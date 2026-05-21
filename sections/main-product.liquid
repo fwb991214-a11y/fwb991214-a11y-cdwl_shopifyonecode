@@ -1,6 +1,131 @@
 {%- render 'section-spacing-collapsing' -%}
 
 <style>
+/* shopify_product_tex2 商品描述（不含 iframe 视频尺寸） */
+
+.product-desc {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    "Noto Sans", "Microsoft YaHei", sans-serif;
+  line-height: 1.6;
+}
+
+
+
+.product-desc h2 {
+  margin: 0 0 14px;
+  line-height: 1.25;
+  font-size: 1.5rem !important;
+}
+
+.product-desc h3 {
+  margin: 14px 0 10px;
+  line-height: 1.3;
+  font-size: 1rem !important;
+}
+
+.product-desc p {
+  margin: 10px 0;
+}
+
+.product-desc .pd-body {
+  display: block;
+}
+
+.product-desc .pd-item {
+  margin-top: 14px;
+}
+
+.product-desc .pd-media,
+.product-desc .video-wrap {
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.product-desc img {
+      width: 700px !important;
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+}
+
+/* Features：圆点 + 标题 + 正文同一行 */
+.product-desc .feature-item {
+  margin-top: 14px;
+}
+
+.product-desc .feature-line {
+  margin: 10px 0;
+ 
+  align-items: baseline;
+  gap: 0.35em;
+}
+
+.product-desc .feature-bullet,
+.product-desc .feature-title,
+.product-desc .feature-text {
+  display: inline;
+  margin: 0;
+}
+
+.product-desc .feature-bullet {
+  flex: 0 0 auto;
+}
+
+.product-desc .feature-title {
+  flex: 0 0 auto;
+  font-weight: 700;
+}
+
+.product-desc .feature-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-weight: 400;
+}
+
+.product-desc .feature-sub {
+  margin: 10px 0 0;
+}
+
+/* FAQ（生成器输出为 ul/li） */
+.product-desc .pd-faq ul {
+  margin: 10px 0;
+  padding-left: 1.2em;
+}
+
+.product-desc .pd-faq li {
+  margin: 10px 0;
+}
+
+.product-desc .pd-faq li p {
+  margin: 6px 0 0;
+}
+
+/* 旧版 FAQ 类名（若手写 faq-q / faq-a） */
+.product-desc .pd-faq .faq-q {
+  font-weight: 700;
+  margin: 10px 0 6px;
+  position: relative;
+  padding-left: 1.2em;
+}
+
+.product-desc .pd-faq .faq-a {
+  font-weight: 400;
+  margin: 0 0 12px 1.2em;
+}
+
+.product-desc .pd-faq .faq-q::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.product-desc .pd-faq .faq-a::before {
+  content: "\00a0\00a0";
+}
+
+
   #shopify-section-{{ section.id }} {
     --product-grid: auto / minmax(0, 1fr);
     --product-gallery-media-list-grid: auto / auto-flow {% if section.settings.mobile_carousel_control == 'free_scroll' %}{% if section.settings.mobile_media_size == 'expanded' %}84vw{% else %}73vw{% endif %}{% else %}100%{% endif %};
@@ -567,13 +692,15 @@ padding:10px;
   @media screen and (max-width: 999px) {
     #shopify-section-{{ section.id }} .pm-anchor-tabs {
       padding: 8px;
-        width: 100%;
+      width: 100%;
       max-width: 100%;
-     background: transparent;
-    border: none;
-    box-shadow: none;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 0 12px 16px 0 #6b6f7314;
+      border: 1px solid #e6e6e6;
     }
-       #shopify-section-{{ section.id }} .pm-anchor-tabs__list {
+
+    #shopify-section-{{ section.id }} .pm-anchor-tabs__list {
       flex-wrap: nowrap;
       justify-content: flex-start;
       overflow-x: auto;
@@ -588,8 +715,9 @@ padding:10px;
     #shopify-section-{{ section.id }} .pm-anchor-tabs__btn {
       padding: 10px 14px;
       font-size: 14px;
-        flex: 0 0 auto;
+      flex: 0 0 auto;
       white-space: nowrap;
+      border-radius: 999px;
     }
   }
 
@@ -786,12 +914,12 @@ padding:10px;
         {%- assign first_tab = '' -%}
         {%- if has_overviews -%}
           {%- assign first_tab = 'overviews' -%}
+        {%- elsif has_description -%}
+          {%- assign first_tab = 'description' -%}
         {%- elsif has_videos -%}
           {%- assign first_tab = 'videos' -%}
         {%- elsif has_more_info -%}
           {%- assign first_tab = 'more_info' -%}
-        {%- elsif has_description -%}
-          {%- assign first_tab = 'description' -%}
         {%- elsif has_faq -%}
           {%- assign first_tab = 'faq' -%}
         {%- elsif has_reviews -%}
@@ -804,14 +932,14 @@ padding:10px;
               {%- if has_overviews -%}
                 <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-overviews-{{ section.id }}" aria-current="{% if first_tab == 'overviews' %}true{% else %}false{% endif %}">Overviews</button>
               {%- endif -%}
+              {%- if has_description -%}
+                <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-description-anchor-{{ section.id }}" aria-current="{% if first_tab == 'description' %}true{% else %}false{% endif %}">Description</button>
+              {%- endif -%}
               {%- if has_videos -%}
                 <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-videos-anchor-{{ section.id }}" aria-current="{% if first_tab == 'videos' %}true{% else %}false{% endif %}">Video</button>
               {%- endif -%}
               {%- if has_more_info -%}
                 <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-more-info-anchor-{{ section.id }}" aria-current="{% if first_tab == 'more_info' %}true{% else %}false{% endif %}">More Info</button>
-              {%- endif -%}
-              {%- if has_description -%}
-                <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-description-anchor-{{ section.id }}" aria-current="{% if first_tab == 'description' %}true{% else %}false{% endif %}">Description</button>
               {%- endif -%}
               {%- if has_faq -%}
                 <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-faq-anchor-{{ section.id }}" aria-current="{% if first_tab == 'faq' %}true{% else %}false{% endif %}">FAQ</button>
@@ -989,18 +1117,6 @@ padding:10px;
             - If pm_more_info exists: show ACF block (More Info), hide product.description
             - Else: show product.description (if any)
           {%- endcomment -%}
-
-          {%- if pm_more_info == blank and product.description != blank -%}
-            <div id="pm-description-anchor-{{ section.id }}" class="pm-more-info pm-product-description">
-              <div class="pm-more-info__header">
-                <div class="pm-more-info__title">Description</div>
-              </div>
-
-              <div class="prose">
-                {{- product.description -}}
-              </div>
-            </div>
-          {%- endif -%}
 
           <!-- Overviews -->
           {%- if has_overviews -%}
@@ -1195,6 +1311,18 @@ padding:10px;
             {%- endif -%}
 
           </div>
+          {%- endif -%}
+
+          {%- if pm_more_info == blank and product.description != blank -%}
+            <div id="pm-description-anchor-{{ section.id }}" class="pm-more-info pm-product-description">
+              <div class="pm-more-info__header">
+                <div class="pm-more-info__title">Description</div>
+              </div>
+
+              <div class="prose">
+                {{- product.description -}}
+              </div>
+            </div>
           {%- endif -%}
 
           <!-- Product Videos -->
