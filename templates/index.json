@@ -1,0 +1,794 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "section-1": {
+      "type": "slideshow",
+      "blocks": {
+        "block-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/1.jpg",
+            "mobile_image": "shopify://shop_images/five_home_anner.jpg",
+            "content_max_width": 720,
+            "mobile_text_position": "place-self-center text-center",
+            "desktop_text_position": "sm:place-self-center-start sm:text-start",
+            "subheading": "30V boost ouput, No power drops!",
+            "title": "30V Boost Cigarette Lighter Power Adapter  for Starlink Mini",
+            "heading_tag": "h1",
+            "button_text": "Shop Now",
+            "button_link": "shopify://products/starlink-mini-30v-step-up-car-adapter-with-usb-c-port",
+            "text_color": "#ffffff",
+            "button_background": "#2d2dd5",
+            "button_text_color": "#ffffff",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0,
+            "background": "",
+            "background_gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "block-1"
+      ],
+      "custom_css": [
+        "{max-height: 90vh;}"
+      ],
+      "name": "Slideshow",
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": false,
+        "show_initial_transition": false,
+        "image_size": "auto",
+        "controls_type": "none",
+        "transition_type": "fade_with_text",
+        "autoplay": true,
+        "cycle_speed": 6,
+        "background": "rgba(0,0,0,0)",
+        "background_gradient": ""
+      }
+    },
+    "rich_text_EgGy3Q": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Q7YDbM": {
+          "type": "heading",
+          "settings": {
+            "text": "Shop by Starlinks",
+            "heading_tag": "h2",
+            "text_color": "#191919",
+            "gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_Q7YDbM"
+      ],
+      "custom_css": [
+        "{margin-top: -2rem !important; position: relative; z-index: 2; border-radius: 36px 36px 0 0;}"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "medium",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "model_pill_cards_6QYT3h": {
+      "type": "model-pill-cards",
+      "blocks": {
+        "card_UgEmte": {
+          "type": "card",
+          "settings": {
+            "title": "Mini",
+            "image": "shopify://shop_images/img_shopby_01_2x_7325055a-b3dd-4725-96a9-92b2376e2df3.webp",
+            "background_position": "center center",
+            "title_size": 20,
+            "link": "shopify://collections/for-starlink-mini",
+            "text_color": "#ffffff",
+            "background": "#050505",
+            "show_border": false
+          }
+        },
+        "card_G4zwD9": {
+          "type": "card",
+          "settings": {
+            "title": "Gen 3",
+            "image": "shopify://shop_images/img_shopby_02_2x_f769207c-4f75-4d19-9565-89bec2519e17.webp",
+            "background_position": "center center",
+            "title_size": 20,
+            "link": "shopify://collections/for-starlink-gen-3",
+            "text_color": "#ffffff",
+            "background": "#2e33d9",
+            "show_border": false
+          }
+        },
+        "card_Jcf9iF": {
+          "type": "card",
+          "settings": {
+            "title": "Gen 3P",
+            "image": "shopify://shop_images/img_shopby_03_2x_6aefe7f3-8305-4c1b-973f-726c0aac873a.webp",
+            "background_position": "center center",
+            "title_size": 20,
+            "link": "shopify://collections/for-starlink-gen-3-performance",
+            "text_color": "#ffffff",
+            "background": "#050505",
+            "show_border": false
+          }
+        },
+        "card_bnKnaG": {
+          "type": "card",
+          "settings": {
+            "title": "Gen 2",
+            "image": "shopify://shop_images/img_shopby_04_2x_f32a73f6-c30f-4440-bfa6-d845f6fea1cf.webp",
+            "background_position": "center center",
+            "title_size": 20,
+            "link": "shopify://collections/for-starlink-gen-2",
+            "text_color": "#1a1a1a",
+            "background": "#ffffff",
+            "show_border": true
+          }
+        }
+      },
+      "block_order": [
+        "card_UgEmte",
+        "card_G4zwD9",
+        "card_Jcf9iF",
+        "card_bnKnaG"
+      ],
+      "name": "Model pill cards",
+      "settings": {
+        "heading": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "feature_card_split_Vz9Xk4": {
+      "type": "feature-card-split",
+      "name": "Feature card split",
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "Starlink Mini Heavy-Duty Magnetic Mount",
+        "content": "<p>8-magnet heavy-duty mount delivers 560 lb grip for Starlink Mini. Paint-safe, no-drill, stays secure at 100+ km/h.</p>",
+        "image": "shopify://shop_images/Starlink_Mini_Heavy-Duty_Magnetic_Mount_Banner.jpg",
+        "button_text": "Shop Now",
+        "button_url": "shopify://products/starlink-mini-heavy-duty-magnetic-car-mount",
+        "background": "",
+        "background_gradient": "",
+        "card_background": "",
+        "text_color": "#6a6a6a",
+        "heading_color": "#191919",
+        "heading_gradient": "",
+        "button_background": "#2d2dd5",
+        "button_text_color": "#ffffff"
+      }
+    },
+    "feature_card_grid_2_dNNfwz": {
+      "type": "feature-card-grid-2",
+      "blocks": {
+        "card_Vhp4Rr": {
+          "type": "card",
+          "settings": {
+            "title": "Starlink Mini Power Tripod Stand",
+            "content": "<p>All-in-one power stand: 45000mAh for 6-hour runtime, built-in tripod, USB-C charging.</p>",
+            "item_background_image": "shopify://shop_images/img_wenli1_2x_e69ccb81-84b1-4f3a-9816-33a95c144cc6.webp",
+            "image": "shopify://shop_images/Starlink_Mini_Power_Tripod_Stand_Banner.png",
+            "button_text": "Shop Now",
+            "button_url": "shopify://products/starlink-mini-power-stand-with-integrated-tripod",
+            "card_background": "rgba(0,0,0,0)",
+            "text_color": "#191919",
+            "heading_color": "",
+            "heading_gradient": "",
+            "button_background": "#2d2dd5",
+            "button_text_color": ""
+          }
+        },
+        "card_wP8TFk": {
+          "type": "card",
+          "settings": {
+            "title": "Starlink Mini 30V Step-Up Car Adapter with USB-C Port",
+            "content": "<p>Use Starlink Mini anytime, anywhere</p>",
+            "item_background_image": "shopify://shop_images/img_wenli1_2x_e69ccb81-84b1-4f3a-9816-33a95c144cc6.webp",
+            "image": "shopify://shop_images/img_shouye_chanpin3_2x_7b261dba-028b-45c1-9914-8346604a5e6c.webp",
+            "button_text": "Shop Now",
+            "button_url": "shopify://products/starlink-mini-30v-step-up-car-adapter-with-usb-c-port",
+            "card_background": "rgba(0,0,0,0)",
+            "text_color": "#191919",
+            "heading_color": "",
+            "heading_gradient": "",
+            "button_background": "#2d2dd5",
+            "button_text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_Vhp4Rr",
+        "card_wP8TFk"
+      ],
+      "name": "Feature card grid 2",
+      "settings": {
+        "full_width": true,
+        "background": "rgba(0,0,0,0)",
+        "background_gradient": ""
+      }
+    },
+    "section-15": {
+      "type": "feature-chart",
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "subheading": "Compare",
+        "title": "Highlight key differences at a glance",
+        "content": "<p>This section is perfect for showcasing product comparisons side-by-side. Use it to display key features, specifications, and pricing so customers can quickly decide which item fits their needs.</p>",
+        "button_text": "Learn more",
+        "button_url": "",
+        "text_position": "start",
+        "max_rows": 5,
+        "view_all_text": "View all",
+        "view_less_text": "View less",
+        "view_product": "View",
+        "viewing_product": "",
+        "show_product_swatch": true,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "button_background": "",
+        "button_text_color": "",
+        "chart_background": "",
+        "chart_text_color": "",
+        "chart_true_false_color": ""
+      }
+    },
+    "rich_text_9AHVBL": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_PpzKHi": {
+          "type": "heading",
+          "settings": {
+            "text": "Best Sellers",
+            "heading_tag": "h1",
+            "text_color": "#191919",
+            "gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_PpzKHi"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "medium",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "best_sellers_tabs_hLLjUM": {
+      "type": "best-sellers-tabs",
+      "blocks": {
+        "tab_AAeRdL": {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Mini",
+            "collection": "starlink-mini-accessories",
+            "products_to_show": 6,
+            "shop_more_text": "Shop More",
+            "shop_more_url": "shopify://collections/starlink-mini-accessories"
+          }
+        },
+        "tab_mEQDap": {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Gen3",
+            "collection": "starlink-gen-3-accessories",
+            "products_to_show": 6,
+            "shop_more_text": "Shop More",
+            "shop_more_url": "shopify://collections/starlink-gen-3-accessories"
+          }
+        },
+        "tab_fUJaQA": {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Gen2",
+            "collection": "starlink-gen-2-accessories",
+            "products_to_show": 6,
+            "shop_more_text": "Shop More",
+            "shop_more_url": "shopify://collections/starlink-gen-2-accessories"
+          }
+        },
+        "tab_UfmBjq": {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Gen3P",
+            "collection": "starlink-gen-3-performance-accessories",
+            "products_to_show": 6,
+            "shop_more_text": "Shop More",
+            "shop_more_url": "shopify://collections/starlink-gen-3-performance-accessories"
+          }
+        }
+      },
+      "block_order": [
+        "tab_AAeRdL",
+        "tab_mEQDap",
+        "tab_fUJaQA",
+        "tab_UfmBjq"
+      ],
+      "name": "Best sellers tabs",
+      "settings": {
+        "full_width": true,
+        "background_image": "shopify://shop_images/Best_Sellers_bg_2x_1.webp",
+        "title": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "#191919",
+        "heading_color": "",
+        "heading_gradient": "",
+        "button_background": "",
+        "button_text_color": ""
+      }
+    },
+    "rich_text_BRUjwG": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Yi9QXn": {
+          "type": "heading",
+          "settings": {
+            "text": "Top Collections",
+            "heading_tag": "h1",
+            "text_color": "",
+            "gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_Yi9QXn"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "medium",
+        "text_position": "center",
+        "background": "#ffffff",
+        "background_gradient": "",
+        "text_color": "#191919"
+      }
+    },
+    "top_collections_slider_ht7Wnx": {
+      "type": "top-collections-slider",
+      "blocks": {
+        "card_pT96B3": {
+          "type": "card",
+          "settings": {
+            "title": "Mini for Car Travel",
+            "content": "<p>Use Starlink Mini on the road, anytime.</p>",
+            "image": "shopify://shop_images/img_top03_2x_74524e86-4c19-42e6-b9e5-a3bf34ef10a3.webp",
+            "button_text": "Shop Now",
+            "button_url": "shopify://collections/mini-for-car-travel",
+            "card_background": "",
+            "text_color": "#191919",
+            "heading_color": "",
+            "heading_gradient": ""
+          }
+        },
+        "card_4xbNBn": {
+          "type": "card",
+          "settings": {
+            "title": "Mini for Camping",
+            "content": "<p>Stay connected anywhere outdoors</p>",
+            "image": "shopify://shop_images/img_top02_2x_f3700c11-717e-4bdb-a9bb-315d3f2f18c9.webp",
+            "button_text": "Shop Now",
+            "button_url": "shopify://collections/mini-for-camping",
+            "card_background": "",
+            "text_color": "#191919",
+            "heading_color": "",
+            "heading_gradient": ""
+          }
+        },
+        "card_Qa3e9E": {
+          "type": "card",
+          "settings": {
+            "title": "Mini Protection",
+            "content": "<p>Protect your Starlink Mini at all times</p>",
+            "image": "shopify://shop_images/img_top01_2x_cfc4384e-d0e1-4071-80e5-253dad43b130.webp",
+            "button_text": "Shop Now",
+            "button_url": "shopify://collections/mini-storage-protection",
+            "card_background": "",
+            "text_color": "#191919",
+            "heading_color": "",
+            "heading_gradient": ""
+          }
+        },
+        "card_rynP3k": {
+          "type": "card",
+          "settings": {
+            "title": "Mini for Home",
+            "content": "<p>Internet backup when you need it most.</p>",
+            "image": "shopify://shop_images/img_top04_2x_9b6841d1-906a-4101-93c6-d86ff3d8f766.webp",
+            "button_text": "Shop Now",
+            "button_url": "shopify://collections/mini-for-home-backup",
+            "card_background": "",
+            "text_color": "#191919",
+            "heading_color": "",
+            "heading_gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_pT96B3",
+        "card_4xbNBn",
+        "card_Qa3e9E",
+        "card_rynP3k"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "Top collections slider",
+      "settings": {
+        "full_width": true,
+        "heading_size_desktop": 36,
+        "heading_size_mobile": 32,
+        "heading_weight": "600",
+        "heading_line_height": 1.1,
+        "item_corner_background_image": "shopify://shop_images/img_top_card_bg2_2x_1.webp",
+        "background": "",
+        "background_gradient": ""
+      }
+    },
+    "top_collections_slider_swiper_PmtQGa": {
+      "type": "top-collections-slider-swiper",
+      "blocks": {
+        "card_kzVecY": {
+          "type": "card",
+          "settings": {
+            "title": "Mini for Car Travel",
+            "content": "<p>Use Starlink Mini on the road, anytime.</p>",
+            "image": "shopify://shop_images/img_top03_2x_74524e86-4c19-42e6-b9e5-a3bf34ef10a3.webp",
+            "button_text": "Read More",
+            "button_url": "shopify://collections/mini-for-car-travel",
+            "card_background": "",
+            "text_color": "",
+            "heading_color": "",
+            "heading_gradient": ""
+          }
+        },
+        "card_m9HaMg": {
+          "type": "card",
+          "settings": {
+            "title": "Mini for Camping",
+            "content": "<p>Stay connected anywhere outdoors</p>",
+            "image": "shopify://shop_images/img_top02_2x_f3700c11-717e-4bdb-a9bb-315d3f2f18c9.webp",
+            "button_text": "Read More",
+            "button_url": "shopify://collections/mini-for-camping",
+            "card_background": "",
+            "text_color": "",
+            "heading_color": "",
+            "heading_gradient": ""
+          }
+        },
+        "card_ik4FRD": {
+          "type": "card",
+          "settings": {
+            "title": "Mini Protection",
+            "content": "<p>Protect your Starlink Mini at all times</p>",
+            "image": "shopify://shop_images/img_top01_2x_cfc4384e-d0e1-4071-80e5-253dad43b130.webp",
+            "button_text": "Read More",
+            "button_url": "shopify://collections/mini-storage-protection",
+            "card_background": "",
+            "text_color": "",
+            "heading_color": "",
+            "heading_gradient": ""
+          }
+        },
+        "card_8tTbFi": {
+          "type": "card",
+          "settings": {
+            "title": "Mini for Home",
+            "content": "<p>Internet backup when you need it most.</p>",
+            "image": "shopify://shop_images/img_top04_2x_9b6841d1-906a-4101-93c6-d86ff3d8f766.webp",
+            "button_text": "Read More",
+            "button_url": "shopify://collections/mini-for-home-backup",
+            "card_background": "",
+            "text_color": "",
+            "heading_color": "",
+            "heading_gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_kzVecY",
+        "card_m9HaMg",
+        "card_ik4FRD",
+        "card_8tTbFi"
+      ],
+      "name": "Top collections 11111",
+      "settings": {
+        "full_width": true,
+        "slides_mobile": "1.15",
+        "slides_tablet": "2",
+        "slides_desktop": "3",
+        "slides_gap": 16,
+        "speed": 450,
+        "loop": true,
+        "heading_size_desktop": 40,
+        "heading_size_mobile": 32,
+        "heading_weight": "800",
+        "heading_line_height": 1.1,
+        "item_corner_background_image": "shopify://shop_images/img_top_card_bg2_2x_1.webp",
+        "background": "#ffffff",
+        "background_gradient": ""
+      }
+    },
+    "what_drives_us_split_DDmMth": {
+      "type": "what-drives-us-split",
+      "blocks": {
+        "feature_xpAeVg": {
+          "type": "feature",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon_renzheng_2x_4fa0a173-ca66-41e6-83fc-f1228b82a2ac.webp",
+            "title": "Safety"
+          }
+        },
+        "feature_nYM89x": {
+          "type": "feature",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon_renzheng_2x_4fa0a173-ca66-41e6-83fc-f1228b82a2ac.webp",
+            "title": "Intelligence"
+          }
+        },
+        "feature_caqETP": {
+          "type": "feature",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon_stability_2x_5a0238fa-4e1b-49b8-98bc-c9d4a88e2c7d.webp",
+            "title": "Stability"
+          }
+        }
+      },
+      "block_order": [
+        "feature_xpAeVg",
+        "feature_nYM89x",
+        "feature_caqETP"
+      ],
+      "name": "What drives us split",
+      "settings": {
+        "full_width": true,
+        "title": "What Drives Us",
+        "content": "<p>Parts4Star designs reliable power and accessory solutions for Starlink and advanced mobile technology. Built for vehicles, off-grid use, and real-world conditions, our products focus on safety, stability, and smart engineering-so your connection stays powered wherever you go.</p>",
+        "feature_icon_size": 32,
+        "bottom_card_text": "<p>Built for real-world conditions—stable, durable, and ready for any environment.</p>",
+        "stat_prefix": "",
+        "stat_number": 1000,
+        "stat_suffix": "+",
+        "stat_label": "Stability",
+        "stat_duration": 1600,
+        "image": "shopify://shop_images/Frame_427319025_2x_b7109a7a-1cdd-40d4-bfb8-fd1571f47b35.webp",
+        "image_hover_scale": 1.1,
+        "button_text": "Read More",
+        "button_url": "",
+        "background": "",
+        "background_gradient": "",
+        "card_background": "",
+        "image_card_background": "",
+        "bottom_card_background": "#111111",
+        "bottom_card_text_color": "#ffffff",
+        "stat_background": "#3b3ef3",
+        "stat_text_color": "#ffffff",
+        "text_color": "#191919",
+        "heading_color": "",
+        "heading_gradient": ""
+      }
+    },
+    "rich_text_9Tjqxt": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_NB3fKg": {
+          "type": "heading",
+          "settings": {
+            "text": "Hear from Our Customers",
+            "heading_tag": "h1",
+            "text_color": "",
+            "gradient": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_NB3fKg"
+      ],
+      "disabled": true,
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "medium",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "#191919"
+      }
+    },
+    "testimonials_slider_cards_KmVQtc": {
+      "type": "testimonials-slider-cards",
+      "blocks": {
+        "testimonial_cbC6FY": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/Zk4deuZJ1Y_orig.jpg",
+            "show_count": true,
+            "current_index": "1",
+            "total_index": "2",
+            "avatar_text": "J",
+            "author_name": "Jing Li",
+            "rating": 5,
+            "content": "<p>Suction held for my whole work session. Didn’t slowly slide down.<br/><br/></p>",
+            "card_background": "",
+            "text_color": "#191919"
+          }
+        },
+        "testimonial_74FGV6": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/c0K5ItMK8h_orig.jpg",
+            "show_count": false,
+            "current_index": "0",
+            "total_index": "0",
+            "avatar_text": "A",
+            "author_name": "Ava Thompson",
+            "rating": 5,
+            "content": "<p>Feels way sturdier than I expected. That ASA material holds up.</p>",
+            "card_background": "",
+            "text_color": "#191919"
+          }
+        },
+        "testimonial_QrkfJU": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/MCCkH_WJeF_orig.jpg",
+            "show_count": false,
+            "current_index": "0",
+            "total_index": "0",
+            "avatar_text": "C",
+            "author_name": "Chloe Ramirez",
+            "rating": 5,
+            "content": "<p>Solid mount. Holds my Starlink Mini steady, even in strong winds. No complaints--totally worth it.</p>",
+            "card_background": "",
+            "text_color": "#191919"
+          }
+        },
+        "testimonial_eYtM9r": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/e_aAlJPTY_orig.jpg",
+            "show_count": false,
+            "current_index": "0",
+            "total_index": "0",
+            "avatar_text": "E",
+            "author_name": "Emily Kim",
+            "rating": 5,
+            "content": "<p>Exactly what I needed for my Mini.</p>",
+            "card_background": "",
+            "text_color": "#191919"
+          }
+        },
+        "testimonial_YFnGia": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/7HfefAQSVUS_orig.jpg",
+            "show_count": true,
+            "current_index": "1",
+            "total_index": "2",
+            "avatar_text": "C",
+            "author_name": "Chloe Rios",
+            "rating": 5,
+            "content": "<p>Super easy to set up and works great with my Starlink. Totally worth it.<br/><br/></p>",
+            "card_background": "",
+            "text_color": "#191919"
+          }
+        },
+        "testimonial_JabXym": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify://shop_images/l1yrDVTEPv_orig.jpg",
+            "show_count": true,
+            "current_index": "1",
+            "total_index": "3",
+            "avatar_text": "N",
+            "author_name": "Nate Washington",
+            "rating": 5,
+            "content": "<p>Mounted it on my boat roof. Easy setup and works great. Highly recommend.</p>",
+            "card_background": "",
+            "text_color": "#191919"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_cbC6FY",
+        "testimonial_74FGV6",
+        "testimonial_QrkfJU",
+        "testimonial_eYtM9r",
+        "testimonial_YFnGia",
+        "testimonial_JabXym"
+      ],
+      "name": "Testimonials slider cards",
+      "settings": {
+        "full_width": true,
+        "background": "",
+        "background_gradient": "",
+        "avatar_background": "#3b3ef3",
+        "avatar_text_color": "#ffffff",
+        "star_active_color": "#f59e0b",
+        "star_inactive_color": "#d1d5db"
+      }
+    },
+    "service_highlights_row_GGN3RE": {
+      "type": "service-highlights-row",
+      "blocks": {
+        "item_tLxxgD": {
+          "type": "item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon_shipping_2x_796c602e-473a-441f-a85b-3e881a63830c.webp",
+            "title": "Free Shipping",
+            "text": "Free Shipping on orders over $89"
+          }
+        },
+        "item_khHPRR": {
+          "type": "item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon_refund_2x_e33589f2-c426-44d6-aeb6-14521952a26b.webp",
+            "title": "Free Refund",
+            "text": "Free refund within 30 days of receiving the package"
+          }
+        },
+        "item_hTqy3c": {
+          "type": "item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon_service_2x_603c0dbd-a936-4573-8899-532794518f4f.webp",
+            "title": "Quick Customer Service",
+            "text": "Reply to customer messages within 24 hours"
+          }
+        }
+      },
+      "block_order": [
+        "item_tLxxgD",
+        "item_khHPRR",
+        "item_hTqy3c"
+      ],
+      "name": "Service highlights row",
+      "settings": {
+        "full_width": true,
+        "icon_size": 36,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "#191919"
+      }
+    }
+  },
+  "order": [
+    "section-1",
+    "rich_text_EgGy3Q",
+    "model_pill_cards_6QYT3h",
+    "feature_card_split_Vz9Xk4",
+    "feature_card_grid_2_dNNfwz",
+    "section-15",
+    "rich_text_9AHVBL",
+    "best_sellers_tabs_hLLjUM",
+    "rich_text_BRUjwG",
+    "top_collections_slider_ht7Wnx",
+    "top_collections_slider_swiper_PmtQGa",
+    "what_drives_us_split_DDmMth",
+    "rich_text_9Tjqxt",
+    "testimonials_slider_cards_KmVQtc",
+    "service_highlights_row_GGN3RE"
+  ]
+}

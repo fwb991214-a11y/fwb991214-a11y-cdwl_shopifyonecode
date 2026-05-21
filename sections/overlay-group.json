@@ -1,0 +1,127 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "custom.overlay",
+  "name": "Overlay group",
+  "sections": {
+    "newsletter-popup": {
+      "type": "newsletter-popup",
+      "disabled": true,
+      "settings": {
+        "apparition_delay": 5,
+        "show_only_on_index": true,
+        "show_only_for_visitors": true,
+        "show_only_once": true,
+        "title": "Signup for our newsletter",
+        "button_text": "Subscribe",
+        "subtext": "Describe what your customers will receive when subscribing to your newsletter."
+      }
+    },
+    "privacy-banner": {
+      "type": "privacy-banner",
+      "disabled": true,
+      "settings": {
+        "privacy_bar_title": "Cookie policy",
+        "privacy_bar_content": "<p>We use cookies and similar technologies to provide the best experience on our website. Refer to our Privacy Policy for more information.</p>"
+      }
+    },
+    "cart-drawer": {
+      "type": "cart-drawer",
+      "settings": {
+        "show_cart_note": true,
+        "show_shipping_text": true,
+        "allow_discount_application": false,
+        "show_view_cart_button": true,
+        "show_checkout_button": true,
+        "recommendations_title": "Trending this month",
+        "products": [],
+        "product_card_background": "#f2f2f2",
+        "product_card_text_color": ""
+      }
+    },
+    "search-drawer": {
+      "type": "search-drawer",
+      "blocks": {
+        "trending_search_JpPp9r": {
+          "type": "trending_search",
+          "settings": {
+            "label": "Starlink Mini",
+            "link": "https://parts4star.com/collections/starlink-mini-accessories"
+          }
+        },
+        "trending_search_1": {
+          "type": "trending_search",
+          "settings": {
+            "label": "Gen 3 Wall Mount",
+            "link": ""
+          }
+        },
+        "trending_search_2": {
+          "type": "trending_search",
+          "settings": {
+            "label": "DC Power Cables",
+            "link": ""
+          }
+        },
+        "trending_search_3": {
+          "type": "trending_search",
+          "settings": {
+            "label": "Cigarette Lighter Adapter",
+            "link": ""
+          }
+        },
+        "trending_search_4": {
+          "type": "trending_search",
+          "settings": {
+            "label": "Ethernet Cables",
+            "link": ""
+          }
+        },
+        "trending_search_5": {
+          "type": "trending_search",
+          "settings": {
+            "label": "Magnetic Mount",
+            "link": ""
+          }
+        },
+        "trending_search_6": {
+          "type": "trending_search",
+          "settings": {
+            "label": "Protective Carrying Case",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "trending_search_JpPp9r",
+        "trending_search_1",
+        "trending_search_2",
+        "trending_search_3",
+        "trending_search_4",
+        "trending_search_5",
+        "trending_search_6"
+      ],
+      "settings": {
+        "full_width": false,
+        "show_article_category": true,
+        "show_trending_searches": true,
+        "trending_searches_title": "Search trending",
+        "search_menu": "",
+        "search_menu_show_title": true
+      }
+    }
+  },
+  "order": [
+    "newsletter-popup",
+    "privacy-banner",
+    "cart-drawer",
+    "search-drawer"
+  ]
+}

@@ -1,0 +1,73 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "content_width": "80ch"
+      }
+    },
+    "image_with_text_overlay_cUBLMG": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_J8WpcH": {
+          "type": "heading",
+          "settings": {
+            "text": "Customer Support",
+            "heading_tag": "h0"
+          }
+        }
+      },
+      "block_order": [
+        "heading_J8WpcH"
+      ],
+      "name": "Image with text overlay",
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/A.png",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "contact": {
+      "type": "contact",
+      "settings": {
+        "full_width": true,
+        "subheading": "Contact Us",
+        "title": "Do you have any question?",
+        "content": "<p>PARTS4STAR LLC</p><p>Tel: +1 (406) 894-5402</p><p>Email: support@parts4star.com</p><p>Address: 1001 S Main Street STE 600, Kalispell, MT 59901, US</p><p>Office Hours: Mon-Sat 10AM-8PM(PST)</p>",
+        "text_position": "end",
+        "contact_form_size": "large",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "contact_background": "",
+        "contact_text_color": "",
+        "button_background": "",
+        "button_text_color": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_overlay_cUBLMG",
+    "contact"
+  ]
+}

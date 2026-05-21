@@ -1,0 +1,285 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-stack-intro: 50%;
+    --section-stack-main: 50%;
+  }
+
+  #shopify-section-{{ section.id }} .feature-card-split__surface {
+    overflow: hidden;
+    box-shadow: 0 12px 16px 0 #6b6f7314;
+        background-color: #fff;
+        border-radius: 32px;
+
+  }
+
+  #shopify-section-{{ section.id }} .feature-card-split__stack {
+    align-items: stretch;
+    gap: 0;
+    padding:16px
+  }
+
+  #shopify-section-{{ section.id }} .feature-card-split__intro-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+    padding: 3rem;
+    gap: 2rem;
+  }
+
+  #shopify-section-{{ section.id }} .feature-card-split__media {
+    height: 100%;
+    min-height: 420px;
+    overflow: hidden;
+    border-radius:20px;
+  }
+
+  #shopify-section-{{ section.id }} .feature-card-split__media img,
+  #shopify-section-{{ section.id }} .feature-card-split__placeholder {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .feature-card-split__prose {
+    max-width: 32rem;
+  }
+
+  #shopify-section-{{ section.id }} .feature-card-split__subtext {
+    color: rgb(var(--text-color) / 0.72);
+  }
+
+  @media screen and (max-width: 999px) {
+    #shopify-section-{{ section.id }} {
+      --section-stack-intro: 100%;
+      --section-stack-main: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .feature-card-split__stack .section-stack__intro {
+      order: 2;
+    }
+
+    #shopify-section-{{ section.id }} .feature-card-split__stack .section-stack__main {
+      order: 1;
+    }
+    #shopify-section-{{ section.id }} .feature-card-split__intro-inner {
+      padding: 1.5rem 1.5rem 1rem;
+    }
+
+    #shopify-section-{{ section.id }} .feature-card-split__media {
+      min-height: 280px;
+    }
+  }
+
+  /* Phone layout: image on top, centered text, centered button */
+  @media screen and (max-width: 699px) {
+    #shopify-section-{{ section.id }} .feature-card-split__stack {
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .feature-card-split__intro-inner {
+      padding: 1.25rem 1.25rem 1.5rem;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      gap: 1.25rem;
+    }
+
+    #shopify-section-{{ section.id }} .feature-card-split__prose {
+      max-width: 22rem;
+      margin-inline: auto;
+    }
+
+    #shopify-section-{{ section.id }} .feature-card-split__button-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    #shopify-section-{{ section.id }} .feature-card-split__media {
+      min-height: 0;
+      height: auto;
+    }
+
+    #shopify-section-{{ section.id }} .feature-card-split__media img,
+    #shopify-section-{{ section.id }} .feature-card-split__placeholder {
+      height: auto;
+    }
+  }
+</style>
+
+<div {% render 'section-properties' %}>
+  <div
+    {% render 'surface',
+      class: 'feature-card-split__surface',
+      background: section.settings.card_background,
+      text_color: section.settings.text_color,
+      background_fallback: 'bg-secondary'
+    %}
+  >
+    <div class="section-stack section-stack--horizontal feature-card-split__stack">
+      <div class="section-stack__intro">
+        <div class="feature-card-split__intro-inner">
+          <div class="v-stack gap-6">
+            {%- if section.settings.subheading != blank -%}
+              <p class="subheading">{{ section.settings.subheading | escape }}</p>
+            {%- endif -%}
+
+            <div class="prose feature-card-split__prose">
+              {%- if section.settings.title != blank -%}
+                <h2 class="h2">
+                  {%- render 'styled-text',
+                    content: section.settings.title,
+                    text_color: section.settings.heading_color,
+                    gradient: section.settings.heading_gradient
+                  -%}
+                </h2>
+              {%- endif -%}
+
+              {%- if section.settings.content != blank -%}
+                <div class="feature-card-split__subtext">
+                  {{ section.settings.content }}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+
+          {%- if section.settings.button_text != blank -%}
+            <div class="feature-card-split__button-wrapper">
+              {% render 'button',
+                content: section.settings.button_text,
+                href: section.settings.button_url,
+                size: 'xl',
+                background: section.settings.button_background,
+                text_color: section.settings.button_text_color
+              %}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="section-stack__main">
+        <div class="feature-card-split__media">
+          {%- if section.settings.image != blank -%}
+            {%- capture sizes -%}(max-width: 999px) 100vw, 58vw{%- endcapture -%}
+            {%- capture widths -%}600,800,1000,1200,1400,1600,1800{%- endcapture -%}
+            {{
+              section.settings.image
+              | image_url: width: 1800
+              | image_tag: loading: 'lazy', sizes: sizes, widths: widths
+            }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'feature-card-split__placeholder' }}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Feature card split",
+  "class": "shopify-section--feature-card-split",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Starlink Mini Suction Cup Car Mount"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
+      "default": "<p>Use Starlink Mini anytime, anywhere</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Section background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Section background gradient"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color"
+    },
+    {
+      "type": "color_background",
+      "id": "heading_gradient",
+      "label": "Heading gradient"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature card split"
+    }
+  ]
+}
+{% endschema %}

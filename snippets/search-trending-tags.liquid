@@ -1,0 +1,82 @@
+{%- comment -%}
+  Trending search tags for the search drawer idle state.
+  @param section {section} search-drawer section
+{%- endcomment -%}
+
+{%- if section.settings.show_trending_searches -%}
+  {%- liquid
+    assign trending_block_count = 0
+    for block in section.blocks
+      if block.type == 'trending_search' and block.settings.label != blank
+        assign trending_block_count = trending_block_count | plus: 1
+      endif
+    endfor
+
+    assign show_legacy_trending = false
+    if trending_block_count == 0 and section.settings.trending_searches != blank
+      assign show_legacy_trending = true
+    endif
+  -%}
+
+  {%- if trending_block_count > 0 or show_legacy_trending -%}
+    <div class="search-trending v-stack gap-3">
+      <p class="search-trending__heading">
+        {%- if section.settings.trending_searches_title != blank -%}
+          {{- section.settings.trending_searches_title | escape -}}
+        {%- else -%}
+          {{- 'search.general.trending' | t -}}
+        {%- endif -%}
+      </p>
+
+      <div class="search-trending__tags" role="list">
+        {%- if trending_block_count > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type != 'trending_search' -%}
+              {%- continue -%}
+            {%- endif -%}
+
+            {%- assign term_label = block.settings.label | strip -%}
+            {%- if term_label == blank -%}
+              {%- continue -%}
+            {%- endif -%}
+
+            {%- liquid
+              if block.settings.link != blank
+                assign tag_href = block.settings.link
+              else
+                assign tag_href = routes.search_url | append: '?q=' | append: term_label | url_param_escape
+              endif
+            -%}
+
+            <a
+              href="{{ tag_href }}"
+              class="search-trending__tag"
+              role="listitem"
+              data-instant
+              {{ block.shopify_attributes }}
+            >
+              <span class="search-trending__tag-icon" aria-hidden="true">{%- render 'icon' with 'search', width: 14, height: 14 -%}</span>
+              <span class="search-trending__tag-label">{{ term_label }}</span>
+            </a>
+          {%- endfor -%}
+        {%- else -%}
+          {%- assign trending_terms = section.settings.trending_searches | newline_to_br | split: '<br />' -%}
+          {%- for term in trending_terms -%}
+            {%- assign term_label = term | strip -%}
+            {%- if term_label != blank -%}
+              <a
+                href="{{ routes.search_url }}?q={{ term_label | url_param_escape }}"
+                class="search-trending__tag"
+                role="listitem"
+                data-instant
+              >
+                <span class="search-trending__tag-icon" aria-hidden="true">{%- render 'icon' with 'search', width: 14, height: 14 -%}</span>
+                <span class="search-trending__tag-label">{{ term_label }}</span>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}

@@ -1,0 +1,85 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "links_yfj7kc": {
+          "type": "links",
+          "settings": {
+            "menu": "footer",
+            "show_menu_title": true,
+            "menu_title": ""
+          }
+        },
+        "links_Tg67Mj": {
+          "type": "links",
+          "settings": {
+            "menu": "support",
+            "show_menu_title": true,
+            "menu_title": ""
+          }
+        },
+        "links": {
+          "type": "links",
+          "settings": {
+            "menu": "policies",
+            "show_menu_title": true,
+            "menu_title": ""
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "image_width": 150,
+            "heading_size": "h5",
+            "title": "NewsLetter Sign Up",
+            "content": "<p>Slgn up for exclusive updates, new arrivals & inslder only discounts</p>",
+            "show_social": true
+          }
+        }
+      },
+      "block_order": [
+        "links_yfj7kc",
+        "links_Tg67Mj",
+        "links",
+        "newsletter"
+      ],
+      "custom_css": [
+        "{border-radius: 48px 48px 0 0; overflow: hidden;}"
+      ],
+      "settings": {
+        "show_social_media": true,
+        "show_payment_icons": true,
+        "show_powered_by_shopify": false,
+        "show_policy_links": false,
+        "show_country_selector": true,
+        "show_country_flag": true,
+        "show_country_name": true,
+        "show_locale_selector": true,
+        "show_contact_bar": true,
+        "contact_phone": "+1(406)894-5402",
+        "contact_email": "support@parts4star.com",
+        "contact_address": "1001 S Main Street STE 600, Kalispell, MT 59901, US",
+        "contact_hours": "Mon-Sat 10AM-8PM(PST)",
+        "contact_phone_icon": "shopify://shop_images/icon_tel_2x_3ab3b306-1a72-4fa8-a0e3-622fa7bd09e0.webp",
+        "contact_email_icon": "shopify://shop_images/icon_email_2x_f10bebee-3aca-4c7c-97cf-74df28fc01fa.webp",
+        "contact_address_icon": "shopify://shop_images/icon_adressed_2x_260e9332-ab56-48ec-b6b3-b805ffa45f2c.webp",
+        "contact_hours_icon": "shopify://shop_images/icon_time_2x_1d488b01-9131-40e8-9b9b-75151488abf1.webp"
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

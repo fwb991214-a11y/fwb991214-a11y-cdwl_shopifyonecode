@@ -1,0 +1,3523 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --product-grid: auto / minmax(0, 1fr);
+    --product-gallery-media-list-grid: auto / auto-flow {% if section.settings.mobile_carousel_control == 'free_scroll' %}{% if section.settings.mobile_media_size == 'expanded' %}84vw{% else %}73vw{% endif %}{% else %}100%{% endif %};
+    --product-gallery-media-list-gap: {% if section.settings.mobile_media_size == 'expanded' %}var(--spacing-0-5){% else %}var(--grid-gutter){% endif %};
+  }
+   
+    @media screen and (max-width: 1024px) {
+ #shopify-section-{{ section.id }} .section {
+      padding-block-end:24px
+    }
+    }
+
+  /* Right-side info panel background (scoped to this product section) */
+  #shopify-section-{{ section.id }} .product-info-panel {
+    background: #fff;
+    border-radius: var(--rounded-xs, 8px);
+    padding: var(--container-gutter, 16px);
+    border-radius: 24px;
+background: #FFF;
+box-shadow: 0 12px 16px 0 #6b6f7314;
+  }
+
+  /* PM OVER VIEW: lay out like product-info-panel */
+  #shopify-section-{{ section.id }} .product-info-column {
+    display: grid;
+    align-content: start;
+    gap: var(--container-gutter, 16px);
+  }
+
+  #shopify-section-{{ section.id }} .Overviews_banner {
+    border-radius: 32px;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .Overviews_banner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Overviews content items (left image + right text) */
+  #shopify-section-{{ section.id }} .Overviews_content_item {
+    margin-top: var(--container-gutter, 16px);
+  border-radius: 32px;
+background: #FFF;
+box-shadow: 0 12px 16px 0 #6b6f7314;
+padding:10px;
+  }
+
+  #shopify-section-{{ section.id }} .Overviews_content_item--lr {
+    display: grid;
+    gap: 20px;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .Overviews_content_item--rl {
+    display: grid;
+    gap: 20px;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .Overviews_content_item--lr {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .Overviews_content_item--rl {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .Overviews_content_item--rl .Overviews_content_item-text {
+      order: 1;
+    }
+
+    #shopify-section-{{ section.id }} .Overviews_content_item--rl .Overviews_content_item-media {
+      order: 2;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .Overviews_content_item-media {
+    border-radius: 32px;
+    overflow: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .Overviews_content_item-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .Overviews_content_item-title {
+    color: #191919;
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 700;
+     line-height: 1.2;
+  }
+
+  #shopify-section-{{ section.id }} .Overviews_content_item-content {
+    margin-top: 20px;
+   color: #666666;
+ font-size: 1.3rem;
+ font-style: normal;
+ font-weight: 400;
+ line-height: 1.4;
+  }
+
+  #shopify-section-{{ section.id }} .Overviews_content_item-text {
+    padding-inline: 16px;
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .Overviews_content_item-text {
+      padding-inline: 24px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .product-info__pm-overview-list {
+    margin-top: 10px;
+    padding-left: 1.1em;
+    list-style: disc;
+  }
+
+  #shopify-section-{{ section.id }} .product-info__pm-overview-list > li + li {
+    margin-top: 6px;
+  }
+
+  #shopify-section-{{ section.id }} .product-pm-overview__title {
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 700;
+    margin-bottom:20px;
+  }
+
+  /* Right column recommended products panel (app mounts into slot) */
+  #shopify-section-{{ section.id }} .pm-side-reco__content {
+    margin-top: 12px;
+  }
+
+  /* Description below (align under right column on desktop) */
+  #shopify-section-{{ section.id }} .product-description-below {
+    margin-top: var(--spacing-8, 32px);
+    border-radius: var(--rounded-xs, 8px);
+ 
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .product-description-below {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .product-info-panel {
+      padding: calc(var(--container-gutter, 16px) * 1.25);
+    }
+  }
+
+  @media screen and (max-width: 999px) {
+    #shopify-section-{{ section.id }} {
+      --section-spacing-block-start: {% if section.settings.mobile_media_size == 'expanded' %}0px{% else %}var(--container-gutter){% endif %};
+    }
+
+    /* Mobile: always stack image on top, text below */
+    #shopify-section-{{ section.id }} .Overviews_content_item--lr,
+    #shopify-section-{{ section.id }} .Overviews_content_item--rl {
+      grid-template-columns: 1fr;
+    }
+
+    #shopify-section-{{ section.id }} .Overviews_content_item--rl .Overviews_content_item-media {
+      order: 1;
+    }
+
+    #shopify-section-{{ section.id }} .Overviews_content_item--rl .Overviews_content_item-text {
+      order: 2;
+    }
+
+    #shopify-section-{{ section.id }} .Overviews_banner {
+      border-radius: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .Overviews_content_item {
+      margin-top: 24px;
+      padding: 12px;
+      border-radius: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .Overviews_content_item-media {
+      border-radius: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .Overviews_content_item-text {
+      padding-inline: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .Overviews_content_item-title {
+      font-size: 1.5rem;
+      line-height: 1.15;
+      word-break: break-word;
+    }
+
+    #shopify-section-{{ section.id }} .Overviews_content_item-content {
+      margin-top: 14px;
+      font-size: 1rem;
+      line-height: 1.55;
+      word-break: break-word;
+    }
+
+    #shopify-section-{{ section.id }} .product-pm-overview__title {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} {
+      {%- assign media_ratio = section.settings.desktop_media_width | divided_by: 50.0 -%}
+      --product-grid: auto / minmax(0, {{ media_ratio }}fr) minmax(0, {{ 2.0 | minus: media_ratio }}fr);
+      --product-gallery-media-list-grid: {% if section.settings.desktop_media_layout contains 'grid' %}auto-flow dense / repeat({% if section.settings.desktop_media_layout == 'grid_one' %}1{% else %}2{% endif %}, minmax(0, 1fr)){% else %}auto / auto-flow 100%{% endif %};
+      --product-gallery-media-list-gap: calc(var(--grid-gutter) / 2);
+    }
+
+    {%- if section.settings.desktop_media_layout == 'grid_highlight' -%}
+      #shopify-section-{{ section.id }} .product-gallery__media-list > :not([hidden]) {
+        grid-column: span 2;
+      }
+
+      #shopify-section-{{ section.id }} .product-gallery__media-list > :not([hidden]) ~ *:not(.product-gallery__media--expand) {
+        grid-column: span 1;
+      }
+    {%- endif -%}
+  }
+
+  @media screen and (min-width: 1400px) {
+    #shopify-section-{{ section.id }} {
+      --product-gallery-media-list-gap: var(--grid-gutter);
+    }
+  }
+
+  /* Product videos tabs */
+  #shopify-section-{{ section.id }} .fivestopsproduct_ProductVideos {
+    margin-top: 32px;
+  }
+
+  #shopify-section-{{ section.id }} .pm-videos {
+    display: grid;
+    gap: 30px;
+  }
+
+  #shopify-section-{{ section.id }} .pm-videos__title {
+    text-align: center;
+    font-size: 40px;
+    line-height: 1.1;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .pm-videos__tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  #shopify-section-{{ section.id }} .pm-videos__tab {
+    border: 1px solid rgb(0 0 0 / 10%);
+    background: transparent;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  #shopify-section-{{ section.id }} .pm-videos__tab[aria-selected="true"] {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+  }
+
+  #shopify-section-{{ section.id }} .pm-videos__panel {
+    border-radius: 32px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 12px 16px 0 #6b6f7314;
+  }
+
+  #shopify-section-{{ section.id }} .pm-videos__panel iframe,
+  #shopify-section-{{ section.id }} .pm-videos__panel video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
+  /* More info (JSON -> tables) */
+  #shopify-section-{{ section.id }} .pm-more-info {
+    margin-top: 52px;
+    border-radius: 32px;
+    background: #fff;
+    box-shadow: 0 12px 16px 0 #6b6f7314;
+    padding: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__title {
+    font-size: 32px;
+    line-height: 1.1;
+    font-weight: 700;
+  }
+  #shopify-section-{{ section.id }}  .prose {
+    margin-top:16px
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: #fff;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    /* Default (expanded): show X by rotating the + */
+    transform: rotate(45deg);
+    transition: transform 0.5s ease;
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info.is-collapsed .pm-more-info__toggle {
+    /* Collapsed: show + */
+    transform: rotate(0deg);
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__toggle::before,
+  #shopify-section-{{ section.id }} .pm-more-info__toggle::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 2px;
+    background: #111;
+    border-radius: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__toggle::after {
+    transform: rotate(90deg);
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__toggle {
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__content-wrap {
+    overflow: hidden;
+    max-height: 2000px; /* will be overridden inline by JS */
+    transition: max-height 0.5s ease;
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info.is-collapsed .pm-more-info__content-wrap {
+    max-height: 0 !important;
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__grid {
+    display: grid;
+    gap: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__section-title {
+    font-weight: 700;
+    margin: 8px 0 10px;
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #e6e6e6;
+    background: #fff;
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__table th,
+  #shopify-section-{{ section.id }} .pm-more-info__table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+    vertical-align: top;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+@media (max-width: 699px) {
+  .pm-product-description .prose iframe {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9 !important;
+  }
+}
+  #shopify-section-{{ section.id }} .pm-more-info__table tr > :last-child {
+    border-right: 0;
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__table tr:last-child td,
+  #shopify-section-{{ section.id }} .pm-more-info__table tr:last-child th {
+    border-bottom: 0;
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__table th {
+    width: 38%;
+    background: #f5f5f5;
+    font-weight: 600;
+  }
+
+  /* Package includes table: 4 columns (List/Value/List/Value) */
+  #shopify-section-{{ section.id }} .pm-more-info__table--pkg th {
+    width: 18%;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__table--pkg td {
+    width: 32%;
+  }
+
+  /* Specification table: 4 columns (Label/Value/Label/Value) on desktop */
+  #shopify-section-{{ section.id }} .pm-more-info__table--spec th {
+    width: 18%;
+   
+  }
+
+  #shopify-section-{{ section.id }} .pm-more-info__table--spec td {
+    width: 32%;
+  }
+
+  /* FAQ (JSON -> accordion) */
+  #shopify-section-{{ section.id }} .pm-faq {
+    margin-top: 52px;
+    border-radius: 32px;
+    background: #fff;
+    box-shadow: 0 12px 16px 0 #6b6f7314;
+    padding: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .pm-faq__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .pm-faq__title {
+    font-size: 32px;
+    line-height: 1.1;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .pm-faq__toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: #fff;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    position: relative;
+    /* Default (expanded): show X by rotating the + */
+    transform: rotate(45deg);
+    transition: transform 0.5s ease;
+  }
+
+  #shopify-section-{{ section.id }} .pm-faq.is-collapsed .pm-faq__toggle {
+    /* Collapsed: show + */
+    transform: rotate(0deg);
+  }
+
+  #shopify-section-{{ section.id }} .pm-faq__toggle::before,
+  #shopify-section-{{ section.id }} .pm-faq__toggle::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 2px;
+    background: #111;
+    border-radius: 2px;
+  }
+
+  #shopify-section-{{ section.id }} .pm-faq__toggle::after {
+    transform: rotate(90deg);
+  }
+
+  #shopify-section-{{ section.id }} .pm-faq__list {
+    overflow: hidden;
+  }
+
+  
+
+  #shopify-section-{{ section.id }} .pm-faq__content-wrap {
+    overflow: hidden;
+    max-height: 2000px; /* overridden inline by JS */
+    transition: max-height 0.5s ease;
+  }
+
+  #shopify-section-{{ section.id }} .pm-faq.is-collapsed .pm-faq__content-wrap {
+    max-height: 0 !important;
+  }
+
+  #shopify-section-{{ section.id }} .pm-faq__a-wrap {
+    padding: 14px 16px;
+  }
+
+  #shopify-section-{{ section.id }} .pm-faq__a {
+    color: #666666;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  #shopify-section-{{ section.id }} .pm-faq__q-text {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.35;
+    margin-bottom: 6px;
+    color: #111;
+  }
+
+  /* Anchor tabs (Overviews / More Info / FAQ / Reviews) */
+  #shopify-section-{{ section.id }} .pm-anchor-tabs {
+    margin: 0 auto 18px;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 12px 16px 0 #6b6f7314;
+    border: 1px solid #e6e6e6;
+  }
+
+  #shopify-section-{{ section.id }} .pm-anchor-tabs__list {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  #shopify-section-{{ section.id }} .pm-anchor-tabs__btn {
+    border: 0;
+    background: transparent;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    color: #111;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .pm-anchor-tabs__btn[aria-current="true"] {
+    background: #111;
+    color: #fff;
+  }
+
+  @media screen and (max-width: 999px) {
+    #shopify-section-{{ section.id }} .pm-anchor-tabs {
+      padding: 8px;
+        width: 100%;
+      max-width: 100%;
+     background: transparent;
+    border: none;
+    box-shadow: none;
+    }
+       #shopify-section-{{ section.id }} .pm-anchor-tabs__list {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+    }
+    #shopify-section-{{ section.id }} .pm-anchor-tabs__list::-webkit-scrollbar {
+      display: none; /* WebKit */
+    }
+
+    #shopify-section-{{ section.id }} .pm-anchor-tabs__btn {
+      padding: 10px 14px;
+      font-size: 14px;
+        flex: 0 0 auto;
+      white-space: nowrap;
+    }
+  }
+
+  @media screen and (max-width: 999px) {
+    #shopify-section-{{ section.id }} .pm-more-info,
+    #shopify-section-{{ section.id }} .pm-faq {
+      margin-top: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .pm-faq {
+      border-radius: 24px;
+      padding: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .pm-faq__title {
+      font-size: 22px;
+    }
+  }
+
+  @media screen and (max-width: 999px) {
+    #shopify-section-{{ section.id }} .pm-more-info {
+      border-radius: 24px;
+      padding: 12px;
+    }
+
+    #shopify-section-{{ section.id }} .pm-more-info__title {
+      font-size: 22px;
+    }
+  }
+
+  @media screen and (max-width: 999px) {
+    #shopify-section-{{ section.id }} .pm-videos__title {
+      font-size: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .pm-videos__panel {
+      border-radius: 24px;
+    }
+  }
+</style>
+
+{%- capture product_form_id -%}product-form-{{ product.id }}-{{ section.id }}{%- endcapture -%}
+
+<div {% render 'section-properties', tight: true %}>
+  <product-rerender id="product-info-{{ product.id }}-{{ section.id }}" observe-form="{{ product_form_id }}" allow-partial-rerender>
+    <div class="product">
+      {%- if product.media.size > 0 -%}
+        {%- render 'product-gallery', product: product, product_form_id: product_form_id -%}
+      {%- endif -%}
+
+      <div class="product-info-column">
+        <div class="product-info-panel">
+          {%- render 'product-info',
+            product: product,
+            update_url: true,
+            product_form_id: product_form_id,
+            context: 'main_product'
+          -%}
+        </div>
+
+        {%- assign pm_over_view = product.metafields.custom.pm_over_view.value -%}
+        {%- if pm_over_view != blank -%}
+          <div class="product-info-panel">
+            <p class="product-pm-overview__title">Overview</p>
+
+            <ul class="product-info__pm-overview-list" role="list" id="pm-product-overview-list-{{ section.id }}">
+              {%- assign pm_over_view_lines = pm_over_view | newline_to_br | split: '<br />' -%}
+              {%- for line in pm_over_view_lines -%}
+                {%- assign cleaned = line | strip | remove_first: '•' | remove_first: '-' | strip -%}
+                {%- if cleaned != blank -%}
+                  <li>{{ cleaned }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+
+            <script type="application/json" data-pm-product-overview-json="pm-product-overview-{{ section.id }}">
+              {{- pm_over_view | strip | json -}}
+            </script>
+
+            <script>
+              (() => {
+                const key = "pm-product-overview-{{ section.id }}";
+                const sc = document.querySelector(`script[type="application/json"][data-pm-product-overview-json="${key}"]`);
+                const ul = document.getElementById("pm-product-overview-list-{{ section.id }}");
+                if (!sc || !ul) return;
+
+                const escapeHtml = (s) =>
+                  String(s ?? '')
+                    .replaceAll('&', '&amp;')
+                    .replaceAll('<', '&lt;')
+                    .replaceAll('>', '&gt;')
+                    .replaceAll('"', '&quot;')
+                    .replaceAll("'", '&#39;');
+
+                const parseMaybeDoubleJson = (txt) => {
+                  let data = JSON.parse(txt || 'null');
+                  if (typeof data === 'string') data = JSON.parse(data);
+                  return data;
+                };
+
+                let data;
+                try {
+                  data = parseMaybeDoubleJson(sc.textContent || '');
+                } catch {
+                  return; // keep Liquid-rendered fallback list
+                }
+
+                const items = Array.isArray(data?.overview) ? data.overview : null;
+                if (!items) return; // keep fallback
+
+                ul.innerHTML = items.map((t) => `<li>${escapeHtml(t)}</li>`).join('');
+              })();
+            </script>
+          </div>
+        {%- endif -%}
+
+        <div class="product-info-panel pm-side-reco" id="pm-side-reco-{{ section.id }}">
+          
+
+          <div
+            class="pm-side-reco__content  pm-side-recocontent_aaa"
+            id="pm-side-reco-slot-{{ section.id }}"
+            data-app-slot="side-recommended"
+          ></div>
+        </div>
+        
+      </div>
+
+      <div class="product-description-below">
+        {%- comment -%}Anchor tabs: only show buttons for sections that have content{%- endcomment -%}
+        {%- assign pm_pc_desc_banner = product.metafields.custom.pm_pc_desc_banner.value -%}
+        {%- assign pm_mobile_desc_banner = product.metafields.custom.pm_mobile_desc_banner.value -%}
+        {%- assign pm_desc_video_overview = product.metafields.custom.pm_desc_video_overview.value | default: product.metafields.custom.pm_desc_video_overview -%}
+        {%- assign pm_desc_video_review = product.metafields.custom.pm_desc_video_review.value | default: product.metafields.custom.pm_desc_video_review -%}
+        {%- assign pm_desc_video_installation = product.metafields.custom.pm_desc_video_installation.value | default: product.metafields.custom.pm_desc_video_installation -%}
+
+        {%- assign pm_desc_1_image = product.metafields.custom.pm_desc_1_image.value -%}
+        {%- assign pm_desc_1_title = product.metafields.custom.pm_desc_1_title.value | default: product.metafields.custom.pm_desc_1_title -%}
+        {%- assign pm_desc_1_content = product.metafields.custom.pm_desc_1_content.value | default: product.metafields.custom.pm_desc_1_content -%}
+
+        {%- assign pm_desc_2_image = product.metafields.custom.pm_desc_2_image.value -%}
+        {%- assign pm_desc_2_title = product.metafields.custom.pm_desc_2_title.value | default: product.metafields.custom.pm_desc_2_title -%}
+        {%- assign pm_desc_2_content = product.metafields.custom.pm_desc_2_content.value | default: product.metafields.custom.pm_desc_2_content -%}
+
+        {%- assign pm_desc_3_image = product.metafields.custom.pm_desc_3_image.value -%}
+        {%- assign pm_desc_3_title = product.metafields.custom.pm_desc_3_title.value | default: product.metafields.custom.pm_desc_3_title -%}
+        {%- assign pm_desc_3_content = product.metafields.custom.pm_desc_3_content.value | default: product.metafields.custom.pm_desc_3_content -%}
+
+        {%- assign pm_desc_4_image = product.metafields.custom.pm_desc_4_image.value -%}
+        {%- assign pm_desc_4_title = product.metafields.custom.pm_desc_4_title.value | default: product.metafields.custom.pm_desc_4_title -%}
+        {%- assign pm_desc_4_content = product.metafields.custom.pm_desc_4_content.value | default: product.metafields.custom.pm_desc_4_content -%}
+
+        {%- assign pm_desc_5_image = product.metafields.custom.pm_desc_5_image.value -%}
+        {%- assign pm_desc_5_title = product.metafields.custom.pm_desc_5_title.value | default: product.metafields.custom.pm_desc_5_title -%}
+        {%- assign pm_desc_5_content = product.metafields.custom.pm_desc_5_content.value | default: product.metafields.custom.pm_desc_5_content -%}
+
+        {%- assign pm_desc_6_image = product.metafields.custom.pm_desc_6_image.value -%}
+        {%- assign pm_desc_6_title = product.metafields.custom.pm_desc_6_title.value | default: product.metafields.custom.pm_desc_6_title -%}
+        {%- assign pm_desc_6_content = product.metafields.custom.pm_desc_6_content.value | default: product.metafields.custom.pm_desc_6_content -%}
+
+        {%- assign pm_more_info = product.metafields.custom.pm_more_info.value | default: product.metafields.custom.pm_more_info -%}
+        {%- assign pm_faq = product.metafields.custom.pm_faq.value | default: product.metafields.custom.pm_faq -%}
+
+        {%- assign has_overviews = false -%}
+        {%- if pm_pc_desc_banner != blank or pm_mobile_desc_banner != blank -%}{%- assign has_overviews = true -%}{%- endif -%}
+        {%- if pm_desc_1_image != blank or pm_desc_1_title != blank or pm_desc_1_content != blank -%}{%- assign has_overviews = true -%}{%- endif -%}
+        {%- if pm_desc_2_image != blank or pm_desc_2_title != blank or pm_desc_2_content != blank -%}{%- assign has_overviews = true -%}{%- endif -%}
+        {%- if pm_desc_3_image != blank or pm_desc_3_title != blank or pm_desc_3_content != blank -%}{%- assign has_overviews = true -%}{%- endif -%}
+        {%- if pm_desc_4_image != blank or pm_desc_4_title != blank or pm_desc_4_content != blank -%}{%- assign has_overviews = true -%}{%- endif -%}
+        {%- if pm_desc_5_image != blank or pm_desc_5_title != blank or pm_desc_5_content != blank -%}{%- assign has_overviews = true -%}{%- endif -%}
+        {%- if pm_desc_6_image != blank or pm_desc_6_title != blank or pm_desc_6_content != blank -%}{%- assign has_overviews = true -%}{%- endif -%}
+
+        {%- assign has_videos = false -%}
+        {%- if pm_desc_video_overview != blank or pm_desc_video_review != blank or pm_desc_video_installation != blank -%}{%- assign has_videos = true -%}{%- endif -%}
+
+        {%- assign has_more_info = false -%}
+        {%- if pm_more_info != blank -%}{%- assign has_more_info = true -%}{%- endif -%}
+
+        {%- assign has_description = false -%}
+        {%- if pm_more_info == blank and product.description != blank -%}{%- assign has_description = true -%}{%- endif -%}
+
+        {%- assign has_faq = false -%}
+        {%- if pm_faq != blank -%}{%- assign has_faq = true -%}{%- endif -%}
+        {%- comment -%}
+          Reviews (Loox) is rendered as a separate "product-app-blocks" section (see templates/product.json).
+          We can't reliably detect it from within this section, so we always show the Reviews tab and resolve
+          its scroll target in JS at click time.
+        {%- endcomment -%}
+        {%- assign has_reviews = true -%}
+
+        {%- assign has_any_tabs = false -%}
+        {%- if has_overviews or has_videos or has_more_info or has_description or has_faq or has_reviews -%}{%- assign has_any_tabs = true -%}{%- endif -%}
+
+        {%- assign first_tab = '' -%}
+        {%- if has_overviews -%}
+          {%- assign first_tab = 'overviews' -%}
+        {%- elsif has_videos -%}
+          {%- assign first_tab = 'videos' -%}
+        {%- elsif has_more_info -%}
+          {%- assign first_tab = 'more_info' -%}
+        {%- elsif has_description -%}
+          {%- assign first_tab = 'description' -%}
+        {%- elsif has_faq -%}
+          {%- assign first_tab = 'faq' -%}
+        {%- elsif has_reviews -%}
+          {%- assign first_tab = 'reviews' -%}
+        {%- endif -%}
+
+        {%- if has_any_tabs -%}
+          <div class="pm-anchor-tabs" data-anchor-tabs>
+            <div class="pm-anchor-tabs__list" role="tablist" aria-label="Product section navigation">
+              {%- if has_overviews -%}
+                <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-overviews-{{ section.id }}" aria-current="{% if first_tab == 'overviews' %}true{% else %}false{% endif %}">Overviews</button>
+              {%- endif -%}
+              {%- if has_videos -%}
+                <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-videos-anchor-{{ section.id }}" aria-current="{% if first_tab == 'videos' %}true{% else %}false{% endif %}">Video</button>
+              {%- endif -%}
+              {%- if has_more_info -%}
+                <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-more-info-anchor-{{ section.id }}" aria-current="{% if first_tab == 'more_info' %}true{% else %}false{% endif %}">More Info</button>
+              {%- endif -%}
+              {%- if has_description -%}
+                <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-description-anchor-{{ section.id }}" aria-current="{% if first_tab == 'description' %}true{% else %}false{% endif %}">Description</button>
+              {%- endif -%}
+              {%- if has_faq -%}
+                <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-faq-anchor-{{ section.id }}" aria-current="{% if first_tab == 'faq' %}true{% else %}false{% endif %}">FAQ</button>
+              {%- endif -%}
+              {%- if has_reviews -%}
+                {%- assign reviews_count = product.metafields.reviews.rating_count.value | default: 0 | plus: 0 -%}
+                <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-reviews-anchor-{{ section.id }}" aria-current="{% if first_tab == 'reviews' %}true{% else %}false{% endif %}">
+                  Reviews{%- if reviews_count > 0 -%} ({{ reviews_count }}){%- endif -%}
+                </button>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        <script>
+          (() => {
+            const root = document.querySelector('#shopify-section-{{ section.id }} [data-anchor-tabs]');
+            if (!root) return;
+
+            const buttons = Array.from(root.querySelectorAll('[data-anchor]'));
+            if (buttons.length === 0) return;
+
+            const REVIEWS_SEL = '#pm-reviews-anchor-{{ section.id }}';
+
+            const setCurrent = (btn) => {
+              buttons.forEach((b) => b.setAttribute('aria-current', String(b === btn)));
+            };
+
+            const resolveTarget = (sel) => {
+              let el = sel ? document.querySelector(sel) : null;
+              if (!el && sel === REVIEWS_SEL) {
+                el = Array.from(document.querySelectorAll('.shopify-section--product-app-blocks .pm-app-blocks__title'))
+                  .find((t) => (t.textContent || '').trim().toLowerCase() === 'reviews')
+                  ?.closest('.shopify-section--product-app-blocks');
+              }
+              return el;
+            };
+
+            const buildPairs = () =>
+              buttons
+                .map((btn) => {
+                  const sel = btn.getAttribute('data-anchor');
+                  const el = resolveTarget(sel);
+                  return el ? { btn, el } : null;
+                })
+                .filter(Boolean);
+
+            /** Tab order can differ from DOM order — use vertical position on the page. */
+            const sortPairsByPagePosition = (pairs) =>
+              [...pairs].sort((a, b) => {
+                const ya = a.el.getBoundingClientRect().top + window.scrollY;
+                const yb = b.el.getBoundingClientRect().top + window.scrollY;
+                return ya - yb;
+              });
+
+            /** Resolve theme sticky announcement + header offset for scrollspy line. */
+            const readStickyOffsetPx = () => {
+              const probe = document.createElement('div');
+              probe.style.cssText =
+                'position:absolute;left:0;width:1px;height:1px;margin:0;border:0;padding:0;visibility:hidden;pointer-events:none;top:0';
+              probe.style.top = 'var(--sticky-area-height, 0px)';
+              document.documentElement.appendChild(probe);
+              const px = parseFloat(getComputedStyle(probe).top) || 0;
+              probe.remove();
+              return px;
+            };
+
+            let scrollLockUntil = 0;
+
+            /**
+             * Pick the tab that best matches what the user is viewing:
+             * prefer the block with the largest overlap with the upper "reading zone" (below sticky chrome),
+             * then fall back to classic anchor line (last section whose top crossed that line).
+             */
+            const syncActiveFromScroll = () => {
+              if (Date.now() < scrollLockUntil) return;
+
+              const pairs = buildPairs();
+              if (pairs.length === 0) return;
+
+              const sorted = sortPairsByPagePosition(pairs);
+              const vh = window.innerHeight;
+              const sticky = readStickyOffsetPx();
+              const zoneTop = sticky;
+              const zoneBottom = sticky + Math.min(vh * 0.48, Math.max(260, vh * 0.36));
+
+              const scoreInZone = (r) => {
+                if (r.height < 10) {
+                  const mid = (r.top + r.bottom) / 2;
+                  if (mid >= zoneTop && mid <= zoneBottom) return 1e6 + mid;
+                  if (r.top < zoneBottom && r.bottom > zoneTop) return 5e5 + mid;
+                  return -1;
+                }
+                const segTop = Math.max(r.top, zoneTop);
+                const segBottom = Math.min(r.bottom, zoneBottom);
+                return Math.max(0, segBottom - segTop);
+              };
+
+              let bestBtn = sorted[0].btn;
+              let bestScore = -Infinity;
+
+              for (const { btn, el } of sorted) {
+                const sc = scoreInZone(el.getBoundingClientRect());
+                if (sc > bestScore) {
+                  bestScore = sc;
+                  bestBtn = btn;
+                }
+              }
+
+              if (!Number.isFinite(bestScore) || bestScore <= 0) {
+                const line = sticky + Math.min(152, Math.max(80, vh * 0.19));
+                bestBtn = sorted[0].btn;
+                for (const { btn, el } of sorted) {
+                  if (el.getBoundingClientRect().top <= line) bestBtn = btn;
+                }
+              }
+
+              setCurrent(bestBtn);
+            };
+
+            let scrollRaf = 0;
+            const scheduleSync = () => {
+              cancelAnimationFrame(scrollRaf);
+              scrollRaf = requestAnimationFrame(syncActiveFromScroll);
+            };
+
+            window.addEventListener('scroll', scheduleSync, { passive: true });
+            window.addEventListener('resize', scheduleSync);
+
+            if ('onscrollend' in window) {
+              window.addEventListener(
+                'scrollend',
+                () => {
+                  scrollLockUntil = 0;
+                  syncActiveFromScroll();
+                },
+                { passive: true }
+              );
+            }
+
+            if ('IntersectionObserver' in window) {
+              const io = new IntersectionObserver(scheduleSync, {
+                root: null,
+                rootMargin: '-12% 0px -52% 0px',
+                threshold: [0, 0.05, 0.12, 0.28, 0.45],
+              });
+              buildPairs().forEach(({ el }) => io.observe(el));
+            }
+
+            requestAnimationFrame(syncActiveFromScroll);
+
+            buttons.forEach((btn) => {
+              btn.addEventListener('click', () => {
+                const sel = btn.getAttribute('data-anchor');
+                const el = resolveTarget(sel);
+                if (!el) return;
+
+                setCurrent(btn);
+                scrollLockUntil = Date.now() + 950;
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                window.setTimeout(() => {
+                  scrollLockUntil = 0;
+                  syncActiveFromScroll();
+                }, 1000);
+              });
+            });
+          })();
+        </script>
+
+        <div class="fivestopsproduct-container">
+          {%- assign pm_more_info = product.metafields.custom.pm_more_info.value | default: product.metafields.custom.pm_more_info -%}
+
+          {%- comment -%}
+            OR relation:
+            - If pm_more_info exists: show ACF block (More Info), hide product.description
+            - Else: show product.description (if any)
+          {%- endcomment -%}
+
+          {%- if pm_more_info == blank and product.description != blank -%}
+            <div id="pm-description-anchor-{{ section.id }}" class="pm-more-info pm-product-description">
+              <div class="pm-more-info__header">
+                <div class="pm-more-info__title">Description</div>
+              </div>
+
+              <div class="prose">
+                {{- product.description -}}
+              </div>
+            </div>
+          {%- endif -%}
+
+          <!-- Overviews -->
+          {%- if has_overviews -%}
+          <div id="pm-overviews-{{ section.id }}" class="fivestopsproduct_Overviews">
+            <!-- 5 stop product overview -->
+            <!-- banner -->
+            {%- assign pm_pc_desc_banner = product.metafields.custom.pm_pc_desc_banner.value -%}
+            {%- assign pm_mobile_desc_banner = product.metafields.custom.pm_mobile_desc_banner.value -%}
+
+            {%- if pm_pc_desc_banner != blank or pm_mobile_desc_banner != blank -%}
+              <div class="Overviews_banner">
+                <picture>
+                  {%- if pm_mobile_desc_banner != blank -%}
+                    <source
+                      media="(max-width: 999px)"
+                      srcset="
+                        {{ pm_mobile_desc_banner | image_url: width: 360 }} 360w,
+                        {{ pm_mobile_desc_banner | image_url: width: 540 }} 540w,
+                        {{ pm_mobile_desc_banner | image_url: width: 720 }} 720w,
+                        {{ pm_mobile_desc_banner | image_url: width: 900 }} 900w
+                      "
+                      sizes="100vw"
+                    >
+                  {%- endif -%}
+
+                  {%- assign banner_fallback = pm_pc_desc_banner | default: pm_mobile_desc_banner -%}
+                  {{- banner_fallback | image_url: width: 1440 | image_tag: loading: 'lazy', widths: '480,720,960,1200,1440', sizes: '100vw', class: 'Overviews_banner__img' -}}
+                </picture>
+              </div>
+            {%- endif -%}
+
+            <!-- Overviews_content_item 左图右文 -->
+            {%- assign pm_desc_1_image = product.metafields.custom.pm_desc_1_image.value -%}
+            {%- assign pm_desc_1_title = product.metafields.custom.pm_desc_1_title.value | default: product.metafields.custom.pm_desc_1_title -%}
+            {%- assign pm_desc_1_content = product.metafields.custom.pm_desc_1_content.value | default: product.metafields.custom.pm_desc_1_content -%}
+
+            {%- if pm_desc_1_image != blank or pm_desc_1_title != blank or pm_desc_1_content != blank -%}
+              <div class="Overviews_content_item Overviews_content_item--lr">
+                {%- if pm_desc_1_image != blank -%}
+                  <div class="Overviews_content_item-media">
+                    {{- pm_desc_1_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360,540,720,900,1200', sizes: '(min-width: 1000px) 50vw, 100vw' -}}
+                  </div>
+                {%- endif -%}
+
+                <div class="Overviews_content_item-text">
+                  {%- if pm_desc_1_title != blank -%}
+                    <div class="Overviews_content_item-title">{{ pm_desc_1_title }}</div>
+                  {%- endif -%}
+
+                  {%- if pm_desc_1_content != blank -%}
+                    <div class="Overviews_content_item-content">
+                      {{ pm_desc_1_content }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+
+            <!-- Overviews_content_item 右文左图 -->
+            {%- assign pm_desc_2_image = product.metafields.custom.pm_desc_2_image.value -%}
+            {%- assign pm_desc_2_title = product.metafields.custom.pm_desc_2_title.value | default: product.metafields.custom.pm_desc_2_title -%}
+            {%- assign pm_desc_2_content = product.metafields.custom.pm_desc_2_content.value | default: product.metafields.custom.pm_desc_2_content -%}
+
+            {%- if pm_desc_2_image != blank or pm_desc_2_title != blank or pm_desc_2_content != blank -%}
+              <div class="Overviews_content_item Overviews_content_item--rl">
+                <div class="Overviews_content_item-text">
+                  {%- if pm_desc_2_title != blank -%}
+                    <div class="Overviews_content_item-title">{{ pm_desc_2_title }}</div>
+                  {%- endif -%}
+
+                  {%- if pm_desc_2_content != blank -%}
+                    <div class="Overviews_content_item-content">
+                      {{ pm_desc_2_content }}
+                    </div>
+                  {%- endif -%}
+                </div>
+
+                {%- if pm_desc_2_image != blank -%}
+                  <div class="Overviews_content_item-media">
+                    {{- pm_desc_2_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360,540,720,900,1200', sizes: '(min-width: 1000px) 50vw, 100vw' -}}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            <!-- Overviews_content_item 左图右文 -->
+            {%- assign pm_desc_3_image = product.metafields.custom.pm_desc_3_image.value -%}
+            {%- assign pm_desc_3_title = product.metafields.custom.pm_desc_3_title.value | default: product.metafields.custom.pm_desc_3_title -%}
+            {%- assign pm_desc_3_content = product.metafields.custom.pm_desc_3_content.value | default: product.metafields.custom.pm_desc_3_content -%}
+
+            {%- if pm_desc_3_image != blank or pm_desc_3_title != blank or pm_desc_3_content != blank -%}
+              <div class="Overviews_content_item Overviews_content_item--lr">
+                {%- if pm_desc_3_image != blank -%}
+                  <div class="Overviews_content_item-media">
+                    {{- pm_desc_3_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360,540,720,900,1200', sizes: '(min-width: 1000px) 50vw, 100vw' -}}
+                  </div>
+                {%- endif -%}
+
+                <div class="Overviews_content_item-text">
+                  {%- if pm_desc_3_title != blank -%}
+                    <div class="Overviews_content_item-title">{{ pm_desc_3_title }}</div>
+                  {%- endif -%}
+
+                  {%- if pm_desc_3_content != blank -%}
+                    <div class="Overviews_content_item-content">
+                      {{ pm_desc_3_content }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+
+            <!-- Overviews_content_item 右图左文 -->
+            {%- assign pm_desc_4_image = product.metafields.custom.pm_desc_4_image.value -%}
+            {%- assign pm_desc_4_title = product.metafields.custom.pm_desc_4_title.value | default: product.metafields.custom.pm_desc_4_title -%}
+            {%- assign pm_desc_4_content = product.metafields.custom.pm_desc_4_content.value | default: product.metafields.custom.pm_desc_4_content -%}
+
+            {%- if pm_desc_4_image != blank or pm_desc_4_title != blank or pm_desc_4_content != blank -%}
+              <div class="Overviews_content_item Overviews_content_item--rl">
+                <div class="Overviews_content_item-text">
+                  {%- if pm_desc_4_title != blank -%}
+                    <div class="Overviews_content_item-title">{{ pm_desc_4_title }}</div>
+                  {%- endif -%}
+
+                  {%- if pm_desc_4_content != blank -%}
+                    <div class="Overviews_content_item-content">
+                      {{ pm_desc_4_content }}
+                    </div>
+                  {%- endif -%}
+                </div>
+
+                {%- if pm_desc_4_image != blank -%}
+                  <div class="Overviews_content_item-media">
+                    {{- pm_desc_4_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360,540,720,900,1200', sizes: '(min-width: 1000px) 50vw, 100vw' -}}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            <!-- Overviews_content_item 左图右文 -->
+            {%- assign pm_desc_5_image = product.metafields.custom.pm_desc_5_image.value -%}
+            {%- assign pm_desc_5_title = product.metafields.custom.pm_desc_5_title.value | default: product.metafields.custom.pm_desc_5_title -%}
+            {%- assign pm_desc_5_content = product.metafields.custom.pm_desc_5_content.value | default: product.metafields.custom.pm_desc_5_content -%}
+
+            {%- if pm_desc_5_image != blank or pm_desc_5_title != blank or pm_desc_5_content != blank -%}
+              <div class="Overviews_content_item Overviews_content_item--lr">
+                {%- if pm_desc_5_image != blank -%}
+                  <div class="Overviews_content_item-media">
+                    {{- pm_desc_5_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360,540,720,900,1200', sizes: '(min-width: 1000px) 50vw, 100vw' -}}
+                  </div>
+                {%- endif -%}
+
+                <div class="Overviews_content_item-text">
+                  {%- if pm_desc_5_title != blank -%}
+                    <div class="Overviews_content_item-title">{{ pm_desc_5_title }}</div>
+                  {%- endif -%}
+
+                  {%- if pm_desc_5_content != blank -%}
+                    <div class="Overviews_content_item-content">
+                      {{ pm_desc_5_content }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+
+            <!-- Overviews_content_item 右图左文 -->
+            {%- assign pm_desc_6_image = product.metafields.custom.pm_desc_6_image.value -%}
+            {%- assign pm_desc_6_title = product.metafields.custom.pm_desc_6_title.value | default: product.metafields.custom.pm_desc_6_title -%}
+            {%- assign pm_desc_6_content = product.metafields.custom.pm_desc_6_content.value | default: product.metafields.custom.pm_desc_6_content -%}
+
+            {%- if pm_desc_6_image != blank or pm_desc_6_title != blank or pm_desc_6_content != blank -%}
+              <div class="Overviews_content_item Overviews_content_item--rl">
+                <div class="Overviews_content_item-text">
+                  {%- if pm_desc_6_title != blank -%}
+                    <div class="Overviews_content_item-title">{{ pm_desc_6_title }}</div>
+                  {%- endif -%}
+
+                  {%- if pm_desc_6_content != blank -%}
+                    <div class="Overviews_content_item-content">
+                      {{ pm_desc_6_content }}
+                    </div>
+                  {%- endif -%}
+                </div>
+
+                {%- if pm_desc_6_image != blank -%}
+                  <div class="Overviews_content_item-media">
+                    {{- pm_desc_6_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '360,540,720,900,1200', sizes: '(min-width: 1000px) 50vw, 100vw' -}}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+          </div>
+          {%- endif -%}
+
+          <!-- Product Videos -->
+          {%- if has_videos -%}
+            {%- assign pm_video_id = 'pm-videos-' | append: section.id -%}
+
+            <div id="pm-videos-anchor-{{ section.id }}" class="fivestopsproduct_ProductVideos">
+              <div class="pm-videos" id="{{ pm_video_id }}">
+                <div class="pm-videos__title">Product Videos</div>
+
+                <div class="pm-videos__tabs" role="tablist" aria-label="Product videos">
+                  {%- if pm_desc_video_overview != blank -%}
+                    <button class="pm-videos__tab" type="button" role="tab" aria-selected="true" data-target="overview">Product Overviews</button>
+                  {%- endif -%}
+                  {%- if pm_desc_video_review != blank -%}
+                    <button class="pm-videos__tab" type="button" role="tab" aria-selected="{% if pm_desc_video_overview != blank %}false{% else %}true{% endif %}" data-target="review">Creator Reviews</button>
+                  {%- endif -%}
+                  {%- if pm_desc_video_installation != blank -%}
+                    <button class="pm-videos__tab" type="button" role="tab" aria-selected="{% if pm_desc_video_overview != blank or pm_desc_video_review != blank %}false{% else %}true{% endif %}" data-target="installation">Installation Videos</button>
+                  {%- endif -%}
+                </div>
+
+                <div class="pm-videos__panel" role="region" aria-live="polite">
+                  {%- if pm_desc_video_overview != blank -%}
+                    {%- assign v = pm_desc_video_overview | strip -%}
+                    <div class="pm-videos__item" data-video="overview">
+                      {%- if v contains '.mp4' or v contains '.webm' or v contains '.ogg' -%}
+                        <video controls playsinline preload="metadata" src="{{ v | escape }}"></video>
+                      {%- else -%}
+                        <iframe src="{{ v | escape }}" title="Product overview video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+
+                  {%- if pm_desc_video_review != blank -%}
+                    {%- assign v = pm_desc_video_review | strip -%}
+                    <div class="pm-videos__item" data-video="review" {% if pm_desc_video_overview != blank %}hidden{% endif %}>
+                      {%- if v contains '.mp4' or v contains '.webm' or v contains '.ogg' -%}
+                        <video controls playsinline preload="metadata" src="{{ v | escape }}"></video>
+                      {%- else -%}
+                        <iframe src="{{ v | escape }}" title="Creator review video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+
+                  {%- if pm_desc_video_installation != blank -%}
+                    {%- assign v = pm_desc_video_installation | strip -%}
+                    <div class="pm-videos__item" data-video="installation" {% if pm_desc_video_overview != blank or pm_desc_video_review != blank %}hidden{% endif %}>
+                      {%- if v contains '.mp4' or v contains '.webm' or v contains '.ogg' -%}
+                        <video controls playsinline preload="metadata" src="{{ v | escape }}"></video>
+                      {%- else -%}
+                        <iframe src="{{ v | escape }}" title="Installation video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+
+              <script>
+                (() => {
+                  const root = document.getElementById({{ pm_video_id | json }});
+                  if (!root) return;
+
+                  const tabs = Array.from(root.querySelectorAll('[role="tab"][data-target]'));
+                  const items = Array.from(root.querySelectorAll('.pm-videos__item[data-video]'));
+                  if (tabs.length === 0 || items.length === 0) return;
+
+                  const normalizeYoutubeEmbedUrl = (raw) => {
+                    const s = String(raw ?? '').trim();
+                    if (!s) return s;
+                    if (!/^https?:\/\//i.test(s)) return s;
+
+                    let url;
+                    try {
+                      url = new URL(s);
+                    } catch {
+                      return s;
+                    }
+
+                    const host = url.hostname.replace(/^www\./i, '').toLowerCase();
+                    const path = url.pathname || '/';
+
+                    // Already an embed URL.
+                    if (host.includes('youtube') && path.startsWith('/embed/')) return url.toString();
+
+                    // youtu.be/<id>
+                    if (host === 'youtu.be') {
+                      const id = path.split('/').filter(Boolean)[0];
+                      if (!id) return s;
+                      return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}`;
+                    }
+
+                    // youtube.com/watch?v=<id>
+                    if (host.includes('youtube') && path === '/watch') {
+                      const id = url.searchParams.get('v');
+                      if (!id) return s;
+                      return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}`;
+                    }
+
+                    // youtube.com/shorts/<id>
+                    if (host.includes('youtube') && path.startsWith('/shorts/')) {
+                      const id = path.split('/').filter(Boolean)[1];
+                      if (!id) return s;
+                      return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}`;
+                    }
+
+                    return s;
+                  };
+
+                  // Fix common YouTube URLs that can't be framed (watch/shorts/youtu.be) by converting to /embed/.
+                  items.forEach((it) => {
+                    const iframe = it.querySelector('iframe');
+                    if (!iframe) return;
+                    const src = iframe.getAttribute('src') || '';
+                    const normalized = normalizeYoutubeEmbedUrl(src);
+                    if (normalized && normalized !== src) {
+                      iframe.setAttribute('src', normalized);
+                    }
+                  });
+
+                  const setActive = (key) => {
+                    tabs.forEach((t) => t.setAttribute('aria-selected', String(t.dataset.target === key)));
+                    items.forEach((it) => {
+                      const active = it.dataset.video === key;
+                      it.toggleAttribute('hidden', !active);
+
+                      if (!active) {
+                        const v = it.querySelector('video');
+                        if (v) v.pause();
+                      }
+                    });
+                  };
+
+                  const initial = tabs.find((t) => t.getAttribute('aria-selected') === 'true')?.dataset.target || tabs[0].dataset.target;
+                  setActive(initial);
+
+                  tabs.forEach((tab) => {
+                    tab.addEventListener('click', () => setActive(tab.dataset.target));
+                  });
+                })();
+              </script>
+            </div>
+          {%- endif -%}
+
+          <!-- MoreInfo -->
+          <div id="pm-more-info-anchor-{{ section.id }}" class="fivestopsproduct_MoreInfo">
+            {%- if pm_more_info != blank -%}
+              {%- assign pm_more_info_id = 'pm-more-info-' | append: section.id -%}
+
+              <div class="pm-more-info" id="{{ pm_more_info_id }}">
+                <div class="pm-more-info__header">
+                  <div class="pm-more-info__title">More Info</div>
+                  <button class="pm-more-info__toggle" type="button" aria-expanded="true" aria-controls="{{ pm_more_info_id }}-content"></button>
+                </div>
+
+                <div class="pm-more-info__content-wrap">
+                  <div class="pm-more-info__content" id="{{ pm_more_info_id }}-content"></div>
+                </div>
+              </div>
+
+              <script type="application/json" data-pm-more-info-json="{{ pm_more_info_id }}">
+                {{- pm_more_info | strip | json -}}
+              </script>
+
+              <script>
+                (() => {
+                  const rootId = {{ pm_more_info_id | json }};
+                  const root = document.getElementById(rootId);
+                  if (!root) return;
+
+                  const jsonScript = document.querySelector(`script[type="application/json"][data-pm-more-info-json="${rootId}"]`);
+                  if (!jsonScript) return;
+
+                  const container = root.querySelector('.pm-more-info__content');
+                  if (!container) return;
+
+                  const toggleBtn = root.querySelector('.pm-more-info__toggle');
+                  const contentWrap = root.querySelector('.pm-more-info__content-wrap');
+
+                  const syncHeight = () => {
+                    if (!contentWrap) return;
+                    if (root.classList.contains('is-collapsed')) {
+                      contentWrap.style.maxHeight = '0px';
+                    } else {
+                      contentWrap.style.maxHeight = `${contentWrap.scrollHeight}px`;
+                    }
+                  };
+
+                  const escapeHtml = (s) =>
+                    String(s ?? '')
+                      .replaceAll('&', '&amp;')
+                      .replaceAll('<', '&lt;')
+                      .replaceAll('>', '&gt;')
+                      .replaceAll('"', '&quot;')
+                      .replaceAll("'", '&#39;');
+
+                  const renderTable = (rows) => {
+                    const body = rows
+                      .map(([k, v]) => `<tr><th scope="row">${escapeHtml(k)}</th><td>${escapeHtml(v)}</td></tr>`)
+                      .join('');
+                    return `<table class="pm-more-info__table"><tbody>${body}</tbody></table>`;
+                  };
+
+                  let data;
+                  try {
+                    data = JSON.parse(jsonScript.textContent || 'null');
+
+                    // The metafield content is itself JSON, but we serialize it via Liquid `json`,
+                    // so the first parse may yield a string. In that case, parse one more time.
+                    if (typeof data === 'string') {
+                      data = JSON.parse(data);
+                    }
+                  } catch (e) {
+                    container.innerHTML = `<div class="prose"><pre>${escapeHtml(jsonScript.textContent)}</pre></div>`;
+                    return;
+                  }
+
+                  const specs = Array.isArray(data?.specifications) ? data.specifications : [];
+                  const packages = Array.isArray(data?.package_includes) ? data.package_includes : [];
+
+                  if (specs.length === 0 && packages.length === 0) {
+                    container.innerHTML = `<div class="prose"><pre>${escapeHtml(jsonScript.textContent)}</pre></div>`;
+                    return;
+                  }
+
+                  const pkgRows = packages.map((p, idx) => [`List${idx + 1}`, p]);
+                  const isMobile = () => window.matchMedia && window.matchMedia('(max-width: 999px)').matches;
+
+                  const renderSpecsTable = (rows, mobile) => {
+                    const body = [];
+                    if (mobile) {
+                      for (let i = 0; i < rows.length; i += 1) {
+                        const a = rows[i];
+                        body.push(
+                          `<tr>
+                            <th scope="row">${escapeHtml(a?.[0] ?? '')}</th>
+                            <td>${escapeHtml(a?.[1] ?? '')}</td>
+                          </tr>`
+                        );
+                      }
+                    } else {
+                      for (let i = 0; i < rows.length; i += 2) {
+                        const a = rows[i];
+                        const b = rows[i + 1];
+                        body.push(
+                          `<tr>
+                            <th scope="row">${escapeHtml(a?.[0] ?? '')}</th>
+                            <td>${escapeHtml(a?.[1] ?? '')}</td>
+                            <th scope="row">${escapeHtml(b?.[0] ?? '')}</th>
+                            <td>${escapeHtml(b?.[1] ?? '')}</td>
+                          </tr>`
+                        );
+                      }
+                    }
+
+                    return `<table class="pm-more-info__table pm-more-info__table--spec"><tbody>${body.join('')}</tbody></table>`;
+                  };
+
+                  const renderPackageTable = (rows, mobile) => {
+                    const body = [];
+                    if (mobile) {
+                      for (let i = 0; i < rows.length; i += 1) {
+                        const a = rows[i];
+                        body.push(
+                          `<tr>
+                            <th scope="row">${escapeHtml(a?.[0] ?? '')}</th>
+                            <td>${escapeHtml(a?.[1] ?? '')}</td>
+                          </tr>`
+                        );
+                      }
+                    } else {
+                      for (let i = 0; i < rows.length; i += 2) {
+                        const a = rows[i];
+                        const b = rows[i + 1];
+
+                        body.push(
+                          `<tr>
+                            <th scope="row">${escapeHtml(a?.[0] ?? '')}</th>
+                            <td>${escapeHtml(a?.[1] ?? '')}</td>
+                            <th scope="row">${escapeHtml(b?.[0] ?? '')}</th>
+                            <td>${escapeHtml(b?.[1] ?? '')}</td>
+                          </tr>`
+                        );
+                      }
+                    }
+
+                    return `<table class="pm-more-info__table pm-more-info__table--pkg"><tbody>${body.join('')}</tbody></table>`;
+                  };
+
+                  const renderAll = () => {
+                    const specRows = specs.map((s) => [s?.label, s?.value]);
+                    const specsHtml = specs.length
+                      ? `
+                        <div class="pm-more-info__section-title">Specification(${specs.length})</div>
+                        <div class="pm-more-info__grid">
+                          ${renderSpecsTable(specRows, isMobile())}
+                        </div>
+                      `
+                      : '';
+
+                    const pkgHtml = packages.length
+                      ? `
+                        <div class="pm-more-info__section-title">Package Includes(${packages.length})</div>
+                        <div class="pm-more-info__grid">
+                          ${renderPackageTable(pkgRows, isMobile())}
+                        </div>
+                      `
+                      : '';
+
+                    container.innerHTML = `${specsHtml}${pkgHtml}`;
+                  };
+
+                  renderAll();
+
+                  // After rendering tables, sync expanded height.
+                  syncHeight();
+
+                  // Re-render package table on breakpoint changes and sync height.
+                  let lastMobile = isMobile();
+                  window.addEventListener(
+                    'resize',
+                    () => {
+                      const nowMobile = isMobile();
+                      if (nowMobile !== lastMobile) {
+                        lastMobile = nowMobile;
+                        renderAll();
+                      }
+                      syncHeight();
+                    },
+                    { passive: true }
+                  );
+
+                  if (toggleBtn) {
+                    toggleBtn.addEventListener('click', () => {
+                      const collapsed = root.classList.toggle('is-collapsed');
+                      toggleBtn.setAttribute('aria-expanded', String(!collapsed));
+                      syncHeight();
+                    });
+                  }
+                })();
+              </script>
+            {%- endif -%}
+          </div>
+
+          <!-- faq -->
+          <div id="pm-faq-anchor-{{ section.id }}" class="fivestopsproduct_Faq">
+            {%- assign pm_faq = product.metafields.custom.pm_faq.value | default: product.metafields.custom.pm_faq -%}
+            {%- if pm_faq != blank -%}
+              {%- assign pm_faq_id = 'pm-faq-' | append: section.id -%}
+
+              <div class="pm-faq is-collapsed" id="{{ pm_faq_id }}">
+                <div class="pm-faq__header">
+                  <div class="pm-faq__title">FAQ</div>
+                  <button class="pm-faq__toggle" type="button" aria-expanded="false" aria-controls="{{ pm_faq_id }}-content"></button>
+                </div>
+
+                <div class="pm-faq__content-wrap">
+                  <div class="pm-faq__content" id="{{ pm_faq_id }}-content"></div>
+                </div>
+              </div>
+
+              <script type="application/json" data-pm-faq-json="{{ pm_faq_id }}">
+                {{- pm_faq | strip | json -}}
+              </script>
+
+              <script>
+                (() => {
+                  const rootId = {{ pm_faq_id | json }};
+                  const root = document.getElementById(rootId);
+                  if (!root) return;
+
+                  const jsonScript = document.querySelector(`script[type="application/json"][data-pm-faq-json="${rootId}"]`);
+                  if (!jsonScript) return;
+
+                  const container = root.querySelector('.pm-faq__content');
+                  if (!container) return;
+
+                  const toggleBtn = root.querySelector('.pm-faq__toggle');
+                  const contentWrap = root.querySelector('.pm-faq__content-wrap');
+
+                  const syncHeight = () => {
+                    if (!contentWrap) return;
+                    if (root.classList.contains('is-collapsed')) {
+                      contentWrap.style.maxHeight = '0px';
+                    } else {
+                      contentWrap.style.maxHeight = `${contentWrap.scrollHeight}px`;
+                    }
+                  };
+
+                  const escapeHtml = (s) =>
+                    String(s ?? '')
+                      .replaceAll('&', '&amp;')
+                      .replaceAll('<', '&lt;')
+                      .replaceAll('>', '&gt;')
+                      .replaceAll('"', '&quot;')
+                      .replaceAll("'", '&#39;');
+
+                  let data;
+                  try {
+                    data = JSON.parse(jsonScript.textContent || 'null');
+                    if (typeof data === 'string') data = JSON.parse(data);
+                  } catch (e) {
+                    container.innerHTML = `<div class="prose"><pre>${escapeHtml(jsonScript.textContent)}</pre></div>`;
+                    return;
+                  }
+
+                  const items = Array.isArray(data?.faq) ? data.faq : [];
+                  if (items.length === 0) return;
+
+                  const listHtml = items
+                    .map((it, idx) => {
+                      const q = it?.question ?? '';
+                      const a = it?.answer ?? '';
+                      return `
+                        <div class="pm-faq__item" data-idx="${idx}">
+                          <div class="pm-faq__a-wrap">
+                            <div class="pm-faq__q-text">${escapeHtml(q)}</div>
+                            <div class="pm-faq__a">${escapeHtml(a)}</div>
+                          </div>
+                        </div>
+                      `;
+                    })
+                    .join('');
+
+                  container.innerHTML = `<div class="pm-faq__list">${listHtml}</div>`;
+
+                  // After rendering, sync the whole FAQ height
+                  syncHeight();
+
+                  window.addEventListener(
+                    'resize',
+                    () => {
+                      syncHeight();
+                    },
+                    { passive: true }
+                  );
+
+                  if (toggleBtn) {
+                    toggleBtn.addEventListener('click', () => {
+                      const collapsed = root.classList.toggle('is-collapsed');
+                      toggleBtn.setAttribute('aria-expanded', String(!collapsed));
+                      syncHeight();
+                    });
+                  }
+                })();
+              </script>
+            {%- endif -%}
+          </div>
+
+          <!-- Reviews -->
+          <div id="pm-reviews-anchor-{{ section.id }}" class="fivestopsproduct_Reviews"></div>
+        </div>
+      </div>
+    </div>
+  </product-rerender>
+</div>
+
+{%- assign buy_buttons_block = section.blocks | where: 'type', 'buy_buttons' | first -%}
+
+{%- if section.settings.show_fixed_add_to_cart and product.available and buy_buttons_block != blank -%}
+  <product-rerender id="{{ product_form_id }}-sticky-bar" observe-form="{{ product_form_id }}">
+    {%- if product.selected_or_first_available_variant.available -%}
+      <product-quick-add form="{{ product_form_id }}" class="product-quick-add">
+        {%- assign button_label = 'product.general.add_to_cart_button' | t -%}
+
+        <buy-buttons template="{{ product.template_suffix }}" form="{{ product_form_id }}" class="sm:hidden">
+          {%- render 'button', type: 'submit', content: button_label, form: product_form_id, background: buy_buttons_block.settings.atc_button_background, text_color: buy_buttons_block.settings.atc_button_text_color, secondary: true, stretch: true, size: 'lg' -%}
+        </buy-buttons>
+
+        {%- assign image = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+
+        <div class="product-quick-add__variant {% if image == blank %}no-image{% endif %} hidden sm:grid">
+          {%- if image != blank -%}
+            <variant-media widths="80,160" form="{{ product_form_id }}">
+              {{- image | image_url: width: image.width | image_tag: loading: 'lazy', sizes: '80px', widths: '80,160', class: 'rounded-xs' -}}
+            </variant-media>
+          {%- endif -%}
+
+          <div class="v-stack gap-0.5">
+            {%- assign vendor_block = section.blocks | where: 'type', 'vendor' -%}
+
+            {%- if vendor_block != blank -%}
+              {%- render 'vendor' with product.vendor, class: 'text-xs' -%}
+            {%- endif -%}
+
+            <a href="{{ product.url }}" class="bold truncate-text">{{ product.title }}</a>
+            {%- render 'price-list', product: product, variant: product.selected_or_first_available_variant, form_id: product_form_id -%}
+          </div>
+
+          <buy-buttons template="{{ product.template_suffix }}" form="{{ product_form_id }}" force-secondary-button>
+            {%- render 'button', type: 'submit', content: button_label, form: product_form_id, background: buy_buttons_block.settings.atc_button_background, text_color: buy_buttons_block.settings.atc_button_text_color, secondary: true -%}
+          </buy-buttons>
+        </div>
+      </product-quick-add>
+    {%- endif -%}
+  </product-rerender>
+{%- endif -%}
+
+{%- comment -%}
+IMPLEMENTATION NOTE: Shopify does not currently allows to render a given section within the context of a given product. However,
+when rendering the quick buy popovers, we want to be able to re-use the merchant's choices (such as the selector type). This
+is however only possible by rendering the whole product page, and extracting the relevant part. Here, we therefore render the
+quick buy information in a template, that will be extracted in JS, but ensure it is not visible in the main product page
+{%- endcomment -%}
+
+{%- render 'product-quick-buy', product: product -%}
+
+{% schema %}
+{
+  "name": "Product page",
+  "class": "shopify-section--main-product",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "vendor",
+      "name": "Vendor",
+      "limit": 1
+    },
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "Style",
+          "options": [
+            {
+              "value": "h1",
+              "label": "X-Large"
+            },
+            {
+              "value": "h2",
+              "label": "Large"
+            },
+            {
+              "value": "h3",
+              "label": "Medium"
+            },
+            {
+              "value": "h4",
+              "label": "Small"
+            },
+            {
+              "value": "h5",
+              "label": "X-Small"
+            },
+            {
+              "value": "h6",
+              "label": "XX-Small"
+            }
+          ],
+          "default": "h2"
+        }
+      ]
+    },
+    {
+      "type": "sku",
+      "name": "SKU",
+      "limit": 1
+    },
+    {
+      "type": "badges",
+      "name": "Badges",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Use metafields to add custom badges. [Learn more](https://support.maestrooo.com/article/75-collection-displaying-custom-label)"
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_taxes_notice",
+          "label": "Show taxes notice",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "payment_terms",
+      "name": "Payment installments",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "To display payment installments, your store needs to support Shop Pay Installments. [Learn more](https://help.shopify.com/en/manual/payments/shop-pay-installments)"
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "To display a rating, add a product rating app. [Learn more](https://apps.shopify.com/categories/store-design-social-proof-product-reviews)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_empty",
+          "label": "Show if no reviews",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "separator",
+      "name": "Separator"
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "picto-coupon",
+              "label": "Coupon",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-percent",
+              "label": "Percent",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-gift",
+              "label": "Gift",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-star",
+              "label": "Star",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-like",
+              "label": "Like",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-building",
+              "label": "Building",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-love",
+              "label": "Love",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-award-gift",
+              "label": "Award gift",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-happy",
+              "label": "Happy",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-box",
+              "label": "Box",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-pin",
+              "label": "Pin",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-timer",
+              "label": "Timer",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-validation",
+              "label": "Validation",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-truck",
+              "label": "Truck",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-return",
+              "label": "Return",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-earth",
+              "label": "Earth",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-plane",
+              "label": "Plane",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-credit-card",
+              "label": "Credit card",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-lock",
+              "label": "Lock",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-shield",
+              "label": "Shield",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-secure-profile",
+              "label": "Secure profile",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-money",
+              "label": "Money",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-recycle",
+              "label": "Recycle",
+              "group": "Ecology"
+            },
+            {
+              "value": "picto-leaf",
+              "label": "Leaf",
+              "group": "Ecology"
+            },
+            {
+              "value": "picto-tree",
+              "label": "Tree",
+              "group": "Ecology"
+            },
+            {
+              "value": "picto-mobile-phone",
+              "label": "Mobile phone",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-phone",
+              "label": "Phone",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-chat",
+              "label": "Chat",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-customer-support",
+              "label": "Customer support",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-operator",
+              "label": "Operator",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-mailbox",
+              "label": "Mailbox",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-envelope",
+              "label": "Envelope",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-comment",
+              "label": "Comment",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-question",
+              "label": "Question",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-send",
+              "label": "Send",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-at-sign",
+              "label": "At sign",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-camera",
+              "label": "Camera",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-wifi",
+              "label": "WiFi",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-bluetooth",
+              "label": "Bluetooth",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-printer",
+              "label": "Printer",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-smart-watch",
+              "label": "Smart watch",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-coffee",
+              "label": "Coffee",
+              "group": "Food & Drink"
+            },
+            {
+              "value": "picto-burger",
+              "label": "Burger",
+              "group": "Food & Drink"
+            },
+            {
+              "value": "picto-beer",
+              "label": "Beer",
+              "group": "Food & Drink"
+            },
+            {
+              "value": "picto-target",
+              "label": "Target",
+              "group": "Other"
+            },
+            {
+              "value": "picto-document",
+              "label": "Document",
+              "group": "Other"
+            },
+            {
+              "value": "picto-jewelry",
+              "label": "Jewelry",
+              "group": "Other"
+            },
+            {
+              "value": "picto-music",
+              "label": "Music",
+              "group": "Other"
+            },
+            {
+              "value": "picto-file",
+              "label": "File",
+              "group": "Other"
+            },
+            {
+              "value": "picto-mask",
+              "label": "Mask",
+              "group": "Other"
+            },
+            {
+              "value": "picto-stop",
+              "label": "Stop",
+              "group": "Other"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom icon",
+          "info": "96 x 96px .png or .svg recommended. Only used when content is collapsed."
+        },
+        {
+          "type": "range",
+          "id": "icon_width",
+          "min": 16,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "label": "Icon width",
+          "default": 20
+        },
+        {
+          "type": "checkbox",
+          "id": "collapse_content",
+          "label": "Collapse content",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant picker",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "hide_sold_out_variants",
+          "label": "Hide sold out variants",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "stack_blocks",
+          "label": "Stack options on mobile",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "selector_style",
+          "label": "Selector style",
+          "options": [
+            {
+              "value": "block",
+              "label": "Block"
+            },
+            {
+              "value": "dropdown",
+              "label": "Dropdown"
+            }
+          ],
+          "default": "block"
+        },
+        {
+          "type": "select",
+          "id": "swatch_selector_style",
+          "label": "Swatch selector style",
+          "info": "Enable [swatches](https://help.shopify.com/en/manual/online-store/themes/theme-structure/theme-settings#options-with-swatches) on product options.",
+          "options": [
+            {
+              "value": "swatch",
+              "label": "Swatch"
+            },
+            {
+              "value": "block_swatch",
+              "label": "Block with swatch"
+            },
+            {
+              "value": "none",
+              "label": "None"
+            }
+          ],
+          "default": "swatch"
+        },
+        {
+          "type": "text",
+          "id": "variant_image_options",
+          "label": "Show variant image for options",
+          "info": "List of comma separated option names where option values show the attached variant image. [Learn more](https://impact-theme.helpscoutdocs.com/article/555-variant-images-for-color-option)"
+        },
+        {
+          "type": "page",
+          "id": "size_chart_page",
+          "label": "Size chart page",
+          "info": "Feature a page for size option"
+        }
+      ]
+    },
+    {
+      "type": "product_variations",
+      "name": "Product variations",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Link products of different colors using swatches. [Learn more](https://support.maestrooo.com/article/307-product-creating-product-variations-that-link-to-different-pages)"
+        },
+        {
+          "type": "text",
+          "id": "option_name",
+          "label": "Option name",
+          "info": "Example: Color, Style..."
+        },
+        {
+          "type": "text",
+          "id": "option_value_metafield",
+          "label": "Option value metafield",
+          "info": "Enter namespace and key of the metafield holding the value. Eg.: custom.color"
+        },
+        {
+          "type": "product_list",
+          "id": "products",
+          "label": "Products",
+          "info": "Select all the variations (including the product itself)."
+        },
+        {
+          "type": "select",
+          "id": "selector_style",
+          "label": "Selector style",
+          "info": "Product image mode requires that all variant have an associated image. [Learn more](https://help.shopify.com/en/manual/products/product-media/add-images-variants#add-images-to-existing-variants)",
+          "options": [
+            {
+              "value": "block",
+              "label": "Block"
+            },
+            {
+              "value": "block_swatch",
+              "label": "Block with swatch"
+            },
+            {
+              "value": "swatch",
+              "label": "Swatch"
+            },
+            {
+              "value": "variant_image",
+              "label": "Variant image"
+            }
+          ],
+          "default": "swatch"
+        }
+      ]
+    },
+    {
+      "type": "line_item_property",
+      "name": "Line item property",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Line item properties are used to collect customization information for an item added to the cart."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Your label"
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "label": "Type",
+          "options": [
+            {
+              "value": "text",
+              "label": "Text"
+            },
+            {
+              "value": "checkbox",
+              "label": "Checkbox"
+            }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required",
+          "info": "For text property, the customer must write a text ; for checkbox, the customer must check it to add to cart.",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Text",
+          "visible_if": "{{ block.settings.type == 'text' }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "allow_long_text",
+          "label": "Allow long text",
+          "default": false,
+          "visible_if": "{{ block.settings.type == 'text' }}"
+        },
+        {
+          "type": "number",
+          "id": "max_length",
+          "label": "Maximum number of characters",
+          "visible_if": "{{ block.settings.type == 'text' }}"
+        }
+      ]
+    },
+    {
+      "type": "quantity_selector",
+      "name": "Quantity selector",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "The selector is automatically hidden if all variants are sold out. When at least one variant is available, the selector is always visible to prevent the page from moving when switching variants. To show a volume pricing table, add the dedicatd Volume pricing block."
+        }
+      ]
+    },
+    {
+      "type": "volume_pricing",
+      "name": "Volume pricing table",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Volume pricing is only available to Shopify Plus merchants. [Learn more](https://help.shopify.com/en/manual/b2b/catalogs/quantity-pricing#volume-pricing)"
+        }
+      ]
+    },
+    {
+      "type": "inventory",
+      "name": "Inventory",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "low_inventory_threshold",
+          "label": "Low inventory threshold",
+          "info": "Use low stock color when quantity is below the threshold. Choose 0 to always show in stock.",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_payment_button",
+          "label": "Show dynamic checkout button",
+          "info": "Each customer will see their preferred payment method from those available on your store, such as PayPal or Apple Pay. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_gift_card_recipient",
+          "label": "Show recipient information form for gift cards",
+          "info": "Allow buyers to send gift cards along with a personal message. [Learn more](https://help.shopify.com/manual/online-store/themes/customizing-themes/add-gift-card-recipient-fields)",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "atc_button_background",
+          "label": "Add to cart background"
+        },
+        {
+          "type": "color",
+          "id": "atc_button_text_color",
+          "label": "Add to cart color"
+        },
+        {
+          "type": "color",
+          "id": "payment_button_background",
+          "label": "Buy now button background"
+        },
+        {
+          "type": "color",
+          "id": "payment_button_text_color",
+          "label": "Buy now button color"
+        }
+      ]
+    },
+    {
+      "type": "pickup_availability",
+      "name": "Pickup availability",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Allow your customers to see availability in retail stores by [setting up local pickup](https://help.shopify.com/en/manual/sell-in-person/shopify-pos/order-management/local-pickup-for-online-orders)."
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Share some content to your customers about your products.</p>"
+        }
+      ]
+    },
+    {
+      "type": "collapsible_text",
+      "name": "Collapsible text",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "picto-coupon",
+              "label": "Coupon",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-percent",
+              "label": "Percent",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-gift",
+              "label": "Gift",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-star",
+              "label": "Star",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-like",
+              "label": "Like",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-building",
+              "label": "Building",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-love",
+              "label": "Love",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-award-gift",
+              "label": "Award gift",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-happy",
+              "label": "Happy",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-box",
+              "label": "Box",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-pin",
+              "label": "Pin",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-timer",
+              "label": "Timer",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-validation",
+              "label": "Validation",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-truck",
+              "label": "Truck",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-return",
+              "label": "Return",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-earth",
+              "label": "Earth",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-plane",
+              "label": "Plane",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-credit-card",
+              "label": "Credit card",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-lock",
+              "label": "Lock",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-shield",
+              "label": "Shield",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-secure-profile",
+              "label": "Secure profile",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-money",
+              "label": "Money",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-recycle",
+              "label": "Recycle",
+              "group": "Ecology"
+            },
+            {
+              "value": "picto-leaf",
+              "label": "Leaf",
+              "group": "Ecology"
+            },
+            {
+              "value": "picto-tree",
+              "label": "Tree",
+              "group": "Ecology"
+            },
+            {
+              "value": "picto-mobile-phone",
+              "label": "Mobile phone",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-phone",
+              "label": "Phone",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-chat",
+              "label": "Chat",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-customer-support",
+              "label": "Customer support",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-operator",
+              "label": "Operator",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-mailbox",
+              "label": "Mailbox",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-envelope",
+              "label": "Envelope",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-comment",
+              "label": "Comment",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-question",
+              "label": "Question",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-send",
+              "label": "Send",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-at-sign",
+              "label": "At sign",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-camera",
+              "label": "Camera",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-wifi",
+              "label": "WiFi",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-bluetooth",
+              "label": "Bluetooth",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-printer",
+              "label": "Printer",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-smart-watch",
+              "label": "Smart watch",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-coffee",
+              "label": "Coffee",
+              "group": "Food & Drink"
+            },
+            {
+              "value": "picto-burger",
+              "label": "Burger",
+              "group": "Food & Drink"
+            },
+            {
+              "value": "picto-beer",
+              "label": "Beer",
+              "group": "Food & Drink"
+            },
+            {
+              "value": "picto-target",
+              "label": "Target",
+              "group": "Other"
+            },
+            {
+              "value": "picto-document",
+              "label": "Document",
+              "group": "Other"
+            },
+            {
+              "value": "picto-jewelry",
+              "label": "Jewelry",
+              "group": "Other"
+            },
+            {
+              "value": "picto-music",
+              "label": "Music",
+              "group": "Other"
+            },
+            {
+              "value": "picto-file",
+              "label": "File",
+              "group": "Other"
+            },
+            {
+              "value": "picto-mask",
+              "label": "Mask",
+              "group": "Other"
+            },
+            {
+              "value": "picto-stop",
+              "label": "Stop",
+              "group": "Other"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom icon",
+          "info": "96 x 96px .png or .svg recommended"
+        },
+        {
+          "type": "range",
+          "id": "icon_width",
+          "min": 16,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "label": "Icon width",
+          "default": 20
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Share some content to your customers about your products.</p>"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "Page",
+          "info": "Replaces inline content if specified."
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alignment",
+          "options": [
+            {
+              "value": "start",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "end",
+              "label": "Right"
+            }
+          ],
+          "default": "start"
+        },
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 50,
+          "max": 500,
+          "step": 10,
+          "unit": "px",
+          "label": "Width",
+          "default": 150
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Create link to your contact page, external marketplace..."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Button"
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "Small"
+            },
+            {
+              "value": "base",
+              "label": "Medium"
+            },
+            {
+              "value": "lg",
+              "label": "Large"
+            },
+            {
+              "value": "xl",
+              "label": "X-Large"
+            }
+          ],
+          "default": "xl"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            {
+              "value": "outline",
+              "label": "Outline"
+            },
+            {
+              "value": "fill",
+              "label": "Fill"
+            }
+          ],
+          "default": "fill"
+        },
+        {
+          "type": "checkbox",
+          "id": "stretch",
+          "label": "Stretch",
+          "default": true
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Background"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "liquid",
+      "name": "Custom Liquid",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "liquid",
+          "label": "Liquid",
+          "info": "Add app snippets or other Liquid code to create advanced customizations."
+        }
+      ]
+    },
+    {
+      "type": "custom_block",
+      "name": "Custom block",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Item 1"
+        },
+        {
+          "type": "select",
+          "id": "item_1_icon",
+          "label": "Icon",
+          "options": [
+            { "value": "picto-truck", "label": "Truck" },
+            { "value": "picto-return", "label": "Return" },
+            { "value": "picto-box", "label": "Box" },
+            { "value": "picto-lock", "label": "Lock" },
+            { "value": "picto-question", "label": "Question" }
+          ],
+          "default": "picto-truck"
+        },
+        {
+          "type": "image_picker",
+          "id": "item_1_icon_image",
+          "label": "Custom icon image (optional)"
+        },
+        {
+          "type": "liquid",
+          "id": "item_1_icon_svg",
+          "label": "Custom icon SVG (optional)",
+          "info": "Paste <svg>…</svg> code. If set, it overrides image/icon."
+        },
+        {
+          "type": "text",
+          "id": "item_1_title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "item_1_text",
+          "label": "Description",
+          "default": "Free standard shipping on orders over $129"
+        },
+        {
+          "type": "richtext",
+          "id": "item_1_popup_content",
+          "label": "Popup content (click ?)",
+          "default": "<p>Shipping policy content...</p>"
+        },
+        {
+          "type": "header",
+          "content": "Item 2"
+        },
+        {
+          "type": "select",
+          "id": "item_2_icon",
+          "label": "Icon",
+          "options": [
+            { "value": "picto-truck", "label": "Truck" },
+            { "value": "picto-return", "label": "Return" },
+            { "value": "picto-box", "label": "Box" },
+            { "value": "picto-lock", "label": "Lock" },
+            { "value": "picto-question", "label": "Question" }
+          ],
+          "default": "picto-return"
+        },
+        {
+          "type": "image_picker",
+          "id": "item_2_icon_image",
+          "label": "Custom icon image (optional)"
+        },
+        {
+          "type": "liquid",
+          "id": "item_2_icon_svg",
+          "label": "Custom icon SVG (optional)",
+          "info": "Paste <svg>…</svg> code. If set, it overrides image/icon."
+        },
+        {
+          "type": "text",
+          "id": "item_2_title",
+          "label": "Title",
+          "default": "Free Returns"
+        },
+        {
+          "type": "text",
+          "id": "item_2_text",
+          "label": "Description",
+          "default": "Free returns within 30 days"
+        },
+        {
+          "type": "richtext",
+          "id": "item_2_popup_content",
+          "label": "Popup content (click ?)",
+          "default": "<p>Returns policy content...</p>"
+        }
+      ]
+    },
+    {
+      "type": "associated_products",
+      "name": "Complementary products",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "To select complementary products, use the Search & Discovery app. [Learn more](https://help.shopify.com/en/manual/online-store/search-and-discovery/product-recommendations#complementary-products)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Buy it with"
+        },
+        {
+          "type": "checkbox",
+          "id": "stack_products",
+          "label": "Stack products",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "products_count",
+          "min": 1,
+          "max": 10,
+          "label": "Products to show",
+          "default": 5
+        },
+        {
+          "type": "header",
+          "content": "Colors",
+          "info": "Cards are bordered when background matches section background."
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Background"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "offer",
+      "name": "Offer",
+      "settings": [
+        {
+          "type": "select",
+          "id": "text_alignment",
+          "label": "Text alignment",
+          "options": [
+            {
+              "value": "start",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            }
+          ],
+          "default": "start"
+        },
+        {
+          "type": "select",
+          "id": "icon_position",
+          "label": "Icon position",
+          "options": [
+            {
+              "value": "aligned",
+              "label": "Aligned horizontally"
+            },
+            {
+              "value": "stacked",
+              "label": "Stacked"
+            }
+          ],
+          "default": "aligned"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "picto-coupon",
+              "label": "Coupon",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-percent",
+              "label": "Percent",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-gift",
+              "label": "Gift",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-star",
+              "label": "Star",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-like",
+              "label": "Like",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-building",
+              "label": "Building",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-love",
+              "label": "Love",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-award-gift",
+              "label": "Award gift",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-happy",
+              "label": "Happy",
+              "group": "Shop"
+            },
+            {
+              "value": "picto-box",
+              "label": "Box",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-pin",
+              "label": "Pin",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-timer",
+              "label": "Timer",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-validation",
+              "label": "Validation",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-truck",
+              "label": "Truck",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-return",
+              "label": "Return",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-earth",
+              "label": "Earth",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-plane",
+              "label": "Plane",
+              "group": "Shipping"
+            },
+            {
+              "value": "picto-credit-card",
+              "label": "Credit card",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-lock",
+              "label": "Lock",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-shield",
+              "label": "Shield",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-secure-profile",
+              "label": "Secure profile",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-money",
+              "label": "Money",
+              "group": "Payment & Security"
+            },
+            {
+              "value": "picto-recycle",
+              "label": "Recycle",
+              "group": "Ecology"
+            },
+            {
+              "value": "picto-leaf",
+              "label": "Leaf",
+              "group": "Ecology"
+            },
+            {
+              "value": "picto-tree",
+              "label": "Tree",
+              "group": "Ecology"
+            },
+            {
+              "value": "picto-mobile-phone",
+              "label": "Mobile phone",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-phone",
+              "label": "Phone",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-chat",
+              "label": "Chat",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-customer-support",
+              "label": "Customer support",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-operator",
+              "label": "Operator",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-mailbox",
+              "label": "Mailbox",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-envelope",
+              "label": "Envelope",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-comment",
+              "label": "Comment",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-question",
+              "label": "Question",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-send",
+              "label": "Send",
+              "group": "Communication"
+            },
+            {
+              "value": "picto-at-sign",
+              "label": "At sign",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-camera",
+              "label": "Camera",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-wifi",
+              "label": "WiFi",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-bluetooth",
+              "label": "Bluetooth",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-printer",
+              "label": "Printer",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-smart-watch",
+              "label": "Smart watch",
+              "group": "Tech"
+            },
+            {
+              "value": "picto-coffee",
+              "label": "Coffee",
+              "group": "Food & Drink"
+            },
+            {
+              "value": "picto-burger",
+              "label": "Burger",
+              "group": "Food & Drink"
+            },
+            {
+              "value": "picto-beer",
+              "label": "Beer",
+              "group": "Food & Drink"
+            },
+            {
+              "value": "picto-target",
+              "label": "Target",
+              "group": "Other"
+            },
+            {
+              "value": "picto-document",
+              "label": "Document",
+              "group": "Other"
+            },
+            {
+              "value": "picto-jewelry",
+              "label": "Jewelry",
+              "group": "Other"
+            },
+            {
+              "value": "picto-music",
+              "label": "Music",
+              "group": "Other"
+            },
+            {
+              "value": "picto-file",
+              "label": "File",
+              "group": "Other"
+            },
+            {
+              "value": "picto-mask",
+              "label": "Mask",
+              "group": "Other"
+            },
+            {
+              "value": "picto-stop",
+              "label": "Stop",
+              "group": "Other"
+            }
+          ],
+          "default": "picto-coupon"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom icon",
+          "info": "240 x 240px .png recommended"
+        },
+        {
+          "type": "range",
+          "id": "icon_width",
+          "min": 20,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Icon width",
+          "default": 20
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Shipping"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Short content about your shipping rates or discounts.</p>"
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Background",
+          "default": "#eaf2ed"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text",
+          "default": "#00a341"
+        }
+      ]
+    },
+    {
+      "type": "share_buttons",
+      "name": "Share buttons",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "To improve user experience and performance, native share buttons are used when supported."
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alignment",
+          "options": [
+            {
+              "value": "start",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "end",
+              "label": "Right"
+            }
+          ],
+          "default": "start"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_fixed_add_to_cart",
+      "label": "Show add to cart on scroll",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "paragraph",
+      "content": "Learn more about [media types](https://help.shopify.com/en/manual/products/product-media)"
+    },
+    {
+      "type": "range",
+      "id": "desktop_media_width",
+      "label": "Desktop media size",
+      "min": 35,
+      "max": 65,
+      "step": 5,
+      "unit": "%",
+      "default": 55
+    },
+    {
+      "type": "select",
+      "id": "desktop_media_layout",
+      "label": "Desktop media layout",
+      "options": [
+        {
+          "value": "grid_one",
+          "label": "Grid (1x1)"
+        },
+        {
+          "value": "grid",
+          "label": "Grid (2x2)"
+        },
+        {
+          "value": "grid_highlight",
+          "label": "Grid (2x2) with highlighted media"
+        },
+        {
+          "value": "carousel_thumbnails_left",
+          "label": "Thumbnails left (carousel)"
+        },
+        {
+          "value": "carousel_thumbnails_bottom",
+          "label": "Thumbnails bottom (carousel)"
+        }
+      ],
+      "default": "carousel_thumbnails_left"
+    },
+    {
+      "type":"select",
+      "id": "mobile_media_size",
+      "label": "Mobile media size",
+      "options": [
+        {
+          "value": "expanded",
+          "label": "Expanded"
+        },
+        {
+          "value": "contained",
+          "label": "Contained"
+        }
+      ],
+      "default": "expanded"
+    },
+    {
+      "type": "select",
+      "id": "mobile_carousel_control",
+      "label": "Mobile carousel control",
+      "options": [
+        {
+          "value": "dots",
+          "label": "Dots"
+        },
+        {
+          "value": "floating_dots",
+          "label": "Floating dots"
+        },
+        {
+          "value": "thumbnails",
+          "label": "Thumbnails"
+        },
+        {
+          "value": "free_scroll",
+          "label": "Free scroll"
+        }
+      ],
+      "default": "floating_dots"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_autoplay",
+      "label": "Enable video autoplay",
+      "info": "Video are muted automatically to allow autoplay. Grid mode on desktop turn off autoplay.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "label": "Enable video looping",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Image zoom"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_image_zoom",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "max_image_zoom_level",
+      "min": 1,
+      "max": 4,
+      "step": 0.5,
+      "label": "Max zoom level",
+      "default": 3,
+      "visible_if": "{{ section.settings.enable_image_zoom }}"
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "header",
+      "content": "Input colors",
+      "info": "Applies to elements like quantity selector and variant selectors."
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Background",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Text"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,229 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h2"
+          }
+        },
+        "badges": {
+          "type": "badges",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "show_empty": false
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_style": "block",
+            "swatch_selector_style": "swatch",
+            "variant_image_options": "",
+            "size_chart_page": ""
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "#2d2dd5",
+            "atc_button_text_color": "#ffffff",
+            "payment_button_background": "rgba(0,0,0,0)",
+            "payment_button_text_color": ""
+          }
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "disabled": true,
+          "settings": {}
+        },
+        "separator": {
+          "type": "separator",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "icon": "none",
+            "icon_width": 20,
+            "collapse_content": false
+          }
+        },
+        "dealeasy_mm_bundle_builder_kcnD37": {
+          "type": "shopify://apps/dealeasy/blocks/mm-bundle-builder/e47a8634-0496-480d-9e46-6f7fafd34b30",
+          "settings": {
+            "lb-product-handle": "",
+            "lb-product-id": ""
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "badges",
+        "rating",
+        "price",
+        "quantity_selector",
+        "variant_picker",
+        "buy_buttons",
+        "payment_terms",
+        "separator",
+        "description",
+        "dealeasy_mm_bundle_builder_kcnD37"
+      ],
+      "custom_css": [
+        "/* 限制视频区域最大宽度（按需要改数字） */.product-desc .video-wrap {max-width: 720px;}",
+        ".product-desc .video-wrap iframe,.product-desc .pd-iframe {width: 100%; max-width: 720px; /* 关键：用 px，不要用 100% */ aspect-ratio: 16 / 9; height: auto; border: 0; display: block;}",
+        ".feature-text {display: inline;}"
+      ],
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": true,
+        "desktop_media_width": 55,
+        "desktop_media_layout": "carousel_thumbnails_bottom",
+        "mobile_media_size": "expanded",
+        "mobile_carousel_control": "thumbnails",
+        "enable_video_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "recommendations_count": 6,
+        "products": [],
+        "full_width": true,
+        "stack_products": true,
+        "show_progress_bar": false,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 3,
+        "subheading": "",
+        "title": "You may also like",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
+    "1776675983775d12c5": {
+      "type": "product-app-blocks",
+      "blocks": {
+        "loox_reviews_loox_dynamic_section_wghrLy": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "reviews_to_display": "",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "aggregated": false,
+            "limit": 20,
+            "hide_thumbnails": false,
+            "maxwidth": 1440,
+            "is_sample": true
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_dynamic_section_wghrLy"
+      ],
+      "custom_css": [
+        "#grid {margin: 0 auto; padding: 0 !important;}"
+      ],
+      "settings": {
+        "full_width": true,
+        "default_collapsed": false,
+        "title": "Reviews"
+      }
+    },
+    "service-highlights-row": {
+      "type": "service-highlights-row",
+      "blocks": {
+        "item-1": {
+          "type": "item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon_shipping_2x_796c602e-473a-441f-a85b-3e881a63830c.webp",
+            "title": "Free Shipping",
+            "text": "Free Shipping on orders over $89"
+          }
+        },
+        "item-2": {
+          "type": "item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon_refund_2x_e33589f2-c426-44d6-aeb6-14521952a26b.webp",
+            "title": "Free Refund",
+            "text": "Free refund within 30 days of receiving the package"
+          }
+        },
+        "item-3": {
+          "type": "item",
+          "settings": {
+            "icon_image": "shopify://shop_images/icon_service_2x_603c0dbd-a936-4573-8899-532794518f4f.webp",
+            "title": "Quick Customer Service",
+            "text": "Reply to customer messages within 24 hours"
+          }
+        }
+      },
+      "block_order": [
+        "item-1",
+        "item-2",
+        "item-3"
+      ],
+      "settings": {
+        "full_width": true,
+        "icon_size": 36,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products",
+    "1776675983775d12c5",
+    "service-highlights-row"
+  ]
+}
