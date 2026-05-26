@@ -1,0 +1,669 @@
+{%- comment -%}
+  Wholesale page section (final)
+  Images use Shopify Files: Content -> Files
+  Required filenames:
+  iphone_banner.jpg, banner21.jpg, wholesale_zl.jpg, wholesale_zk.jpg, wholesale_wl.jpg, wholesale_fw.jpg
+{%- endcomment -%}
+
+
+
+<div class="ev-wholesale-page">
+  <style>
+    /* Scope EVERYTHING under .ev-wholesale-page to avoid affecting other pages */
+    .ev-wholesale-page * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .ev-wholesale-page {
+      color: #333;
+      line-height: 1.6;
+      background-color: #f5f5f5;
+    }
+
+    .ev-wholesale-page .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .ev-wholesale-page section {
+      padding: 80px 0;
+    }
+
+    .ev-wholesale-page h2 {
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      
+      text-align: center;
+      color: #000;
+      position: relative;
+    }
+
+    /* Hero */
+    .ev-wholesale-page .hero {
+      padding: 0;
+      width: 100%;
+      position: relative;
+      height: auto;
+      background: #000;
+    }
+
+    .ev-wholesale-page .hero_img {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+    }
+
+    .ev-wholesale-page .hero_img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .ev-wholesale-page .hero-content {
+      position: absolute;
+      top: 12%;
+      left: 10%;
+    }
+
+    .ev-wholesale-page .staircase-text {
+      font-size: 6.5rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+      text-align: left;
+      line-height: 1.2;
+    }
+
+    .ev-wholesale-page .staircase-text span {
+      color: #fff;
+      display: block;
+    }
+
+    .ev-wholesale-page .cta-button {
+      display: inline-block;
+      background: #132141;
+      color: #fff;
+      padding: 16px 48px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      border: 1px solid #132141;
+      margin-top: 30px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .ev-wholesale-page .cta-button:visited,
+    .ev-wholesale-page .cta-button:active,
+    .ev-wholesale-page .cta-button:focus {
+      color: #fff;
+      background: #132141;
+    }
+
+    .ev-wholesale-page .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      z-index: -1;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      transform: scaleX(0);
+      transform-origin: right;
+    }
+
+    @media (hover: hover) {
+      .ev-wholesale-page .cta-button:hover {
+        color: #1a1a1a;
+        border: 1px solid #132141;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        transform: translateY(-2px);
+      }
+
+      .ev-wholesale-page .cta-button:hover::before {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+
+    /* Offerings */
+    .ev-wholesale-page .offerings {
+      background-color: #f0f0f0;
+    }
+
+    .ev-wholesale-page .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .ev-wholesale-page .offer-item {
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+    }
+
+    .ev-wholesale-page .offer-item:hover {
+      transform: translateY(-10px) !important;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .ev-wholesale-page .offer-img {
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .ev-wholesale-page .offer-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+
+    .ev-wholesale-page .offer-item:hover .offer-img img {
+      transform: scale(1.05);
+    }
+
+    .ev-wholesale-page .offer-content {
+      padding: 25px;
+    }
+
+    .ev-wholesale-page .offer-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #000;
+    }
+
+    .ev-wholesale-page .offer-content p {
+      color: #555;
+    }
+
+    /* Join Us */
+    .ev-wholesale-page .join-us {
+      background-color: #fff;
+      padding: 0;
+      padding-top:50px
+    }
+
+    .ev-wholesale-page .contact-container {
+         display: flex;
+    justify-content: center;
+    width: 100%;
+    }
+
+    .ev-wholesale-page .contact-form h3,
+    .ev-wholesale-page .our-contact h3 {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      color: #000;
+    }
+
+    .ev-wholesale-page .form-group {
+      margin-bottom: 20px;
+    }
+
+    .ev-wholesale-page .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .ev-wholesale-page .form-group input,
+    .ev-wholesale-page .form-group select,
+    .ev-wholesale-page .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      color: #111;
+      background: #fff;
+    }
+
+    .ev-wholesale-page .form-group input::placeholder,
+    .ev-wholesale-page .form-group textarea::placeholder {
+      color: #a9a9a9;
+    }
+
+    .ev-wholesale-page .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .ev-wholesale-page .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .ev-wholesale-page .submit-btn {
+      border: 2px solid transparent;
+      background-color: #000;
+      color: #fff;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+      font-weight: bold;
+      width: 100%;
+    }
+
+    .ev-wholesale-page .submit-btn:hover {
+      background-color: #fff;
+      border: 2px solid #000;
+      color: #000;
+    }
+
+    .ev-wholesale-page .our-contact .contact-methods {
+      display: flex;
+          flex-wrap: wrap;
+    }
+
+    .ev-wholesale-page .contact-method {
+      display: flex;
+      align-items: center;
+          width: 50%;
+              margin-top: 20px;
+    }
+
+    .ev-wholesale-page .contact-method i {
+      font-size: 1.5rem;
+      color: #000;
+      width: 30px;
+    }
+
+    /* Footer */
+    .ev-wholesale-page .footer {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 30px 0;
+      margin-top: 50px;
+    }
+
+    /* Reveal animation */
+    .ev-wholesale-page .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    .ev-wholesale-page .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .ev-wholesale-page .delay-100 { transition-delay: 0.1s; }
+    .ev-wholesale-page .delay-200 { transition-delay: 0.2s; }
+    .ev-wholesale-page .delay-300 { transition-delay: 0.3s; }
+    .ev-wholesale-page .delay-400 { transition-delay: 0.4s; }
+
+    /* Focus */
+    .ev-wholesale-page .form-group input:focus,
+    .ev-wholesale-page .form-group select:focus,
+    .ev-wholesale-page .form-group textarea:focus {
+      border-color: #000;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .ev-wholesale-page .offer-grid { grid-template-columns: 1fr; }
+      .ev-wholesale-page .contact-container { grid-template-columns: 1fr; }
+      .ev-wholesale-page .staircase-text { font-size: 2.5rem; }
+    }
+
+    @media (max-width: 768px) {
+      .ev-wholesale-page .contact-form h3,
+      .ev-wholesale-page .our-contact h3 { font-size: 1.2rem; }
+
+      .ev-wholesale-page .form-row { grid-template-columns: 1fr; }
+      .ev-wholesale-page .staircase-text { font-size: 2rem; text-align: center; }
+      .ev-wholesale-page h2 { font-size: 2rem; }
+      .ev-wholesale-page section { padding: 60px 0; }
+
+      .ev-wholesale-page .hero {
+        height: 60vh;
+        min-height: 500px;
+        padding-left: 0;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        display: flex;
+      }
+
+      .ev-wholesale-page .hero_img {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: 1;
+      }
+
+      .ev-wholesale-page .hero_img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .ev-wholesale-page .hero-content {
+        position: absolute;
+        top: auto; left: auto;
+        bottom: 20px;
+        transform: none;
+        align-items: center;
+        padding: 0 20px;
+        width: 100%;
+       z-index: 2;
+      }
+
+      .ev-wholesale-page .cta-button {
+        margin-top: 30px;
+        padding: 14px 30px;
+        font-size: 1rem;
+        width: auto;
+        max-width: 90%;
+      }
+    }
+
+    /* Simple message styles */
+    .ev-wholesale-page .form-notice {
+      margin: 12px 0;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+    .ev-wholesale-page .form-notice.success {
+      background: rgba(0, 128, 0, 0.08);
+      border: 1px solid rgba(0, 128, 0, 0.25);
+      color: #0b5;
+    }
+    .ev-wholesale-page .form-notice.error {
+      background: rgba(255, 0, 0, 0.06);
+      border: 1px solid rgba(255, 0, 0, 0.18);
+      color: #c00;
+    }
+
+    /* Honeypot (anti-spam) */
+    .ev-wholesale-page .hp-field {
+      position: absolute !important;
+      left: -9999px !important;
+      top: -9999px !important;
+      height: 0 !important;
+      width: 0 !important;
+      overflow: hidden !important;
+    }
+
+
+    .icon-svg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  color: #111;
+}
+
+.icon-svg svg {
+  width: 24px;   /* ⭐ 调大这里 */
+  height: 24px;
+}
+
+
+
+
+.wholesale-form-wrapper{
+  width:100%;
+}
+
+.wholesale-form{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.wf-field input,
+.wf-field textarea{
+  width:100%;
+  padding:14px 16px;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  font-size:14px;
+  background:#fff;
+  transition:all .2s ease;
+}
+
+.wf-field input:focus,
+.wf-field textarea:focus{
+  outline:none;
+  border-color:#111;
+  box-shadow:0 0 0 2px rgba(0,0,0,.05);
+}
+
+.wf-field textarea{
+  resize:vertical;
+  min-height:120px;
+}
+
+.wf-btn{
+  margin-top:6px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:#111;
+  color:#fff;
+  font-weight:600;
+  font-size:15px;
+  cursor:pointer;
+  transition:all .2s ease;
+}
+
+.wf-btn:hover{
+  background:#000;
+  transform:translateY(-1px);
+}
+
+/* 📱 mobile 优化 */
+@media (max-width: 768px){
+  .wf-field input,
+  .wf-field textarea{
+    padding:12px 14px;
+  }
+}
+  </style>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero_img">
+      <picture>
+        <source media="(max-width: 768px)" srcset="{{ 'iphone_banner.jpg' | file_url }}">
+        <img src="{{ 'banner21.jpg' | file_url }}" alt="Tesla Model X Banner" class="hero-bg">
+      </picture>
+    </div>
+
+    <div class="hero-content">
+      <div class="staircase-text reveal">
+        <span>BECOME A PARTNER</span>
+      </div>
+      <a href="#join-us" class="cta-button reveal delay-200">Start partnership now</a>
+    </div>
+  </section>
+
+  <!-- Offerings -->
+  <section class="offerings" id="offerings">
+    <div class="container">
+      <h2 class="reveal">Why Choose Us?</h2>
+
+      <div class="offer-grid">
+        <div class="offer-item reveal delay-100">
+          <div class="offer-img">
+            <img src="{{ 'wholesale_zl.jpg' | file_url }}" alt="Recognized Quality">
+          </div>
+          <div class="offer-content">
+            <h3>Recognized Quality</h3>
+            <p>All of Tesla accessories are manufactured to OEM standards. From charging equipment to interior enhancements, each part undergoes virious quality inspection and control to ensure its durability.</p>
+          </div>
+        </div>
+
+        <div class="offer-item reveal delay-200">
+          <div class="offer-img">
+            <img src="{{ 'wholesale_zk.jpg' | file_url }}" alt="Substantial Discount">
+          </div>
+          <div class="offer-content">
+            <h3>Substantial Discount</h3>
+            <p>We provide each clients with a customizedsolution and dedicated service. To express our gratitude for the trust and support of all our clients, partner with us and you'll enjoy discounts of up to 40%.</p>
+          </div>
+        </div>
+
+        <div class="offer-item reveal delay-300">
+          <div class="offer-img">
+            <img src="{{ 'wholesale_wl.jpg' | file_url }}" alt="Logistic System">
+          </div>
+          <div class="offer-content">
+            <h3>Logistic System</h3>
+            <p>Teslaunch has multiple overseas warehouses so that we can respond to orders rapidly. We often arrange shipment directly to your doorstep , while your order could be tracked in real-time.</p>
+          </div>
+        </div>
+
+        <div class="offer-item reveal delay-400">
+          <div class="offer-img">
+            <img src="{{ 'wholesale_fw.jpg' | file_url }}" alt="Comprehensive Services">
+          </div>
+          <div class="offer-content">
+            <h3>Comprehensive Services</h3>
+            <p>Our dedicated team provides all-process assistance for product inquiries, troubleshooting and after-sale service. Our warranty is 30 days, while dedicating personal managers for wholesale clients.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Join Us -->
+  <section class="join-us" id="join-us">
+    <div class="container">
+      <h2>How To Join us?</h2>
+
+      <div class="contact-container">
+        
+
+        <div class="our-contact">
+          <h3>Our Contact Information</h3>
+          <p>Get in touch with our wholesale team through any of the following channels. We typically respond within 2 working days</p>
+
+          <div class="contact-methods">
+            <div class="contact-method">
+             <span class="icon-svg">
+  <svg viewBox="0 0 24 24"  fill="currentColor" aria-hidden="true">
+    <path d="M20 4H4a2 2 0 0 0-2 2v.01l10 6 10-6V6a2 2 0 0 0-2-2zm0 4.236-7.447 4.468a1 1 0 0 1-1.106 0L4 8.236V18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8.236z"/>
+  </svg>
+</span>
+              <div>
+                <strong>Email</strong>
+                <p>sales@teslaunch.net</p>
+              </div>
+            </div>
+
+            <div class="contact-method">
+            <span class="icon-svg">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+    <path d="M6.62 10.79a15.054 15.054 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1-.24 11.36 11.36 0 0 0 3.56.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.85 21 3 13.15 3 3a1 1 0 0 1 1-1h2.49a1 1 0 0 1 1 1c0 1.23.2 2.43.57 3.56a1 1 0 0 1-.24 1l-2.2 2.23z"/>
+  </svg>
+</span>
+              <div>
+                <strong>Phone</strong>
+                <p>+1 7208504800</p>
+              </div>
+            </div>
+
+            <div class="contact-method">
+          <span class="icon-svg">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+    <path d="M12.04 2A9.93 9.93 0 0 0 2 11.94c0 1.76.46 3.48 1.33 4.99L2 22l5.21-1.36a9.94 9.94 0 1 0 4.83-18.64zm5.8 14.43c-.24.68-1.42 1.3-1.95 1.36-.5.06-1.14.09-1.84-.14-.42-.14-.96-.31-1.65-.61-2.9-1.26-4.79-4.23-4.94-4.43-.14-.2-1.18-1.57-1.18-3s.74-2.14 1-2.43c.26-.3.57-.37.76-.37h.55c.18 0 .43-.07.67.5.24.57.82 2 .89 2.14.07.14.12.31.02.5-.1.2-.15.31-.3.48-.15.17-.31.38-.44.5-.15.15-.3.31-.13.61.17.3.75 1.23 1.61 1.99 1.1.98 2.02 1.29 2.32 1.44.3.15.48.12.66-.07.18-.2.74-.86.94-1.16.2-.3.4-.24.66-.14.26.1 1.66.78 1.94.92.28.14.46.2.53.31.07.11.07.64-.17 1.32z"/>
+  </svg>
+</span>
+              <div>
+                <strong>WhatsApp</strong>
+                <p>+86 19870378545</p>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <span class="icon-svg">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+    <path d="M9.04 15.46 8.7 20.2c.5 0 .72-.22.99-.48l2.38-2.28 4.94 3.62c.9.5 1.54.24 1.78-.83l3.22-15.1c.34-1.56-.56-2.17-1.44-1.85L1.6 9.3C.1 9.9.12 10.74 1.34 11.1l4.9 1.53 11.36-7.17c.54-.33 1.03-.15.63.18"/>
+  </svg>
+</span>
+              <div>
+                <strong>Telegram</strong>
+                <p>+86 19870378545</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+
+  <script>
+    (function () {
+      const root = document.querySelector('.ev-wholesale-page');
+      if (!root) return;
+
+      // Reveal animation
+      const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.addEventListener('DOMContentLoaded', () => {
+        root.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      });
+
+      // Smooth anchor scroll (inside this section)
+      root.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const targetId = this.getAttribute('href');
+          if (!targetId || targetId === '#') return;
+
+          const targetElement = document.querySelector(targetId);
+          if (!targetElement) return;
+
+          e.preventDefault();
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        });
+      });
+    })();
+  </script>
+</div>
+
+{% schema %}
+{
+  "name": "Page Wholesale",
+  "settings": []
+}
+{% endschema %}

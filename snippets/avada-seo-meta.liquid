@@ -1,0 +1,184 @@
+  
+{%- if request.page_type == 'product' -%}
+{%-  if avada_seo_ovr_product_ids contains product.id  -%}
+{%- if product.metafields.multilingual_meta_tag.description_tag.[shop.locale] -%}
+{%- capture avada_seo_meta_description -%}
+{{ product.metafields.multilingual_meta_tag.description_tag.[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- if product.metafields.multilingual_meta_tag.title_tag.[shop.locale] -%}
+{%- capture avada_seo_meta_title -%}
+{{ product.metafields.multilingual_meta_tag.title_tag.[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- endif -%}
+{%- endif -%}
+  
+{%- if request.page_type == 'collection' -%}
+{%-  if avada_seo_ovr_collection_ids contains collection.id  -%}
+{%- if collection.metafields.multilingual_meta_tag.description_tag.[shop.locale] -%}
+{%- capture avada_seo_meta_description -%}
+{{ collection.metafields.multilingual_meta_tag.description_tag.[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- if collection.metafields.multilingual_meta_tag.title_tag.[shop.locale] -%}
+{%- capture avada_seo_meta_title -%}
+{{ collection.metafields.multilingual_meta_tag.title_tag.[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- endif -%}
+{%- endif -%}
+  
+{%- if request.page_type == 'article' -%}
+{%-  if avada_seo_ovr_article_ids contains article.id  -%}
+{%- if article.metafields.multilingual_meta_tag.description_tag.[shop.locale] -%}
+{%- capture avada_seo_meta_description -%}
+{{ article.metafields.multilingual_meta_tag.description_tag.[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- if article.metafields.multilingual_meta_tag.title_tag.[shop.locale] -%}
+{%- capture avada_seo_meta_title -%}
+{{ article.metafields.multilingual_meta_tag.title_tag.[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- endif -%}
+{%- endif -%}
+  
+{%- if request.page_type == 'page' -%}
+{%-  if avada_seo_ovr_page_ids contains page.id  -%}
+{%- if page.metafields.multilingual_meta_tag.description_tag.[shop.locale] -%}
+{%- capture avada_seo_meta_description -%}
+{{ page.metafields.multilingual_meta_tag.description_tag.[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- if page.metafields.multilingual_meta_tag.title_tag.[shop.locale] -%}
+{%- capture avada_seo_meta_title -%}
+{{ page.metafields.multilingual_meta_tag.title_tag.[shop.locale] }}
+{%- endcapture -%}
+{%- endif -%}
+{%- endif -%}
+{%- endif -%}
+
+<!-- meta basic type product -->
+{%- if request.page_type == 'product' -%}
+{%- unless avada_seo_ovr_product_ids contains product.id -%}
+{%- capture avada_seo_meta_title -%}
+{%- case shop.locale -%}
+{%- when "en" -%} 
+{{ product.title }}
+{%- else -%}
+{%- endcase -%}
+{%- endcapture -%}
+{%- capture avada_seo_meta_description -%}
+{%- case shop.locale -%}
+{%- when "en" -%} 
+Buy {{ product.title }} at the lowest price in {{ shop.address.country }}. Check reviews and buy {{ product.title }} today.
+{%- when "pt-BR" -%} 
+⚡️ Compre {{ product.title }} pelo menor preço no(a) {{ shop.address.country }}. Confira avaliações e compre {{ product.title }} hoje mesmo.
+{%- when "da" -%} 
+⚡️ Køb {{ product.title }} til den laveste pris i {{ shop.address.country }}. Tjek anmeldelser og køb {{ product.title }} i dag.
+{%- when "nl" -%} 
+⚡️ Koop {{ product.title }} voor de laagste prijs in {{ shop.address.country }}. Lees recensies en koop {{ product.title }} vandaag nog.
+{%- when "fr" -%} 
+⚡️ Achetez {{ product.title }} au prix le plus bas en/au {{ shop.address.country }}. Consultez les avis et achetez {{ product.title }} aujourd'hui.
+{%- when "de" -%} 
+⚡️ Kaufen Sie {{ product.title }} zum günstigsten Preis in {{ shop.address.country }}. Lesen Sie Bewertungen und kaufen Sie {{ product.title }} noch heute.
+{%- when "zh-CN" -%} 
+⚡️以最低价购买{{ product.title }}于{{ shop.address.country }}。查看评论并于今日购买{{ product.title }}。
+{%- when "es" -%} 
+⚡️ Compra {{ product.title }} al precio más bajo en {{ shop.address.country }}. Revisa las opiniones y compra {{ product.title }} hoy mismo.
+{%- when "sv" -%} 
+⚡️ Köp {{ product.title }} till lägsta pris i {{ shop.address.country }}. Läs recensioner och köp {{ product.title }} idag.
+{%- when "vi" -%} 
+⚡ Mua ngay {{ product.title }} với giá tốt nhất tại {{ shop.address.country }}! Đọc đánh giá và mua {{ product.title }} ngay hôm nay.
+{%- else -%}
+{%- endcase -%}
+{%- endcapture -%}
+{%- endunless -%}
+{%- endif -%}
+
+<!-- meta basic type collection -->
+{%- if request.page_type == 'collection' -%}
+{%- unless avada_seo_ovr_collection_ids contains collection.id -%}
+{%- capture avada_seo_meta_title -%}
+{%- case shop.locale -%}
+{%- when "en" -%} 
+{{ collection.title }}
+{%- else -%}
+{%- endcase -%}
+{%- endcapture -%}
+{%- capture avada_seo_meta_description -%}
+{%- case shop.locale -%}
+{%- when "en" -%} 
+Buy {{ collection.title }} at {{ shop.name }}. Check Price and Buy Online. ✓ Free Shipping ✓ Cash on Delivery ✓ Best Offers.
+{%- when "pt-BR" -%} 
+Compre {{ collection.title }} na {{ shop.name }}. Confira o preço e compre online. ✓ Frete grátis ✓ Pagamento na entrega ✓ Melhores ofertas.
+{%- when "da" -%} 
+Køb {{ collection.title }} hos {{ shop.name }}. Tjek prisen og køb online. ✓ Gratis levering ✓ Efterkrav ✓ Bedste tilbud.
+{%- when "nl" -%} 
+Koop {{ collection.title }} bij {{ shop.name }}. Controleer de prijs en koop online. ✓ Gratis verzending ✓ Betaling bij levering ✓ Beste aanbiedingen.
+{%- when "fr" -%} 
+Achetez {{ collection.title }} chez {{ shop.name }}. Vérifiez le prix et achetez en ligne. ✓ Livraison gratuite ✓ Paiement à la livraison ✓ Meilleures offres.
+{%- when "de" -%} 
+Kaufen Sie {{ collection.title }} bei {{ shop.name }}. Prüfen Sie den Preis und kaufen Sie online. ✓ Kostenloser Versand ✓ Nachnahme ✓ Beste Angebote.
+{%- when "zh-CN" -%} 
+购买{{ collection.title }}于{{ shop.name }}。在线查看价格并购买。✓免费送货✓货到付款✓最优惠。
+{%- when "es" -%} 
+Compra {{ collection.title }} en {{ shop.name }}. Comprueba el precio y compra online. ✓ Envío gratis ✓ Contra reembolso ✓ Mejores ofertas.
+{%- when "sv" -%} 
+Köp {{ collection.title }} hos {{ shop.name }}. Kontrollera priset och köp online. ✓ Gratis frakt ✓ Postförskott ✓ Bästa erbjudanden.
+{%- when "vi" -%} 
+Mua ngay {{ collection.title }} tại {{ shop.name }}. Đặt hàng Online. ✓ Miễn phí vận chuyển ✓ Thanh toán khi nhận hàng ✓ Ưu đãi tốt nhất.
+{%- else -%}
+{%- endcase -%}
+{%- endcapture -%}
+{%- endunless -%}
+{%- endif -%}
+
+<!-- meta basic type article -->
+{%- if request.page_type == 'article' -%}
+{%- unless avada_seo_ovr_article_ids contains article.id -%}
+{%- capture avada_seo_meta_title -%}
+{%- case shop.locale -%}
+{%- when "en" -%} 
+{{ article.title }}
+{%- else -%}
+{%- endcase -%}
+{%- endcapture -%}
+{%- capture avada_seo_meta_description -%}
+{%- case shop.locale -%}
+{%- when "en" -%} 
+{{ article.excerpt_or_content }}
+{%- when "pt-BR" -%} 
+{{ article.excerpt_or_content }}
+{%- when "da" -%} 
+{{ article.excerpt_or_content }}
+{%- when "nl" -%} 
+{{ article.excerpt_or_content }}
+{%- when "fr" -%} 
+{{ article.excerpt_or_content }}
+{%- when "de" -%} 
+{{ article.excerpt_or_content }}
+{%- when "zh-CN" -%} 
+{{ article.excerpt_or_content }}
+{%- when "es" -%} 
+{{ article.excerpt_or_content }}
+{%- when "sv" -%} 
+{{ article.excerpt_or_content }}
+{%- when "vi" -%} 
+{{ article.excerpt_or_content }}
+{%- else -%}
+{%- endcase -%}
+{%- endcapture -%}
+{%- endunless -%}
+{%- endif -%}
+
+{%- if avada_seo_meta_title -%}
+{%- assign seo_title = avada_seo_meta_title | strip_html | strip -%}
+{%- assign page_title = seo_title -%}
+{%- assign og_title = seo_title -%}
+{%- endif -%}
+{%- if avada_seo_meta_description -%}
+{%- assign page_description = avada_seo_meta_description | strip_html | strip -%}
+{%- assign og_description = page_description -%}
+{%- endif -%}

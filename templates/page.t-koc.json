@@ -1,0 +1,92 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "rich_text_aNE34T": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_mBb8kw": {
+          "type": "heading",
+          "settings": {
+            "heading": "Get Free Product for Social Share",
+            "heading_size": 30,
+            "heading_size_mb": 30,
+            "heading_line_height": 1,
+            "heading_color": "#000000"
+          }
+        },
+        "text_nKWgBk": {
+          "type": "text",
+          "settings": {
+            "text": "<section class=\"trial-rules\" aria-labelledby=\"trial-rules-title\">\n  <style>\n    .trial-rules {\n      max-width: 720px;\n      margin: 0 auto;\n      font: 14px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;\n      color:#111;\n      text-align: left;\n    }\n    .trial-rules h2 {\n      font-size: 22px;\n      margin: 0 0 12px;\n      font-weight: 700;\n    }\n    .trial-rules h3 {\n      font-size: 16px;\n      margin: 20px 0 6px;\n      font-weight: 600;\n    }\n    .trial-rules p {\n      margin: 0 0 6px;\n      color:#555;\n    }\n    .trial-rules ul {\n      list-style: none;\n      margin: 0;\n      padding: 0;\n    }\n    .trial-rules ul li {\n      position: relative;\n      padding-left: 14px;\n      margin-bottom: 4px;\n    }\n    .trial-rules ul li::before {\n      content: \"·\";\n      position: absolute;\n      left: 0;\n      font-weight: bold;\n    }\n  </style>\n\n  <h2 id=\"trial-rules-title\">About The Program</h2>\n  <p>We want more people to experience Teslaunch products and services. By sharing your genuine experience, you help others better understand us. Please review the rules below before submitting your application.</p>\n\n  <h3>Product Scope</h3>\n  <ul>\n    <li>You may choose any product(s) from the T-Launch (formerly Teslaunch) store.</li>\n    <li>For YouTube reviews, the total product value must not exceed <strong>$200</strong>.</li>\n    <li>For reviews on other platforms, the total product value must not exceed <strong>$100</strong>.</li>\n  </ul>\n\n  <h3>Content Sharing</h3>\n  <ul>\n    <li>Share an authentic product experience on your social media (text + video).</li>\n    <li>You agree that T-Launch (formerly Teslaunch) may repost your content on our official social media accounts.</li>\n  </ul>\n\n  <h3>Costs</h3>\n  <ul>\n    <li>No fees will be charged. T-Launch  covers both the product and shipping.</li>\n  </ul>\n\n  <h3>Authenticity Commitment</h3>\n  <ul>\n    <li>All information you submit must be true and valid.</li>\n    <li>Fraudulent submissions may result in legal action.</li>\n  </ul>\n</section>",
+            "text_size": 14,
+            "text_size_mb": 12,
+            "text_font_weight": "400",
+            "text_line_height": 1,
+            "margin_top_text": 74,
+            "text_color": "#727272",
+            "text_width": "700px"
+          }
+        }
+      },
+      "block_order": [
+        "heading_mBb8kw",
+        "text_nKWgBk"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "container": "1170",
+        "padding_full_width": 0,
+        "enable_border_top": false,
+        "enable_border_bottom": false,
+        "color_border_bottom": "#e8e8e8",
+        "enable_minus_mg_top": false,
+        "minus_spacing_top": -100,
+        "rich_text_bg": "#ffffff",
+        "rich_text_bg_gradient": "",
+        "enable_column": false,
+        "content_align": "center",
+        "mg_top_desktop": 50,
+        "mg_top_tablet": 50,
+        "mg_top_mobile": 50,
+        "mg_bottom_desktop": 50,
+        "mg_bottom_tablet": 50,
+        "mg_bottom_mobile": 50
+      }
+    },
+    "17559292968f0efc0e": {
+      "type": "apps",
+      "blocks": {
+        "powerful_form_builder_app_block_baTjJP": {
+          "type": "shopify://apps/powerful-form-builder/blocks/app-block/e4bcb1eb-35b2-42e6-bc37-bfe0e1542c9d",
+          "settings": {
+            "shortcode": "<div class=\"globo-formbuilder\" data-id=\"MTA1NTkw\"></div>"
+          }
+        }
+      },
+      "block_order": [
+        "powerful_form_builder_app_block_baTjJP"
+      ],
+      "settings": {
+        "include_margins": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_aNE34T",
+    "17559292968f0efc0e"
+  ]
+}

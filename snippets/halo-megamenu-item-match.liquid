@@ -1,0 +1,16 @@
+{%- liquid
+  assign mega_menu_item_matched = false
+  if mega_menu_item != blank
+    assign mega_menu_item_aliases = mega_menu_item | split: ','
+    for mega_menu_alias in mega_menu_item_aliases
+      assign mega_menu_alias_handle = mega_menu_alias | strip | escape | downcase | handle
+      if mega_menu_alias_handle != blank
+        if mega_menu_alias_handle == menu_title or mega_menu_alias_handle == menu_handle
+          assign mega_menu_item_matched = true
+          break
+        endif
+      endif
+    endfor
+  endif
+-%}
+{%- if mega_menu_item_matched -%}true{%- endif -%}

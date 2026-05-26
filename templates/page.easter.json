@@ -1,0 +1,317 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "custom_css": [
+        ".page-title,.main-page-title,h1.page-title,.template-page h1 {display: none !important;}"
+      ],
+      "settings": {}
+    },
+    "easter_banner_AAgjMG": {
+      "type": "easter-banner",
+      "name": "Easter Banner",
+      "settings": {
+        "image": "shopify://shop_images/bg.png",
+        "link": ""
+      }
+    },
+    "tab_switcher_R7PHqr": {
+      "type": "tab-switcher",
+      "blocks": {
+        "collection_tab_zt9aVD": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "2025+ Model Y",
+            "collection": "2025-model-y-juniper-accessories",
+            "product_1_1": "interior-rgb-ambient-lighting-kit-diffused-rear-light-upgrade",
+            "product_1_2": "bundle-save-100-9-2-streaming-rearview-mirror-9-6-dashboard-display",
+            "product_1_3": "bundle-save-100-electric-power-frunk-lift-kit-frunk-luggage-bag",
+            "product_1_4": "co-pilot-electric-adjustable-leg-rest-raised-armrest-cover-neck-lumbar-support-pillow",
+            "product_2_1": "ultimate-family-car-camping-tent-setup-kit",
+            "product_2_2": "car-camping-tailgate-tent-essential-kit",
+            "product_2_3": "aluminum-roof-rack-cargo-cross-bars-rear-trunk-privacy-cargo-cover",
+            "product_2_4": "",
+            "product_3_1": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-north-america-version",
+            "product_3_2": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-european-version",
+            "product_3_3": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-australia-version",
+            "product_3_4": "",
+            "product_4_1": "starlink-mini-all-in-one-travel-kit-with-backpack-save-50",
+            "product_4_2": "starlink-mini-ultimate-travel-kit-with-backpack-save-100",
+            "product_4_3": "",
+            "product_4_4": ""
+          }
+        },
+        "collection_tab_bqQDB8": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "2024+ Model 3",
+            "collection": "2024-model-3-highland-accessories",
+            "product_1_1": "bundle-save-100-9-2-streaming-rearview-mirror-9-6-dashboard-display",
+            "product_1_2": "bundle-save-100-electric-power-frunk-lift-kit-frunk-luggage-bag",
+            "product_1_3": "co-pilot-electric-adjustable-leg-rest-raised-armrest-cover-neck-lumbar-support-pillow",
+            "product_1_4": "",
+            "product_2_1": "ultimate-family-car-camping-tent-setup-kit",
+            "product_2_2": "car-camping-tailgate-tent-essential-kit",
+            "product_2_3": "",
+            "product_2_4": "",
+            "product_3_1": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-north-america-version",
+            "product_3_2": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-european-version",
+            "product_3_3": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-australia-version",
+            "product_3_4": "",
+            "product_4_1": "starlink-mini-all-in-one-travel-kit-with-backpack-save-50",
+            "product_4_2": "starlink-mini-ultimate-travel-kit-with-backpack-save-100",
+            "product_4_3": "",
+            "product_4_4": ""
+          }
+        },
+        "collection_tab_GXFhL4": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "Cybertruck",
+            "collection": "cybertruck",
+            "product_1_1": "screen-rotating-swivel-mount-10-88-head-up-display",
+            "product_1_2": "",
+            "product_1_3": "",
+            "product_1_4": "",
+            "product_2_1": "ultimate-family-car-camping-tent-setup-kit",
+            "product_2_2": "car-camping-tailgate-tent-essential-kit",
+            "product_2_3": "aluminum-roof-rack-crossbars-rear-trunk-molle-cargo-rack",
+            "product_2_4": "bedside-molle-rack-panels-8-pcs-heavy-duty-front-bumper",
+            "product_3_1": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-north-america-version",
+            "product_3_2": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-european-version",
+            "product_3_3": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-australia-version",
+            "product_3_4": "",
+            "product_4_1": "starlink-mini-all-in-one-travel-kit-with-backpack-save-50",
+            "product_4_2": "starlink-mini-ultimate-travel-kit-with-backpack-save-100",
+            "product_4_3": "",
+            "product_4_4": ""
+          }
+        },
+        "collection_tab_pAqhcm": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "2020-2024 Model Y",
+            "collection": "model-y",
+            "product_1_1": "bundle-save-100-9-2-streaming-rearview-mirror-9-6-dashboard-display",
+            "product_1_2": "bundle-save-100-electric-power-frunk-lift-kit-frunk-luggage-bag",
+            "product_1_3": "",
+            "product_1_4": "",
+            "product_2_1": "car-camping-tailgate-tent-essential-kit",
+            "product_2_2": "ultimate-family-car-camping-tent-setup-kit",
+            "product_2_3": "aluminum-roof-rack-cargo-cross-bars-rear-trunk-privacy-cargo-cover",
+            "product_2_4": "",
+            "product_3_1": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-north-america-version",
+            "product_3_2": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-european-version",
+            "product_3_3": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-australia-version",
+            "product_3_4": "",
+            "product_4_1": "starlink-mini-all-in-one-travel-kit-with-backpack-save-50",
+            "product_4_2": "starlink-mini-ultimate-travel-kit-with-backpack-save-100",
+            "product_4_3": "",
+            "product_4_4": ""
+          }
+        },
+        "collection_tab_JhMJmt": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "2017-2023 Model 3 ",
+            "collection": "model-3",
+            "product_1_1": "bundle-save-100-9-2-streaming-rearview-mirror-9-6-dashboard-display",
+            "product_1_2": "bundle-save-100-electric-power-frunk-lift-kit-frunk-luggage-bag",
+            "product_1_3": "",
+            "product_1_4": "",
+            "product_2_1": "car-camping-tailgate-tent-essential-kit",
+            "product_2_2": "ultimate-family-car-camping-tent-setup-kit",
+            "product_2_3": "",
+            "product_2_4": "",
+            "product_3_1": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-north-america-version",
+            "product_3_2": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-european-version",
+            "product_3_3": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-australia-version",
+            "product_3_4": "",
+            "product_4_1": "starlink-mini-all-in-one-travel-kit-with-backpack-save-50",
+            "product_4_2": "starlink-mini-ultimate-travel-kit-with-backpack-save-100",
+            "product_4_3": "",
+            "product_4_4": ""
+          }
+        },
+        "collection_tab_zmrYdQ": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "Model S",
+            "collection": "model-s",
+            "product_1_1": "electric-power-frunk-lift-kit-brake-caliper-covers",
+            "product_1_2": "electric-power-frunk-lift-kit-tpu-invisible-full-car-paint-protection-film-ppf",
+            "product_1_3": "",
+            "product_1_4": "",
+            "product_2_1": "ultimate-family-car-camping-tent-setup-kit",
+            "product_2_2": "car-camping-tailgate-tent-essential-kit",
+            "product_2_3": "",
+            "product_2_4": "",
+            "product_3_1": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-north-america-version",
+            "product_3_2": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-european-version",
+            "product_3_3": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-australia-version",
+            "product_3_4": "",
+            "product_4_1": "starlink-mini-all-in-one-travel-kit-with-backpack-save-50",
+            "product_4_2": "starlink-mini-ultimate-travel-kit-with-backpack-save-100",
+            "product_4_3": "",
+            "product_4_4": ""
+          }
+        },
+        "collection_tab_mQJ3xF": {
+          "type": "collection_tab",
+          "settings": {
+            "tab_title": "Model X",
+            "collection": "model-x",
+            "product_1_1": "electric-power-frunk-lift-kit-brake-caliper-covers",
+            "product_1_2": "electric-power-frunk-lift-kit-tpu-invisible-full-car-paint-protection-film-ppf",
+            "product_1_3": "",
+            "product_1_4": "",
+            "product_2_1": "ultimate-family-car-camping-tent-setup-kit",
+            "product_2_2": "car-camping-tailgate-tent-essential-kit",
+            "product_2_3": "",
+            "product_2_4": "",
+            "product_3_1": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-north-america-version",
+            "product_3_2": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-european-version",
+            "product_3_3": "spring-sale-150-off-v2l-discharge-device-for-tesla-model-3-y-s-x-australia-version",
+            "product_3_4": "",
+            "product_4_1": "starlink-mini-all-in-one-travel-kit-with-backpack-save-50",
+            "product_4_2": "starlink-mini-ultimate-travel-kit-with-backpack-save-100",
+            "product_4_3": "",
+            "product_4_4": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_tab_zt9aVD",
+        "collection_tab_bqQDB8",
+        "collection_tab_GXFhL4",
+        "collection_tab_pAqhcm",
+        "collection_tab_JhMJmt",
+        "collection_tab_zmrYdQ",
+        "collection_tab_mQJ3xF"
+      ],
+      "name": "Advanced Collection Tabs Multi Group",
+      "settings": {
+        "products_to_show": 4,
+        "show_vendor": false,
+        "show_price": true,
+        "tab_bg": "#f5f5f5",
+        "tab_active_bg": "#111111",
+        "tab_text": "#111111",
+        "tab_active_text": "#ffffff"
+      }
+    },
+    "shop_by_model_CVAnDp": {
+      "type": "shop-by-model",
+      "blocks": {
+        "item_k6RnfT": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Y_2x_c69fcc17-b6d7-4551-8d1e-f22556e71b9b.png",
+            "title": "2025+ Model Y",
+            "link": "https://teslaunch.net/collections/2025-model-y-juniper-accessories",
+            "open_new_tab": false
+          }
+        },
+        "item_YgLc9R": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Y_2x_0c746e63-6606-42ad-9ee2-5599bc9cac74.png",
+            "title": "2020-2024 Model Y",
+            "link": "https://teslaunch.net/collections/2020-2024-model-y-accessories",
+            "open_new_tab": false
+          }
+        },
+        "item_dbXikU": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/3_2x_4bb8295c-c550-423f-a610-e053b2e099f6.png",
+            "title": "2024+ Model 3",
+            "link": "https://teslaunch.net/collections/2024-model-3-highland-accessories-2",
+            "open_new_tab": false
+          }
+        },
+        "item_eYK8DU": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/3_2x_acf1e130-81fd-4b2f-85bb-231ec5c45742.png",
+            "title": "2017-2023 Model 3",
+            "link": "https://teslaunch.net/collections/2017-2023-model-3-accessories",
+            "open_new_tab": false
+          }
+        },
+        "item_qdPGnD": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/CT_2x_9aac1360-5eb2-4e18-804d-429a3cf9a74d.png",
+            "title": "Cybertruck",
+            "link": "https://teslaunch.net/collections/2024-cybertruck-accessories",
+            "open_new_tab": false
+          }
+        },
+        "item_LAza8f": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/MS_2x_a1f5149d-f9c9-4296-ba7e-5c83efeb1a48.png",
+            "title": "2012-2025 Model S",
+            "link": "https://teslaunch.net/collections/2012-2025-model-s-accessories",
+            "open_new_tab": false
+          }
+        },
+        "item_kRcQeR": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/MX_2x_a4543ca7-7bbb-4ec1-80b9-66246501c7b2.png",
+            "title": "2025+ Model Y",
+            "link": "https://teslaunch.net/collections/2015-2025-model-x-accessories",
+            "open_new_tab": false
+          }
+        },
+        "item_Rnwh4R": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Starlink_2x_6dfe52e2-b146-4288-9cca-fcd9c8443fcb.png",
+            "title": "GEN2/3 MINI Starlink",
+            "link": "https://teslaunch.net/collections/starlink",
+            "open_new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "item_k6RnfT",
+        "item_YgLc9R",
+        "item_dbXikU",
+        "item_eYK8DU",
+        "item_qdPGnD",
+        "item_LAza8f",
+        "item_kRcQeR",
+        "item_Rnwh4R"
+      ],
+      "name": "Shop by model",
+      "settings": {
+        "title": "Shop By Model",
+        "bg_image": "shopify://shop_images/foot-bg_2x_88ff34cf-cae8-493a-ae8d-fe3e4c608b04.png",
+        "columns_desktop": 4,
+        "columns_tablet": 3,
+        "columns_mobile": "2",
+        "image_height": 120,
+        "image_height_tablet": 110,
+        "image_height_mobile": 90
+      }
+    }
+  },
+  "order": [
+    "main",
+    "easter_banner_AAgjMG",
+    "tab_switcher_R7PHqr",
+    "shop_by_model_CVAnDp"
+  ]
+}

@@ -1,0 +1,26 @@
+<div class="halo-popup newsletter-success-modal customPopup-small" data-newsletter-success-modal id="newsletter-success-modal">
+    <div class="halo-popup-wrapper">
+        <button type="button" class="close close-modal" aria-label="{{ 'cart.ajax_cart.close' | t }}">{% render 'icon-close' %}</button>
+        <div class="halo-modal-body success">
+            <p class="form-message form-message--success" tabindex="-1" data-form-status>{% render 'icon-check'%} <span> {{ 'newsletter.success' | t }}</span></p>
+        </div>
+        <div class="halo-modal-body error">
+            <p class="form-message form-message--error" tabindex="-1" data-form-status>{% render 'icon-error' %} <span>{{ 'newsletter.error' | t }}</span></p>
+        </div>
+    </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const closeBtns = document.querySelectorAll('.halo-popup .close-modal');
+    closeBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const popup = btn.closest('.halo-popup');
+        if (popup) {
+          popup.classList.remove('is-open'); // 如果你是用 class 控制显示状态
+          popup.style.display = 'none';      // 保险起见直接隐藏
+        }
+      });
+    });
+  });
+</script>

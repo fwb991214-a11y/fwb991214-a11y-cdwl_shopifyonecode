@@ -1,0 +1,717 @@
+{% schema %}
+{
+  "name": "Advanced Tabs",
+  "tag": "section",
+  "class": "section-advanced-collection-tabs",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4,
+      "label": "默认显示产品数量"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "显示品牌",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "显示价格",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "tab_bg",
+      "label": "Tab 背景色",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_bg",
+      "label": "激活 Tab 背景色",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "tab_text",
+      "label": "Tab 文字颜色",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_text",
+      "label": "激活 Tab 文字颜色",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_tab",
+      "name": "分类 Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab 标题",
+          "default": "Category"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "选择默认分类"
+        },
+
+        {
+          "type": "header",
+          "content": "第 1 组产品"
+        },
+        {
+          "type": "product",
+          "id": "product_1_1",
+          "label": "第1组 产品1"
+        },
+        {
+          "type": "product",
+          "id": "product_1_2",
+          "label": "第1组 产品2"
+        },
+        {
+          "type": "product",
+          "id": "product_1_3",
+          "label": "第1组 产品3"
+        },
+        {
+          "type": "product",
+          "id": "product_1_4",
+          "label": "第1组 产品4"
+        },
+
+        {
+          "type": "header",
+          "content": "第 2 组产品"
+        },
+        {
+          "type": "product",
+          "id": "product_2_1",
+          "label": "第2组 产品1"
+        },
+        {
+          "type": "product",
+          "id": "product_2_2",
+          "label": "第2组 产品2"
+        },
+        {
+          "type": "product",
+          "id": "product_2_3",
+          "label": "第2组 产品3"
+        },
+        {
+          "type": "product",
+          "id": "product_2_4",
+          "label": "第2组 产品4"
+        },
+
+        {
+          "type": "header",
+          "content": "第 3 组产品"
+        },
+        {
+          "type": "product",
+          "id": "product_3_1",
+          "label": "第3组 产品1"
+        },
+        {
+          "type": "product",
+          "id": "product_3_2",
+          "label": "第3组 产品2"
+        },
+        {
+          "type": "product",
+          "id": "product_3_3",
+          "label": "第3组 产品3"
+        },
+        {
+          "type": "product",
+          "id": "product_3_4",
+          "label": "第3组 产品4"
+        },
+
+        {
+          "type": "header",
+          "content": "第 4 组产品"
+        },
+        {
+          "type": "product",
+          "id": "product_4_1",
+          "label": "第4组 产品1"
+        },
+        {
+          "type": "product",
+          "id": "product_4_2",
+          "label": "第4组 产品2"
+        },
+        {
+          "type": "product",
+          "id": "product_4_3",
+          "label": "第4组 产品3"
+        },
+        {
+          "type": "product",
+          "id": "product_4_4",
+          "label": "第4组 产品4"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Advanced Tabs",
+      "blocks": [
+        { "type": "collection_tab" },
+        { "type": "collection_tab" },
+        { "type": "collection_tab" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% assign section_id = section.id %}
+
+<div class="advanced-tabs advanced-tabs-{{ section_id }}">
+  {% assign valid_blocks = 0 %}
+  {% for block in section.blocks %}
+    {% if block.settings.collection != blank %}
+      {% assign valid_blocks = valid_blocks | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+
+  {% if valid_blocks > 0 %}
+    <div class="advanced-tabs__tabs" role="tablist">
+      {% assign tab_index = 0 %}
+      {% for block in section.blocks %}
+        {% if block.settings.collection != blank %}
+          {% assign tab_index = tab_index | plus: 1 %}
+          <button
+            class="advanced-tabs__tab {% if tab_index == 1 %}is-active{% endif %}"
+            type="button"
+            role="tab"
+            aria-selected="{% if tab_index == 1 %}true{% else %}false{% endif %}"
+            aria-controls="advanced-tab-panel-{{ section_id }}-{{ block.id }}"
+            id="advanced-tab-button-{{ section_id }}-{{ block.id }}"
+            data-tab-target="advanced-tab-panel-{{ section_id }}-{{ block.id }}"
+            {{ block.shopify_attributes }}
+          >
+            {% if block.settings.tab_title != blank %}
+              {{ block.settings.tab_title }}
+            {% else %}
+              {{ block.settings.collection.title }}
+            {% endif %}
+          </button>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="advanced-tabs__contents">
+      {% assign panel_index = 0 %}
+      {% for block in section.blocks %}
+        {% assign collection = block.settings.collection %}
+        {% if collection != blank %}
+          {% assign panel_index = panel_index | plus: 1 %}
+
+          <div
+            class="advanced-tabs__panel {% if panel_index == 1 %}is-active{% endif %}"
+            id="advanced-tab-panel-{{ section_id }}-{{ block.id }}"
+            role="tabpanel"
+            aria-labelledby="advanced-tab-button-{{ section_id }}-{{ block.id }}"
+            {% unless panel_index == 1 %}hidden{% endunless %}
+          >
+            {% for i in (1..4) %}
+              {% assign group_title = '' %}
+              {% assign group_text = '' %}
+              {% assign group_subtext = '' %}
+
+              {% case i %}
+                {% when 1 %}
+                  {% assign group_title = '<p>Smart Driving &amp; Travel Upgrades</p>' %}
+                  {% assign group_text = 'Save Up to' %}
+                  {% assign group_subtext = 'USD 100' %}
+                {% when 2 %}
+                  {% assign group_title = '<p>Camping &amp; Outdoor Essentials</p>' %}
+                  {% assign group_text = 'Save Up to' %}
+                  {% assign group_subtext = 'USD 210' %}
+                {% when 3 %}
+                  {% assign group_title = '<p>Emergency Power Solutions</p>' %}
+                  {% assign group_text = 'Save Up to' %}
+                  {% assign group_subtext = 'USD 150' %}
+                {% when 4 %}
+                  {% assign group_title = '<p>Starlink Travel Accessories</p>' %}
+                  {% assign group_text = 'Save Up to' %}
+                  {% assign group_subtext = 'USD 100' %}
+              {% endcase %}
+
+              {% assign manual_products_count = 0 %}
+              {% for j in (1..4) %}
+                {% assign product_key = 'product_' | append: i | append: '_' | append: j %}
+                {% if block.settings[product_key] != blank %}
+                  {% assign manual_products_count = manual_products_count | plus: 1 %}
+                {% endif %}
+              {% endfor %}
+
+              {% if manual_products_count > 0 %}
+                <div class="advanced-tabs__group">
+                  <div class="advanced-tabs__top">
+                    <div class="advanced-tabs__top-text">
+                      <div class="advanced-tabs__collection-title rte">
+                        {{ group_title }}
+                      </div>
+
+                      <div class="advanced-tabs__description">
+                        <p>
+                          {{ group_text }}
+                          <span>{{ group_subtext }}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="advanced-tabs__products-area">
+                    <div class="advanced-tabs__grid">
+                      {% for j in (1..4) %}
+                        {% assign product_key = 'product_' | append: i | append: '_' | append: j %}
+                        {% assign selected_product = block.settings[product_key] %}
+                        {% if selected_product != blank %}
+                          {% render 'advanced-tab-product-card',
+                            product: selected_product,
+                            show_vendor: section.settings.show_vendor,
+                            show_price: section.settings.show_price
+                          %}
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              {% elsif collection.products_count > 0 and i == 1 %}
+                <div class="advanced-tabs__group">
+                  <div class="advanced-tabs__top">
+                    <div class="advanced-tabs__top-text">
+                      <div class="advanced-tabs__collection-title rte">
+                        <p>Smart Driving &amp; Travel Upgrades</p>
+                      </div>
+
+                      <div class="advanced-tabs__description">
+                        <p>
+                          Save Up to
+                          <span>USD 100</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="advanced-tabs__products-area">
+                    <div class="advanced-tabs__grid">
+                      {% for product in collection.products limit: section.settings.products_to_show %}
+                        <div class="advanced-tabs__card">
+                          <a class="advanced-tabs__card-link" href="{{ product.url }}">
+                            <div class="advanced-tabs__image-wrap">
+                              {% if product.featured_image != blank %}
+                                {{
+                                  product.featured_image
+                                  | image_url: width: 800
+                                  | image_tag:
+                                    loading: 'lazy',
+                                    widths: '200, 300, 400, 500, 600, 800',
+                                    class: 'advanced-tabs__image',
+                                    alt: product.title
+                                }}
+                              {% else %}
+                                {{ 'product-1' | placeholder_svg_tag: 'advanced-tabs__image placeholder-svg' }}
+                              {% endif %}
+                            </div>
+
+                            <div class="advanced-tabs__info">
+                              {% if section.settings.show_vendor %}
+                                <div class="advanced-tabs__vendor">{{ product.vendor }}</div>
+                              {% endif %}
+
+                              <h4 class="advanced-tabs__title">{{ product.title }}</h4>
+
+                              {% if section.settings.show_price %}
+                                <div class="advanced-tabs__price">
+                                  {% if product.compare_at_price > product.price %}
+                                    <span class="advanced-tabs__price-sale">{{ product.price | money }}</span>
+                                    <span class="advanced-tabs__price-compare">{{ product.compare_at_price | money }}</span>
+                                  {% else %}
+                                    <span>{{ product.price | money }}</span>
+                                  {% endif %}
+                                </div>
+                              {% endif %}
+                            </div>
+                          </a>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+
+           
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="advanced-tabs__empty">
+      请先为每个 Tab 选择分类
+    </div>
+  {% endif %}
+</div>
+
+<style>
+.wrapper-body {
+    background:#F1F4EC;
+    padding:0;
+    margin:0;
+  }
+  .advanced-tabs-{{ section_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+    
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__tabs {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 28px;
+
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__tab {
+    border: 0;
+    font-family: Barlow;
+    font-weight: 500;
+    font-size: 16px;
+    color: #000000;
+    cursor: pointer;
+    padding: 6px 20px;
+    background: {{ section.settings.tab_bg }};
+    color: {{ section.settings.tab_text }};
+    transition: all 0.25s ease;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__tab.is-active {
+    background: {{ section.settings.tab_active_bg }};
+    color: {{ section.settings.tab_active_text }};
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__panel {
+    display: none;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__panel.is-active {
+    display: block;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__group {
+    margin-bottom: 40px;
+  }
+
+
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+  }
+ @media screen and (max-width: 989px) {
+   body .advanced-tabs-{{ section_id }} .advanced-tabs__collection-title p {
+    font-weight: 800;
+    font-size: 24px;
+    color: #000000;
+    line-height: 1.5;
+    margin: 0;
+  }
+   body .advanced-tabs-{{ section_id }} .advanced-tabs__description p {
+    font-weight: 500;
+    font-size: 18px;
+    color: #000000;
+    margin: 0;
+    line-height: 1.8;
+  }
+
+}
+  .advanced-tabs-{{ section_id }} .advanced-tabs__collection-title p {
+    font-weight: 800;
+    font-size: 48px;
+    color: #000000;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__description {
+    margin-bottom: 0;
+    margin-top: 20px;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__description p {
+    font-weight: 500;
+    font-size: 32px;
+    color: #000000;
+    margin: 0;
+    line-height: 1.8;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__description p span {
+    display: inline-block;
+    margin-left: 4px;
+    color: #E95144;
+    font-weight: 700;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__view-all {
+    display: inline-block;
+    padding: 12px 22px;
+    background: #111;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 999px;
+  }
+
+.advanced-tabs-{{ section_id }} .advanced-tabs__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.advanced-tabs-{{ section_id }} .advanced-tabs__grid > * {
+  width: calc(25% - 15px);
+  max-width: 280px;
+}
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__image-wrap {
+    background: #f7f7f7;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__info {
+    padding: 16px;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__vendor {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__title {
+    margin: 8px 0 8px;
+    font-size: 16px;
+    line-height: 1.4;
+    font-family: Barlow;
+    font-weight: 400;
+    color: #000000;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .advanced-tabs__price > span:first-child {
+    font-weight: 600;
+    font-size: 18px;
+    font-family: Barlow;
+    color: #E95144;
+  }
+
+  .advanced-tabs__price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__price-sale {
+    font-weight: 700;
+    margin-right: 8px;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__price-compare {
+    opacity: 0.5;
+    text-decoration: line-through;
+  }
+
+
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__empty {
+    text-align: center;
+    padding: 24px;
+    background: #fafafa;
+    border-radius: 16px;
+  }
+
+  .advanced-tabs__group .advanced-tabs__top-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+@media screen and (max-width: 989px) {
+  .advanced-tabs-{{ section_id }} .advanced-tabs__grid > * {
+    width: calc(50% - 10px);
+    max-width: none;
+  }
+ body .advanced-tabs-{{ section_id }} .advanced-tabs__group {
+    margin-bottom: 50px;
+  }
+}
+
+ @media screen and (max-width: 749px) {
+  .advanced-tabs-{{ section_id }} .advanced-tabs__grid > * {
+    width: calc(50% - 6px);
+    max-width: none;
+  }
+}
+.advanced-tabs-{{ section_id }} .advanced-tabs__info {
+  text-align: center;
+}
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__tabs {
+    justify-content: center;
+    overflow-x: auto;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-bottom: 6px;
+    margin-bottom: 18px;
+    margin-top: -30px;
+    background-color: #fff;
+    position: relative;
+    z-index: 1111;
+    border-radius: 10px;
+    padding-top: 6px;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__tab {
+    white-space: nowrap;
+    flex: 0 0 auto;
+    font-size: 14px;
+    padding: 6px 14px;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__group {
+    margin-bottom: 100px;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__top {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    gap: 12px;
+  }
+
+  .advanced-tabs__group .advanced-tabs__top-text {
+    padding: 0 8px;
+    text-align: center;
+  }
+
+  
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__description {
+    margin-top: 8px;
+  }
+
+
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__info {
+    padding: 10px 8px 12px;
+  }
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__title {
+    font-size: 13px;
+    line-height: 1.35;
+    margin: 6px 0;
+  }
+
+  .advanced-tabs__price > span:first-child {
+    font-size: 16px;
+  }
+
+
+
+  .advanced-tabs-{{ section_id }} .advanced-tabs__view-all {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const section = document.querySelector('.advanced-tabs-{{ section_id }}');
+    if (!section) return;
+
+    const tabs = section.querySelectorAll('.advanced-tabs__tab');
+    const panels = section.querySelectorAll('.advanced-tabs__panel');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', function () {
+        const targetId = this.getAttribute('data-tab-target');
+
+        tabs.forEach((item) => {
+          item.classList.remove('is-active');
+          item.setAttribute('aria-selected', 'false');
+        });
+
+        panels.forEach((panel) => {
+          panel.classList.remove('is-active');
+          panel.setAttribute('hidden', 'hidden');
+        });
+
+        this.classList.add('is-active');
+        this.setAttribute('aria-selected', 'true');
+
+        const targetPanel = section.querySelector('#' + targetId);
+        if (targetPanel) {
+          targetPanel.classList.add('is-active');
+          targetPanel.removeAttribute('hidden');
+        }
+      });
+    });
+  });
+</script>

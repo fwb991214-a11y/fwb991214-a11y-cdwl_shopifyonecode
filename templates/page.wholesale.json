@@ -1,0 +1,38 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "page-wholesale",
+      "settings": {}
+    },
+    "17721017114b273e56": {
+      "type": "apps",
+      "blocks": {
+        "powerful_form_builder_app_block_qppjcU": {
+          "type": "shopify://apps/powerful-form-builder/blocks/app-block/e4bcb1eb-35b2-42e6-bc37-bfe0e1542c9d",
+          "settings": {
+            "shortcode": "<div class=\"globo-formbuilder\" data-id=\"MTM0NDk3\"></div>"
+          }
+        }
+      },
+      "block_order": [
+        "powerful_form_builder_app_block_qppjcU"
+      ],
+      "settings": {
+        "include_margins": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "17721017114b273e56"
+  ]
+}

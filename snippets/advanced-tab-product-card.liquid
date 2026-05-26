@@ -1,0 +1,40 @@
+{% if product != blank %}
+  <div class="advanced-tabs__card">
+    <a class="advanced-tabs__card-link" href="{{ product.url }}">
+      <div class="advanced-tabs__image-wrap">
+        {% if product.featured_image != blank %}
+          {{
+            product.featured_image
+            | image_url: width: 800
+            | image_tag:
+              loading: 'lazy',
+              widths: '200, 300, 400, 500, 600, 800',
+              class: 'advanced-tabs__image',
+              alt: product.title
+          }}
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'advanced-tabs__image placeholder-svg' }}
+        {% endif %}
+      </div>
+
+      <div class="advanced-tabs__info">
+        {% if show_vendor %}
+          <div class="advanced-tabs__vendor">{{ product.vendor }}</div>
+        {% endif %}
+
+        <h4 class="advanced-tabs__title">{{ product.title }}</h4>
+
+        {% if show_price %}
+          <div class="advanced-tabs__price">
+            {% if product.compare_at_price > product.price %}
+              <span class="advanced-tabs__price-sale">{{ product.price | money }}</span>
+              <span class="advanced-tabs__price-compare">{{ product.compare_at_price | money }}</span>
+            {% else %}
+              <span>{{ product.price | money }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </a>
+  </div>
+{% endif %}

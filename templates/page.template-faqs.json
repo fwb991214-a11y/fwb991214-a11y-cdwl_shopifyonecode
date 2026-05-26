@@ -1,0 +1,141 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-faqs-page",
+      "blocks": {
+        "15d9d2f4-1bdd-49c8-9a99-58246020f05c": {
+          "type": "paragraph",
+          "settings": {
+            "title": "Pre Sale Questions",
+            "question_1": "Q1: “Is this product compatible with my vehicle?”",
+            "answer_1": "<p>A1: Please refer to the compatibility details provided on the product page. \n<br>If you are still unsure, feel free to contact us via live chat or email at  <a href=\"mailto:support@teslaunch.net\" style=\"text-decoration: underline;\">support@teslaunch.net</a>.</p>",
+            "question_2": "Q2: “How long will delivery take after placing an order?”",
+            "answer_2": "<p>A2: Our standard delivery time is 6-12 days. For some products, delivery may take as little as 3-7 days. Please note that delivery times may vary slightly based on your location and any unforeseen logistical circumstances.</p>",
+            "question_3": "Q3: “Which countries do you ship to?”",
+            "answer_3": "<p>A3: We offer worldwide shipping.\n</p><p>Exclusions:\n Please note that P.O. Box addresses are accepted (excluding APO/FPO/DPO addresses). Kindly provide a residential or business address during checkout.</p>",
+            "question_4": "Q4: “Who is responsible for customs duties and taxes?”",
+            "answer_4": "<p>A4: Each country or region has its own customs regulations and policies. Please contact your local customs office for more details. In rare cases, if import duties or taxes are incurred, they are the responsibility of the customer.</p>",
+            "question_5": "Q5: “Which payment methods are supported?”",
+            "answer_5": "<p>A5: Payment Methods include:\n PayPal Express, Visa, Mastercard, American Express, Discover, Diners Club, Apple Pay, Bancontact, Google Pay, IDEAL, and Shop Pay.\n</p>",
+            "question_6": "Q6: “How is payment security ensured?”",
+            "answer_6": "<p>A6: We utilize advanced encryption and secure payment gateways to protect your personal and financial information. Your security is our top priority.\n</p>",
+            "question_7": "",
+            "answer_7": "",
+            "question_8": "",
+            "answer_8": "",
+            "question_9": "",
+            "answer_9": "",
+            "question_10": "",
+            "answer_10": ""
+          }
+        },
+        "f4d12560-a07c-4bd4-a934-2a8eddeaccc9": {
+          "type": "paragraph",
+          "settings": {
+            "title": "During-Sale Questions",
+            "question_1": "Q1: “How can I change the shipping address?”",
+            "answer_1": "<p>A1: If your order has not yet shipped, please contact customer service immediately to update the shipping address. Once the order has been shipped, the address cannot be changed, and cancellations will not be possible.</p>",
+            "question_2": "Q2: “How can I change an item in my order?”",
+            "answer_2": "<p>A2: If your order has not yet shipped, please contact customer service immediately to modify the item. Once the order has been shipped, changes and cancellations will not be possible.</p>",
+            "question_3": "Q3: “What is the order processing time?”",
+            "answer_3": "<p>A3: After placing an order, the warehouse requires 1-3 business days to process it. \n</p><p>Standard products are typically shipped within this time frame. \n</p><p>For pre-order items, shipping will follow the timeline indicated on the product page.</p>",
+            "question_4": "Q4: “How can I track my order?”",
+            "answer_4": "<p>A4: Once your order has shipped, you will receive a shipping confirmation email. At the bottom of the email, you’ll find a tracking number. \n<br>You can click on the tracking number or use it to track your shipment at:<a href=\"https://www.17track.net/en\" style=\"text-decoration: underline;\">https://www.17track.net/en</a>.</p>",
+            "question_5": "Q5: “How can I cancel my order?”",
+            "answer_5": "<p>A5: For regular products, orders can be canceled by contacting customer service before they are shipped. Once the order is in transit, cancellation is no longer possible. \n</p><p>For customized products, such as custom steering wheels or full-cover seat covers, cancellations are not allowed once the order details have been confirmed with customer service.</p>",
+            "question_6": "",
+            "answer_6": "",
+            "question_7": "",
+            "answer_7": "",
+            "question_8": "",
+            "answer_8": "",
+            "question_9": "",
+            "answer_9": "",
+            "question_10": "",
+            "answer_10": ""
+          }
+        },
+        "paragraph_7XUYzr": {
+          "type": "paragraph",
+          "settings": {
+            "title": "After-Sale Questions",
+            "question_1": "Q1:\"How do I install the product?\"",
+            "answer_1": "<p>A1: Please refer to the installation video available on the product page or the instructions included in the package. \n<br>If you need further assistance, feel free to contact our customer support at <a href=\"mailto:support@teslaunch.net\" style=\"text-decoration: underline;\">support@teslaunch.net</a>.</p>",
+            "question_2": "Q2:\"How do I request a return or refund?\"",
+            "answer_2": "<p>A2: Please contact our customer support team at <a href=\"mailto:support@teslaunch.net\" to=\"\" initiate=\"\" the=\"\" process.style=\"text-decoration: underline;\">support@teslaunch.net</a>.</p>",
+            "question_3": "Q3:\"What is your refund policy?\"",
+            "answer_3": "<p>A3: We have a 30-day return policy. You have 30 days after receiving your item to request a return.\n</p><p>To be eligible for a return, your item must be in the same condition as received—unworn or unused, with tags, and in its original packaging. A receipt or proof of purchase is also required.\n</p><p>To start a return, kindly contact us at <a href=\"mailto:support@teslaunch.net\" style=\"text-decoration: underline;\">support@teslaunch.net</a>.</p>",
+            "question_4": "Q4:\"What should I do if I haven't received my package?\"",
+            "answer_4": "<p>A4: 1. Confirm that the shipping address and email provided during the order are correct. If accurate, please check around your front door, back door, or nearby areas for the package.\n \n</p><p>2. If the package is not found, please contact your local carrier. Below are the contact details for major carriers:\n \n</p><p>1) USPS (US)\n Phone: 1-800-275-8777\n</p><p>Website: <a href=\"www.usps.com\" style=\"text-decoration: underline;\">www.usps.com</a>.</p>\n<p>Find a Post Office: Find Location\n \n</p><p></p><p>2) UPS (US)\n Phone: 1-888-742-5877\n</p><p>Website: <a href=\"www.ups.com\" style=\"text-decoration: underline;\">www.ups.com</a>.</p>\n \n<p></p><p> 3) OnTrac (US)\n Phone: 1-800-334-5000\n</p><p>Email: sagteam1@ontrac.com\n</p><p>Website: <a href=\"www.ontrac.com\" style=\"text-decoration: underline;\">www.ontrac.com</a>.</p>\n \n<p></p><p> 4) FedEx (US)\n Phone: 1-800-463-3339\n</p><p>Website: <a href=\"www.fedex.com\" style=\"text-decoration: underline;\">www.fedex.com</a>.</p>\n<p>Locate a FedEx Office: Find Location\n \n</p><p></p><p> 5) LaserShip (US)\n Phone: (804) 414-2590\n</p><p>Website: <a href=\"www.lasership.com\" style=\"text-decoration: underline;\">www.lasership.com</a>.</p>\n \n<p></p><p>6) Colis Privé (FR)\n Email: <a href=\"suividecolis@colisprive.com%20/%20opvolgenvanpakketten@colisprive.com\" style=\"text-decoration: underline;\">suividecolis@colisprive.com / opvolgenvanpakketten@colisprive.com</a>.</p>\n<p>Website: <a href=\"www.colisprive.be\" style=\"text-decoration: underline;\">www.colisprive.be</a>.</p><p></p>",
+            "question_5": "Q5:\"What should I do if the product arrives damaged?\"",
+            "answer_5": "<p>A5: Please provide pictures of the damaged product, the packaging, and your order number to our customer service team. We will verify with the shipping company and arrange a refund or replacement. Contact us at <a href=\"mailto:support@teslaunch.net\" style=\"text-decoration: underline;\">support@teslaunch.net</a>.</p>",
+            "question_6": "Q6:\"Why did I only receive one item when I ordered multiple products?\"",
+            "answer_6": "<p>A6: Orders with multiple items are often shipped in separate packages. Please check your shipment confirmation email, where you will find tracking numbers for each package.</p>",
+            "question_7": "",
+            "answer_7": "",
+            "question_8": "",
+            "answer_8": "",
+            "question_9": "",
+            "answer_9": "",
+            "question_10": "",
+            "answer_10": ""
+          }
+        }
+      },
+      "block_order": [
+        "15d9d2f4-1bdd-49c8-9a99-58246020f05c",
+        "f4d12560-a07c-4bd4-a934-2a8eddeaccc9",
+        "paragraph_7XUYzr"
+      ],
+      "settings": {
+        "container": "1170",
+        "padding_full_width": 0,
+        "show_breadcrumb": true,
+        "breadcrumb_alignment": "left",
+        "breadcrumb_bg": "",
+        "breadcrumb_gradient": "",
+        "breadcrumb_bg_mb": "#f6f6f6",
+        "breadcrumb_gradient_mb": "",
+        "show_page_title": true,
+        "page_title_alignment": "left",
+        "show_faqs_filter": true,
+        "faqs_text": "<p>Below FAQ are some common concerns of our clients before purchasing the theme.\n<br> If you have other questions, please just send it to <a href=\"mailto:support@teslaunch.net\" style=\"text-decoration: underline;\">support@teslaunch.net</a>.</p>",
+        "faqs_message_heading": "Need Help?",
+        "faqs_message_text": "<span>If you have an issue or question that requires immediate assistance, you can click the button below to chat live with a Customer Service representative.   \n<br> \n<br>\nIf we aren’t available, drop us an email and we will get back to you within 20-36 hours!</span>",
+        "message_method_link_1": "https://facebook.com",
+        "message_method_text_1": "Message Us",
+        "message_method_link_2": "https://gmail.com",
+        "message_method_text_2": "Contact Us",
+        "contact_content_text": "Unable to find satisfactory answers ?",
+        "contact_text": "Contact Support",
+        "contact_link": "mailto:support@teslaunch.net",
+        "contact_color": "#ffffff",
+        "contact_color_border": "#ef6454",
+        "contact_color_bg": "#ef6454",
+        "contact_color_bg_gradient": "",
+        "contact_color_hover": "#ffffff",
+        "contact_color_border_hover": "#e93d29",
+        "contact_color_bg_hover": "#e93d29",
+        "contact_color_bg_gradient_hover": "",
+        "mg_top_desktop": 0,
+        "mg_top_tablet": 0,
+        "mg_top_mobile": 0,
+        "mg_bottom_desktop": 0,
+        "mg_bottom_tablet": 0,
+        "mg_bottom_mobile": 0
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

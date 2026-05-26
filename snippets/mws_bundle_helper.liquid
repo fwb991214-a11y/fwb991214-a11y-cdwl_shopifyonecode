@@ -1,0 +1,97 @@
+<script>
+  
+  if (window.mwMarketingOffersHelper) {
+  
+    class mwCustomTheme {
+
+              openCartDrawer(cart) {
+
+        setTimeout(function () { 
+
+          var $body = $('body'),
+            $doc = $(document),
+            $html = $('html'),
+            $win = $(window);
+
+          const $cartDropdown = $('#halo-cart-sidebar .halo-sidebar-wrapper .previewCart-wrapper');
+                
+          const $cartLoading = '<div class="loading-overlay loading-overlay--custom">\
+                        <div class="loading-overlay__spinner">\
+                            <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">\
+                                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>\
+                            </svg>\
+                        </div>\
+                    </div>';
+                const loadingClass = 'is-loading';
+
+                $cartDropdown
+                    .addClass(loadingClass)
+                    .prepend($cartLoading);
+
+                $.ajax({
+                    type: 'GET',
+                    url: window.routes.root + '/cart?view=ajax_side_cart',
+                    cache: false,
+                    success: function (data) {
+                        var response = $(data);
+
+                        $cartDropdown
+                            .removeClass(loadingClass)
+                            .html(response);
+                    },
+                    error: function (xhr, text) {
+                        // halo.showWarning($.parseJSON(xhr.responseText).description);
+                    },
+                    complete: function () {
+                        document.dispatchEvent(new CustomEvent('cart-update', { detail: cart }));
+                        if ($('body').hasClass('cursor-fixed__show')){
+                            window.sharedFunctionsAnimation.onEnterButton();
+                            window.sharedFunctionsAnimation.onLeaveButton();
+                        }
+                    }
+                });
+
+                                
+          
+          const $cartIcon = document.querySelector('.header__icon.header__icon--cart');
+          if ($cartIcon) $cartIcon.click();
+
+                 
+          $.getJSON("/cart.js").then(function (cart) {
+            var count = 0;
+            for (var i = 0; i < cart.items.length; i++) {
+              count += cart.items[i].quantity;
+            }
+            $(".header__icon--cart .cart-count-bubble [data-cart-count], .wrapper-cartCount  .cartCount").text(count);
+          });
+          
+
+
+        }, 800);
+        
+        
+ 
+      }
+
+      close() {
+      }
+
+      updateCartBubble(sections) {
+      }
+
+      getButtonLoadingClassName() {
+        return "loading";
+      }
+    }
+
+    const mwTheme = new mwCustomTheme();
+
+    window.mwMarketingOffersOptions.setThemeSections("mini-cart,main-cart");
+
+    window.mwMarketingOffersOptions.theme = mwTheme;
+    
+ {% comment %} mwMarketingOffersOptions.addSelector('add_to_cart', '.product-form__submit'); {% endcomment %}
+{% comment %} mwMarketingOffersOptions.addSelector('buy_now_button', '.product-info__image'); {% endcomment %}
+{% comment %} mwMarketingOffersOptions.addSelector('variant_input', '#variantIdBundle'); {% endcomment %}
+  }
+</script>
