@@ -191,14 +191,14 @@
                                                                 {%- if item.original_price != item.final_price -%}
                                                                     <dl class="cart-item__discounted-prices">
                                                                         <dt class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</dt>
-                                                                        <dd><s class="cart-item__old-price price price--end" data-item-original-price-display>{{ item.original_price | money }}</s></dd>
+                                                                        <dd><s class="cart-item__old-price price price--end" data-item-original-price-display>{% render 'formatted-money', amount: item.original_price %}</s></dd>
                                                                         <dt class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</dt>
-                                                                        <dd class="price price--end" data-item-final-price-display>{{ item.final_price | money }}</dd>
+                                                                        <dd class="price price--end" data-item-final-price-display>{% render 'formatted-money', amount: item.final_price %}</dd>
                                                                     </dl>
                                                                     {%- if item.variant.available and item.unit_price_measurement -%}
                                                                         <div class="unit-price caption">
                                                                             <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
-                                                                            {{ item.variant.unit_price | money }}
+                                                                            {% render 'formatted-money', amount: item.variant.unit_price %}
                                                                             <span aria-hidden="true">/</span>
                                                                             <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
                                                                             {%- if item.variant.unit_price_measurement.reference_value != 1 -%}
@@ -210,12 +210,12 @@
                                                                 {%- elsif current_variant.compare_at_price > current_variant.price -%}
                                                                     <dl class="cart-item__discounted-prices">
                                                                         <dt class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</dt>
-                                                                        <dd><s class="cart-item__old-price price price--end" data-item-original-price-display>{{ current_variant.compare_at_price | money }}</s></dd>
+                                                                        <dd><s class="cart-item__old-price price price--end" data-item-original-price-display>{% render 'formatted-money', amount: current_variant.compare_at_price %}</s></dd>
                                                                         <dt class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</dt>
-                                                                        <dd class="price price--end" data-item-final-price-display>{{ current_variant.price | money }}</dd>
+                                                                        <dd class="price price--end" data-item-final-price-display>{% render 'formatted-money', amount: current_variant.price %}</dd>
                                                                     </dl>
                                                                 {%- else -%}
-                                                                    <span class="price price--end" data-item-final-price-display>{{ item.original_price | money }}</span>
+                                                                    <span class="price price--end" data-item-final-price-display>{% render 'formatted-money', amount: item.original_price %}</span>
                                                                 {%- endif -%}
                                                             </div>
                                                         </div>
@@ -279,7 +279,7 @@
                                                                                   <ul class="list-unstyled">
                                                                                     <li>
                                                                                       <span>{{ item.variant.quantity_rule.min }}+</span>
-                                                                                      {%- assign price = item.variant.price | money_with_currency -%}
+                                                                                      {%- capture price -%}{% render 'formatted-money', amount: item.variant.price %}{%- endcapture -%}
                                                                                       <span>{{ 'sections.quick_order_list.each' | t: money: price }}</span>
                                                                                     </li>
                                                                                     {%- for price_break in item.variant.quantity_price_breaks -%}
@@ -288,7 +288,7 @@
                                                                                           {{- price_break.minimum_quantity -}}
                                                                                           <span aria-hidden="true">+</span></span
                                                                                         >
-                                                                                        {%- assign price = price_break.price | money_with_currency -%}
+                                                                                        {%- capture price -%}{% render 'formatted-money', amount: price_break.price %}{%- endcapture -%}
                                                                                         <span> {{ 'sections.quick_order_list.each' | t: money: price }}</span>
                                                                                       </li>
                                                                                     {%- endfor -%}
@@ -321,14 +321,14 @@
                                                     {%- if item.original_price != item.final_price -%}
                                                         <dl class="cart-item__discounted-prices">
                                                             <dt class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</dt>
-                                                            <dd><s class="cart-item__old-price price price--end" data-item-original-price-display>{{ item.original_price | money }}</s></dd>
+                                                            <dd><s class="cart-item__old-price price price--end" data-item-original-price-display>{% render 'formatted-money', amount: item.original_price %}</s></dd>
                                                             <dt class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</dt>
-                                                            <dd class="price price--end" data-item-final-price-display>{{ item.final_price | money }}</dd>
+                                                            <dd class="price price--end" data-item-final-price-display>{% render 'formatted-money', amount: item.final_price %}</dd>
                                                         </dl>
                                                         {%- if item.variant.available and item.unit_price_measurement -%}
                                                             <div class="unit-price caption">
                                                                 <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
-                                                                {{ item.variant.unit_price | money }}
+                                                                {% render 'formatted-money', amount: item.variant.unit_price %}
                                                                 <span aria-hidden="true">/</span>
                                                                 <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
                                                                 {%- if item.variant.unit_price_measurement.reference_value != 1 -%}
@@ -340,12 +340,12 @@
                                                     {%- elsif current_variant.compare_at_price > current_variant.price -%}
                                                         <dl class="cart-item__discounted-prices">
                                                             <dt class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</dt>
-                                                            <dd><s class="cart-item__old-price price price--end" data-item-original-price-display>{{ current_variant.compare_at_price | money }}</s></dd>
+                                                            <dd><s class="cart-item__old-price price price--end" data-item-original-price-display>{% render 'formatted-money', amount: current_variant.compare_at_price %}</s></dd>
                                                             <dt class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</dt>
-                                                            <dd class="price price--end" data-item-final-price-display>{{ current_variant.price | money }}</dd>
+                                                            <dd class="price price--end" data-item-final-price-display>{% render 'formatted-money', amount: current_variant.price %}</dd>
                                                         </dl>
                                                     {%- else -%}
-                                                        <span class="price price--end" data-item-final-price-display>{{ item.original_price | money }}</span>
+                                                        <span class="price price--end" data-item-final-price-display>{% render 'formatted-money', amount: item.original_price %}</span>
                                                     {%- endif -%}
                                                 </div>
                                             </div>
@@ -407,7 +407,7 @@
                                                               <ul class="list-unstyled">
                                                                 <li>
                                                                   <span>{{ item.variant.quantity_rule.min }}+</span>
-                                                                  {%- assign price = item.variant.price | money_with_currency -%}
+                                                                  {%- capture price -%}{% render 'formatted-money', amount: item.variant.price %}{%- endcapture -%}
                                                                   <span>{{ 'sections.quick_order_list.each' | t: money: price }}</span>
                                                                 </li>
                                                                 {%- for price_break in item.variant.quantity_price_breaks -%}
@@ -416,7 +416,7 @@
                                                                       {{- price_break.minimum_quantity -}}
                                                                       <span aria-hidden="true">+</span></span
                                                                     >
-                                                                    {%- assign price = price_break.price | money_with_currency -%}
+                                                                    {%- capture price -%}{% render 'formatted-money', amount: price_break.price %}{%- endcapture -%}
                                                                     <span> {{ 'sections.quick_order_list.each' | t: money: price }}</span>
                                                                   </li>
                                                                 {%- endfor -%}
@@ -443,7 +443,7 @@
                                                 endif 
                                             -%} 
                                             <div class="cart-item-block cart-item-total" data-price="{{ price_to_display }}" data-original-price="{{ item.original_price }}">
-                                                <span class="cart-item-value" data-item-price-with-quantity-display>{{ price_to_display | times: item.quantity | money }}</span>
+                                                <span class="cart-item-value" data-item-price-with-quantity-display>{% assign cart_line_total = price_to_display | times: item.quantity %}{% render 'formatted-money', amount: cart_line_total %}</span>
                                             </div>
                                             <div class="cart-item-block cart-item-remove">
                                                 <a class="cart-remove" href="javascript:void(0)" data-cart-remove data-cart-remove-id="{{ item.id }}" data-line="{{ item.key }}" data-index="{{ item.index | plus: 1 }}" aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}">{% render 'icon-close' %}</a>
@@ -480,7 +480,7 @@
                                     <div class="cart--totals-title">{{ 'general.cart.order_summary' | t }}</div>
                                     <li class="cart-total cart-total-subtotal">
                                         <div class="cart-total-label"><span class="text">{{ 'general.cart.subtotal' | t }}</span></div>
-                                        <div class="cart-total-value"><span class="text">{{ cart.original_total_price | money }}</span></div>
+                                        <div class="cart-total-value"><span class="text">{% render 'formatted-money', amount: cart.original_total_price %}</span></div>
                                     </li>
                                     {%- if show_shipping_rate_calculator -%}
                                         <li class="cart-total cart-total-shipping{% if enable_dropdown %} enable_dropdown{% endif %}">
@@ -536,17 +536,17 @@
                                                     {%- for discount in cart.cart_level_discount_applications -%}
                                                         {%- render 'icon-discount' -%}
                                                         {{ discount.title }}
-                                                        (-{{ discount.total_allocated_amount | money }})
+                                                        (-{% render 'formatted-money', amount: discount.total_allocated_amount %})
                                                     {%- endfor -%}
                                                 {%- else -%}
-                                                    {{ cart.total_discount | money | prepend: '-' }}
+                                                    {%- capture cart_discount_formatted -%}{% render 'formatted-money', amount: cart.total_discount %}{%- endcapture -%}{{ cart_discount_formatted | prepend: '-' }}
                                                 {%- endif -%}
                                             </span>
                                         </div>  
                                     </li>
                                     <li class="cart-total cart-total-grandtotal">
                                         <div class="cart-total-label"><span class="text">{{ 'general.cart.total' | t }}</span></div>  
-                                        <div class="cart-total-value" data-cart-total-value="{{ cart.total_price }}"><span class="text">{{ cart.total_price | money }}</span></div>  
+                                        <div class="cart-total-value" data-cart-total-value="{{ cart.total_price }}"><span class="text">{% render 'formatted-money', amount: cart.total_price %}</span></div>  
                                     </li>
                                     {%- if settings.show_shipping_note -%}
                                         <li class="shipTotal"><p class="cart-total-value form-text">{{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}</p></li>  
@@ -569,7 +569,7 @@
                                     {%- if section.settings.enable_sticky_button_checkout_mb -%}
                                         <li class="cart-total cart-total-grandtotal">
                                             <div class="cart-total-label"><span class="text">{{ 'general.cart.total' | t }}</span></div>  
-                                            <div class="cart-total-value" data-cart-total-value="{{ cart.total_price }}"><span class="text">{{ cart.total_price | money }}</span></div>  
+                                            <div class="cart-total-value" data-cart-total-value="{{ cart.total_price }}"><span class="text">{% render 'formatted-money', amount: cart.total_price %}</span></div>  
                                         </li>
                                     {%- endif -%}
                                     {%- if settings.show_global_checkbox -%}

@@ -59,7 +59,7 @@ class VariantEditCartSelects extends HTMLElement {
         this.updateAddToCartButton();
 
         if (window.show_multiple_currencies && Currency.currentCurrency != shopCurrency) {
-            Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+            Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
         }
     }
 

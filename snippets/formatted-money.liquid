@@ -1,0 +1,10 @@
+{%- comment -%}
+  Renders a price using the same format as product prices and Shopify checkout.
+  Accepts:
+  - amount: {Number} Price in cents (required)
+{%- endcomment -%}
+{%- if settings.currency_format_enable -%}
+  {{- amount | money_with_currency -}}
+{%- else -%}
+  {{- amount | money -}}
+{%- endif -%}

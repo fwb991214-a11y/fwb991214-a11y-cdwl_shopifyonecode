@@ -1,4 +1,9 @@
-<free-shipping-component class="haloCalculatorShipping" data-free-shipping-wrapper style="display: block;">
+<free-shipping-component
+    class="haloCalculatorShipping"
+    data-free-shipping-wrapper
+    data-cart-currency="{{ cart.currency.iso_code }}"
+    data-shop-currency="{{ shop.currency }}"
+    style="display: block;">
     <div class="progress{% if cart.item_count == 0 %} progress-hidden{% endif %}" data-text-enabled="{{ settings.calculator_free_shipping_message_show_percent  }}" data-shipping-progress>
       <div class="progress_shipping" role="progressbar">
             <div class="progress-meter" style="width: 0" data-free-shipping-progress-meter>

@@ -60,9 +60,12 @@
     window.iso_code = '{{ request.locale.iso_code }}';
     {% if settings.currency_format_enable %}
         window.money_format = '{{ shop.money_with_currency_format }}';
+        window.currencyFormatStyle = 'money_with_currency_format';
     {% else %}
         window.money_format = '{{ shop.money_format }}';
+        window.currencyFormatStyle = 'money_format';
     {% endif %}
+    window.currencyFormatted = {% if settings.currency_format_enable %}true{% else %}false{% endif %};
     window.shop_currency = '{{ shop.currency }}';
     window.currencySymbol ="{{ cart.currency.symbol }}";
     window.show_multiple_currencies = {{ enable_multiple_currencies }};
@@ -159,6 +162,8 @@
         {% else %}
             window.free_shipping_price = 0;
         {% endif %}
+        window.free_shipping_base_currency = {{ shop.currency | json }};
+        window.cart_currency = {{ cart.currency.iso_code | json }};
         window.free_shipping_text = {
             free_shipping_message: `{{ 'calculator_free_shipping_message.general.free_shipping_message' | t }}`,
             free_shipping_message_1: `{{ 'calculator_free_shipping_message.general.free_shipping_message_1' | t }}`,

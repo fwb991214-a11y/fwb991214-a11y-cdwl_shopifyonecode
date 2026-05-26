@@ -16,7 +16,7 @@
 		<cart-coupon-discount data-is-sidebar="true">
 			<template data-discount-icon>{% render 'icon-discount' %}</template>
 			<template data-discounted-price-template>
-				<span class="previewCartItem-saving-price"><s class="before-discount-price" data-original-price-display>{{ item.original_price | money }}</s><span class="discounted-price" data-current-price-display>{{ item.final_price | money }}</span></span> 
+				<span class="previewCartItem-saving-price"><s class="before-discount-price" data-original-price-display>{% render 'formatted-money', amount: item.original_price %}</s><span class="discounted-price" data-current-price-display>{% render 'formatted-money', amount: item.final_price %}</span></span> 
 			</template>
 			<div class="previewCart-wrapper"></div>
 		</cart-coupon-discount>

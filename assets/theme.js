@@ -346,7 +346,7 @@
                                     }
 
                                     if (halo.checkNeedToConvertCurrency()) {
-                                        Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                                        Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                                     };
 
                                     if ($('body').hasClass('cursor-fixed__show')){
@@ -367,7 +367,7 @@
                             }
 
                             if (halo.checkNeedToConvertCurrency()) {
-                                Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                                Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                             };
                         }
                     }
@@ -1203,7 +1203,7 @@
                         }
 
                         if (halo.checkNeedToConvertCurrency()) {
-                            Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                            Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                         };
                                        
                         curTabContent.parent().find('.card .variants-popup-content .selector-wrapper .swatch-element').each(function() {
@@ -1701,7 +1701,7 @@
                 complete: function () {
                     // halo.hideLoading();
                     if (halo.checkNeedToConvertCurrency()) {
-                        Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                        Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                     };
                 }
             });
@@ -1764,12 +1764,12 @@
                     }
 
                     if (halo.checkNeedToConvertCurrency()) {
-                        Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                        Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                     }
                 },
                 complete: () => {
                     if (halo.checkNeedToConvertCurrency()) {
-                        Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                        Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                     }
                 }
             });
@@ -2211,7 +2211,7 @@
   
                 // halo.checkPreOrderOfVariant(selectedVariant, productAction, productJson)
                 if (halo.checkNeedToConvertCurrency()) {
-                    Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                    Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                 }
             });
               
@@ -2480,7 +2480,7 @@
                     }
 
                     if (halo.checkNeedToConvertCurrency()) {
-                        Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                        Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                     }
                 });
 
@@ -2727,7 +2727,7 @@
                 }
 
                 if (halo.checkNeedToConvertCurrency()) {
-                    Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                    Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                 };
 
                 if (!$body.hasClass('quick_shop_option_2') && !$body.hasClass('quick_shop_option_3') && $win.width() < 767) {
@@ -3602,7 +3602,7 @@
                     }, 700);
                 });
                 if (halo.checkNeedToConvertCurrency()) {
-                  Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                  Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                 };
             } else {
                 cartIcon.on('click', (event) => {
@@ -3680,7 +3680,7 @@
                         halo.productCollectionCartSlider();
                         halo.updateGiftWrapper();
                         if (halo.checkNeedToConvertCurrency()) {
-                          Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                          Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                         };
                         document.dispatchEvent(new CustomEvent('cart-update', { detail: cart }));
                         if ($('body').hasClass('cursor-fixed__show')){
@@ -3828,7 +3828,7 @@
                         $body.find('[data-cart-count]').text(cart.item_count);
                         halo.dispatchChangeForShippingMessage();
                         if (halo.checkNeedToConvertCurrency()) {
-                            Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                            Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                         }
                         if ($body.hasClass('template-cart')) {
                             const giftWrapping = document.getElementById('cart-gift-wrapping')
@@ -3967,7 +3967,7 @@
                         }
 
                         if (halo.checkNeedToConvertCurrency()) {
-                            Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                            Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                         };
 
                         if ($('body').hasClass('cursor-fixed__show')){
@@ -6317,7 +6317,7 @@
                 }
 
                 if (halo.checkNeedToConvertCurrency()) {
-                    Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', 'money_format');
+                    Currency.convertAll(window.shop_currency, $('#currencies .active').attr('data-currency'), 'span.money', window.currencyFormatStyle || 'money_format');
                 }
             }
         },
