@@ -1,0 +1,61 @@
+{%- comment -%}
+  Horizontal list row for blog article listings.
+{%- endcomment -%}
+
+<article class="blog-post-list-item group">
+  {%- if article.image != blank -%}
+    {%- liquid
+      assign loading_strategy = nil
+      if section.index > 3 or position > 3
+        assign loading_strategy = 'lazy'
+      endif
+    -%}
+    <a href="{{ article.url }}" class="blog-post-list-item__media">
+      {%- if show_category and article.tags.size > 0 -%}
+        <span class="badge badge--primary">{{ article.tags | first }}</span>
+      {%- endif -%}
+      {{-
+        article.image
+        | image_url: width: 600
+        | image_tag:
+          loading: loading_strategy,
+          sizes: sizes,
+          widths: '200,300,400,500,600',
+          class: 'blog-post-list-item__image zoom-image'
+      -}}
+    </a>
+  {%- endif -%}
+
+  <div class="blog-post-list-item__body">
+    <h2 class="blog-post-list-item__title">
+      <a href="{{ article.url }}">{{ article.title }}</a>
+    </h2>
+
+    {%- if show_excerpt -%}
+      <p class="blog-post-list-item__excerpt">{{ article.excerpt_or_content | strip_html | truncate: 220 }}</p>
+    {%- endif -%}
+
+    {%- if show_date or show_author or show_comments_count -%}
+      <div class="blog-post-list-item__meta">
+        {%- if show_date -%}
+          <span class="blog-post-list-item__meta-item">
+            {%- render 'icon' with 'blog-date' -%}
+            {{ article.published_at | date: format: 'abbreviated_date' }}
+          </span>
+        {%- endif -%}
+        {%- if show_author -%}
+          <span class="blog-post-list-item__meta-item">
+            {%- render 'icon' with 'blog-author' -%}
+            {{ article.author }}
+          </span>
+        {%- endif -%}
+        {%- if show_comments_count and article.comments_enabled? -%}
+          <span class="blog-post-list-item__meta-item">
+            {%- render 'icon' with 'blog-comment' -%}
+            <a href="{{ article.url }}#blog-post-comments">{{ 'blog.comments.count' | t: count: article.comments_count }}</a>
+          </span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</article>

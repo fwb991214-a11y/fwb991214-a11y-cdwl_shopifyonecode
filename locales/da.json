@@ -96,7 +96,7 @@
       "view_in_space": "Se den i dit område",
       "taxes_included": "Inkl. moms.",
       "taxes_excluded": "Ekskl. moms.",
-      "shipping_policy_html": "Moms og <a href=\"{{ link }}\" class=\"link\">levering beregnes<\/a> ved kassen",
+      "shipping_policy_html": "Moms og <a href=\"{{ link }}\" class=\"link\">levering beregnes</a> ved kassen",
       "size_chart": "Størrelsesoversigt",
       "available_colors_count": {
         "one": "{{ count }} farve tilgængelig",
@@ -319,7 +319,8 @@
       "empty": "Din indkøbskurv er tom",
       "item_count": {
         "one": "{{ count }} vare",
-        "other": "{{ count }} varer"
+        "other": "{{ count }} varer",
+        "zero": "{{ count }} genstande"
       },
       "continue_shopping": "Fortsæt med at handle",
       "weight": "Vægt",
@@ -332,9 +333,9 @@
       "view_cart": "Vis indkøbskurv",
       "checkout": "Gå til kasse",
       "we_accept": "Vi accepterer",
-      "taxes_and_shipping_policy_at_checkout_html": "Moms og <a href=\"{{ link }}\" class=\"link\">levering<\/a> beregnes ved kassen",
+      "taxes_and_shipping_policy_at_checkout_html": "Moms og <a href=\"{{ link }}\" class=\"link\">levering</a> beregnes ved kassen",
       "taxes_included_but_shipping_at_checkout": "Inkl. moms og levering beregnes ved kassen",
-      "taxes_included_and_shipping_policy_html": "Moms inkluderet. <a href=\"{{ link }}\" class=\"link\">Levering<\/a> beregnes ved kassen.",
+      "taxes_included_and_shipping_policy_html": "Moms inkluderet. <a href=\"{{ link }}\" class=\"link\">Levering</a> beregnes ved kassen.",
       "taxes_and_shipping_at_checkout": "Moms og levering beregnes ved kassen"
     },
     "order": {
@@ -386,7 +387,8 @@
       "clear": "Ryd",
       "view_all": "Vis alle",
       "view_all_results": "Vis alle resultater",
-      "no_results": "Ingen resultater blev fundet."
+      "no_results": "Ingen resultater blev fundet.",
+      "trending": "Søgetrends"
     },
     "results_count": {
       "zero": "0 resultater for \"{{ terms }}\"",

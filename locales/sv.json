@@ -387,7 +387,8 @@
       "clear": "Ta bort",
       "view_all": "Visa alla",
       "view_all_results": "Visa alla resultat",
-      "no_results": "Inga resultat kunde hittas."
+      "no_results": "Inga resultat kunde hittas.",
+      "trending": "Sök trender"
     },
     "results_count": {
       "zero": "0 result för \"{{ terms }}\"",

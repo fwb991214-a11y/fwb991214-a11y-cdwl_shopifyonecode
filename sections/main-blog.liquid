@@ -1,13 +1,15 @@
 {%- render 'section-spacing-collapsing' -%}
 
+{%- assign blog_content_max = 1440 -%}
+
 <style>
   #shopify-section-{{ section.id }} {
     {%- if section.settings.allow_transparent_header -%}
       --banner-spacing-block-added: var(--header-height);
-
       margin-block-start: calc(-1 * var(--header-height) * var(--section-is-first));
     {%- endif -%}
     --banner-content-padding-block-start: {%- if section.settings.allow_transparent_header -%}var(--spacing-12){% else %}var(--spacing-16){% endif %};
+    --blog-content-max: {{ blog_content_max }}px;
   }
 
   @media screen and (min-width: 700px) {
@@ -15,25 +17,397 @@
       --banner-content-padding-block-start: {%- if section.settings.allow_transparent_header -%}var(--spacing-18){% else %}var(--spacing-28){% endif %};
     }
   }
+
+  #shopify-section-{{ section.id }} .blog-page__inner {
+    width: 100%;
+    max-width: var(--blog-content-max);
+    margin-inline: auto;
+    padding-inline: max(16px, var(--container-gutter, 16px));
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner .blog-page__inner {
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-content {
+    width: 100%;
+    text-align: center;
+    justify-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-content .prose {
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner-content > .v-stack {
+    width: 100%;
+    justify-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .blog-banner__form {
+    width: 100%;
+    max-width: 500px;
+    margin-inline: auto;
+  }
+
+  #shopify-section-{{ section.id }} .blog-page__layout {
+    display: grid;
+    gap: 24px;
+    margin-block-start: var(--spacing-8);
+    margin-block-end: var(--spacing-14);
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .blog-page__layout--with-sidebar {
+      grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
+      gap: 40px;
+      align-items: start;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar {
+    position: sticky;
+    top: calc(var(--sticky-area-height, 0px) + 16px);
+    z-index: 1;
+  }
+
+  #shopify-section-{{ section.id }} .blog-page__main {
+    width: 100%;
+    min-width: 0;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar--desktop {
+    display: none;
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .blog-sidebar--desktop {
+      display: block;
+    }
+
+    #shopify-section-{{ section.id }} .blog-sidebar__toggle,
+    #shopify-section-{{ section.id }} .blog-sidebar__overlay,
+    #shopify-section-{{ section.id }} .blog-sidebar__drawer {
+      display: none !important;
+    }
+  }
+
+  /* Mobile drawer */
+  #shopify-section-{{ section.id }} .blog-sidebar__toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-block-end: 16px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: 1px solid rgb(var(--text-primary) / 0.14);
+    background: rgb(var(--background-primary));
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__toggle-label {
+    opacity: 0.65;
+    font-weight: 600;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__toggle-value {
+    max-width: 52vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    background: rgb(0 0 0 / 0.45);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__drawer {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 90;
+    width: min(320px, calc(100vw - 48px));
+    max-width: 85vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    padding: max(16px, env(safe-area-inset-top, 0px)) 16px max(16px, env(safe-area-inset-bottom, 0px));
+    background: rgb(var(--background-primary));
+    box-shadow: 8px 0 32px rgb(0 0 0 / 0.16);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-105%);
+    transition: transform 0.35s ease;
+    overflow: hidden;
+    touch-action: auto;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__drawer.is-open {
+    transform: translateX(0);
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-block-end: 14px;
+    margin-block-end: 8px;
+    border-bottom: 1px solid rgb(var(--text-primary) / 0.1);
+    flex: 0 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__drawer-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__drawer-body {
+    flex: 1 1 0%;
+    height: 0;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__drawer .blog-sidebar__nav {
+    max-height: none;
+    overflow: visible;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__title {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__nav,
+  #shopify-section-{{ section.id }} .blog-sidebar__drawer-body {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--text-primary) / 0.28) transparent;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__nav::-webkit-scrollbar,
+  #shopify-section-{{ section.id }} .blog-sidebar__drawer-body::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__nav::-webkit-scrollbar-track,
+  #shopify-section-{{ section.id }} .blog-sidebar__drawer-body::-webkit-scrollbar-track {
+    background: transparent;
+    margin-block: 4px;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__nav::-webkit-scrollbar-thumb,
+  #shopify-section-{{ section.id }} .blog-sidebar__drawer-body::-webkit-scrollbar-thumb {
+    background: rgb(var(--text-primary) / 0.22);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__nav::-webkit-scrollbar-thumb:hover,
+  #shopify-section-{{ section.id }} .blog-sidebar__drawer-body::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--text-primary) / 0.38);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__nav::-webkit-scrollbar-button,
+  #shopify-section-{{ section.id }} .blog-sidebar__drawer-body::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__nav {
+    margin: 0;
+    padding: 0;
+    padding-inline-end: 4px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: min(70vh, 640px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__link,
+  #shopify-section-{{ section.id }} .blog-sidebar__nav a {
+    display: block;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__link.is-active,
+  #shopify-section-{{ section.id }} .blog-sidebar__nav li[aria-selected='true'] a {
+    background: rgb(var(--text-primary) / 1);
+    color: rgb(var(--background-primary));
+  }
+
+  #shopify-section-{{ section.id }} .blog-sidebar__nav li[aria-selected='false'] a {
+    opacity: 0.72;
+  }
+
+  @media screen and (pointer: fine) {
+    #shopify-section-{{ section.id }} .blog-sidebar__nav li[aria-selected='false'] a:hover {
+      opacity: 1;
+      background: rgb(var(--text-primary) / 0.06);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .blog-posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-list-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding-block: 24px;
+    border-bottom: 1px solid rgb(var(--text-primary) / 0.1);
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .blog-post-list-item {
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+      padding-block: 28px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-list-item__media {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    aspect-ratio: 16 / 10;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-list-item__media > .badge {
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    left: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-list-item__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media screen and (pointer: fine) {
+    #shopify-section-{{ section.id }} .blog-post-list-item__image {
+      transform-origin: center;
+      transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    #shopify-section-{{ section.id }} .blog-post-list-item:hover .blog-post-list-item__image {
+      transform: scale(1.06);
+    }
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-list-item__title {
+    margin: 0 0 8px;
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.25;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-list-item__title a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-list-item__excerpt {
+    margin: 0 0 12px;
+    font-size: 15px;
+    line-height: 1.55;
+    opacity: 0.78;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-list-item__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    font-size: 13px;
+    opacity: 0.7;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-list-item__meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  #shopify-section-{{ section.id }} .blog-post-list-item__meta-item a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  #shopify-section-{{ section.id }} .blog-posts-newsletter {
+    margin-block: 8px 24px;
+    padding: var(--spacing-8);
+    border-radius: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .blog-page__pagination {
+    margin-block-start: var(--spacing-8);
+  }
 </style>
 
 <div class="blog" {% if section.settings.allow_transparent_header %}allow-transparent-header{% endif %}>
   {%- if blog.articles_count == 0 -%}
-    <div class="empty-state">
-      <div class="empty-state__icon-wrapper">
-        {%- render 'icon' with 'picto-comment', width: 32, height: 32, stroke_width: 1 -%}
-      </div>
+    <div class="blog-page__inner">
+      <div class="empty-state">
+        <div class="empty-state__icon-wrapper">
+          {%- render 'icon' with 'picto-comment', width: 32, height: 32, stroke_width: 1 -%}
+        </div>
 
-      <div class="prose">
-        <h1 class="h4">{{ 'blog.general.empty_blog' | t }}</h1>
+        <div class="prose">
+          <h1 class="h4">{{ 'blog.general.empty_blog' | t }}</h1>
 
-        {%- assign button_content = 'blog.general.back_to_home' | t -%}
-        {%- render 'button', size: 'xl', content: button_content, href: routes.root_url -%}
+          {%- assign button_content = 'blog.general.back_to_home' | t -%}
+          {%- render 'button', size: 'xl', content: button_content, href: routes.root_url -%}
+        </div>
       </div>
     </div>
   {%- else -%}
     <header {% render 'surface', class: 'blog-banner', text_color: section.settings.banner_text_color, background: section.settings.banner_background, background_fallback: 'bg-secondary' %}>
-      <div class="container">
+      <div class="blog-page__inner">
         <div class="blog-banner-content v-stack gap-10 text-center justify-items-center">
           <div class="v-stack gap-5 sm:gap-8">
             <h1 class="h0">{{- blog.title -}}</h1>
@@ -69,103 +443,239 @@
             {%- endform -%}
           {%- endif -%}
         </div>
-
-        {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
-          <div class="scroll-area bleed sm:unbleed justify-items-center">
-            <div class="nav-categories">
-              <ul class="h-stack bold text-base" role="tablist">
-                <li role="tab" aria-selected="{% if current_tags == blank %}true{% else %}false{% endif %}">
-                  <a href="{{ blog.url }}" class="{% if current_tags == blank %}selected{% endif %}">{{ 'blog.general.all_posts' | t }}</a>
-                </li>
-
-                {%- for tag in blog.all_tags -%}
-                  <li role="tab" aria-selected="{% if current_tags contains tag %}true{% else %}false{% endif %}">
-
-                    {%- if current_tags contains tag -%}
-                      {{- tag | link_to_remove_tag: tag -}}
-                    {%- else -%}
-                      {{- tag | link_to_tag: tag -}}
-                    {%- endif -%}
-                  </li>
-                {%- endfor -%}
-              </ul>
-            </div>
-          </div>
-        {%- endif -%}
       </div>
     </header>
 
-    <div class="blog-posts__container container">
-      {%- paginate blog.articles by section.settings.articles_per_page -%}
-        <div class="blog-posts">
-          {%- for article in blog.articles -%}
-            {%- assign article_index = forloop.index -%}
+    <div class="blog-page__inner">
+      <div class="blog-page__layout{% if section.settings.show_tags and blog.all_tags.size > 0 %} blog-page__layout--with-sidebar{% endif %}">
+        {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
+          {%- liquid
+            if current_tags != blank
+              assign blog_sidebar_active_label = current_tags | first
+            else
+              assign blog_sidebar_active_label = 'blog.general.all_posts' | t
+            endif
+          -%}
 
-            {%- if section.blocks.size > 0 -%}
-              {%- for block in section.blocks -%}
-                {%- assign block_position = block.settings.position | at_most: section.settings.articles_per_page -%}
+          {%- capture blog_category_nav -%}
+            <ul class="blog-sidebar__nav" role="navigation">
+              <li role="presentation">
+                <a href="{{ blog.url }}" class="blog-sidebar__link{% if current_tags == blank %} is-active{% endif %}">
+                  {{- 'blog.general.all_posts' | t -}}
+                </a>
+              </li>
 
-                {%- if block_position == article_index -%}
-                  <div {% render 'surface', class: 'blog-posts-newsletter v-stack gap-6 sm:gap-8 text-center rounded', text_color: block.settings.text_color, background: block.settings.background, background_fallback: 'bg-secondary' %}>
-                    <div class="blog-posts-newsletter__content v-stack gap-4 justify-items-center sm:gap-6">
-                      {%- render 'icon' with 'picto-envelope', width: 24, height: 24 -%}
-
-                      {%- if block.settings.title != blank -%}
-                        <p class="h4">{{- block.settings.title -}}</p>
-                      {%- endif -%}
-
-                      {%- if block.settings.content != blank -%}
-                        <div class="prose">
-                          {{- block.settings.content -}}
-                        </div>
-                      {%- endif -%}
-                    </div>
-
-                    {%- form 'customer', id: 'blog-posts-newsletter-form', class: 'form form--tight' -%}
-                      <div class="fieldset">
-                        {%- if form.posted_successfully? -%}
-                          {%- capture success_message -%}{{ 'general.newsletter.subscribed_successfully' | t }}{%- endcapture -%}
-                          {%- render 'banner', content: success_message, status: 'success' -%}
-                        {%- else -%}
-                          {%- if form.errors -%}
-                            {%- assign content = form.errors | default_errors -%}
-                            {%- render 'banner', status: 'error', content: content -%}
-                          {%- endif -%}
-                        {%- endif -%}
-
-                        <input type="hidden" name="contact[tags]" value="newsletter">
-
-                        {%- assign label = 'blog.comments.email' | t -%}
-                        {%- render 'input', type: 'email', name: 'contact[email]', label: label, value: customer.email, required: true, autocomplete: 'email' -%}
-                      </div>
-
-                      {%- render 'button', content: block.settings.button_text, icon: 'picto-envelope', type: 'submit', size: 'xl', secondary: true -%}
-                    {%- endform -%}
-
-                    {%- if block.settings.subtext != blank -%}
-                      <p class="text-sm text-subdued">{{- block.settings.subtext -}}</p>
-                    {%- endif -%}
-                  </div>
-                {%- endif -%}
+              {%- for tag in blog.all_tags -%}
+                <li role="presentation" aria-selected="{% if current_tags contains tag %}true{% else %}false{% endif %}">
+                  {%- if current_tags contains tag -%}
+                    {{- tag | link_to_remove_tag: tag -}}
+                  {%- else -%}
+                    {{- tag | link_to_tag: tag -}}
+                  {%- endif -%}
+                </li>
               {%- endfor -%}
-            {%- endif -%}
+            </ul>
+          {%- endcapture -%}
 
-            {%- if section.settings.feature_first_article and forloop.first -%}
-              {%- assign background_color = article.metafields.banner.background_color.value | default: section.settings.feature_article_background -%}
-              {%- assign text_color = article.metafields.banner.text_color.value | default: section.settings.feature_article_text_color -%}
-              {%- capture sizes -%}(max-width: 999px) 100vw, calc(min(100vw, {{ settings.page_width }}px) * 0.65){%- endcapture -%}
-              {%- render 'blog-post-card', article: article, featured: section.settings.feature_first_article, show_excerpt: section.settings.show_excerpt, show_date: section.settings.show_date, show_author: section.settings.show_author, show_comments_count: section.settings.show_comments_count, show_category: section.settings.show_category, background: background_color, text_color: text_color, sizes: sizes, position: forloop.index -%}
-            {%- else -%}
-              {%- capture sizes -%}(max-width: 699px) 100vw, (max-width: 1149px) calc(100vw / 2 - 40px), (max-width: 1399px) calc(min(100vw, {{ settings.page_width }}px) / 3 - 40px) , calc(min(100vw, {{ settings.page_width }}px) / 3 - 80px) {%- endcapture -%}
-              {%- render 'blog-post-card', article: article, show_excerpt: section.settings.show_excerpt, show_date: section.settings.show_date, show_author: section.settings.show_author, show_comments_count: section.settings.show_comments_count, show_category: section.settings.show_category, sizes: sizes, position: forloop.index -%}
-            {%- endif -%}
-          {%- endfor -%}
+          <button
+            type="button"
+            class="blog-sidebar__toggle"
+            aria-controls="blog-sidebar-drawer-{{ section.id }}"
+            aria-expanded="false"
+          >
+            {%- render 'icon' with 'hamburger', width: 18, height: 18 -%}
+            <span class="blog-sidebar__toggle-label">Categories</span>
+            <span class="blog-sidebar__toggle-value">{{ blog_sidebar_active_label }}</span>
+          </button>
+
+          <div class="blog-sidebar__overlay" data-blog-sidebar-close hidden></div>
+
+          <aside
+            id="blog-sidebar-drawer-{{ section.id }}"
+            class="blog-sidebar__drawer"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Categories"
+            hidden
+          >
+            <div class="blog-sidebar__drawer-header">
+              <p class="blog-sidebar__drawer-title">Categories</p>
+              <button type="button" class="tap-area" data-blog-sidebar-close aria-label="Close categories">
+                {%- render 'icon' with 'close' -%}
+              </button>
+            </div>
+            <div class="blog-sidebar__drawer-body">
+              {{- blog_category_nav -}}
+            </div>
+          </aside>
+
+          <aside class="blog-sidebar blog-sidebar--desktop" aria-label="Categories">
+            <p class="blog-sidebar__title">Categories</p>
+            {{- blog_category_nav -}}
+          </aside>
+        {%- endif -%}
+
+        <div class="blog-page__main">
+          {%- paginate blog.articles by section.settings.articles_per_page -%}
+            <div class="blog-posts-list">
+              {%- for article in blog.articles -%}
+                {%- assign article_index = forloop.index -%}
+
+                {%- if section.blocks.size > 0 -%}
+                  {%- for block in section.blocks -%}
+                    {%- assign block_position = block.settings.position | at_most: section.settings.articles_per_page -%}
+
+                    {%- if block_position == article_index -%}
+                      <div {% render 'surface', class: 'blog-posts-newsletter v-stack gap-6 sm:gap-8 text-center rounded', text_color: block.settings.text_color, background: block.settings.background, background_fallback: 'bg-secondary' %}>
+                        <div class="blog-posts-newsletter__content v-stack gap-4 justify-items-center sm:gap-6">
+                          {%- render 'icon' with 'picto-envelope', width: 24, height: 24 -%}
+
+                          {%- if block.settings.title != blank -%}
+                            <p class="h4">{{- block.settings.title -}}</p>
+                          {%- endif -%}
+
+                          {%- if block.settings.content != blank -%}
+                            <div class="prose">
+                              {{- block.settings.content -}}
+                            </div>
+                          {%- endif -%}
+                        </div>
+
+                        {%- form 'customer', id: 'blog-posts-newsletter-form', class: 'form form--tight' -%}
+                          <div class="fieldset">
+                            {%- if form.posted_successfully? -%}
+                              {%- capture success_message -%}{{ 'general.newsletter.subscribed_successfully' | t }}{%- endcapture -%}
+                              {%- render 'banner', content: success_message, status: 'success' -%}
+                            {%- else -%}
+                              {%- if form.errors -%}
+                                {%- assign content = form.errors | default_errors -%}
+                                {%- render 'banner', status: 'error', content: content -%}
+                              {%- endif -%}
+                            {%- endif -%}
+
+                            <input type="hidden" name="contact[tags]" value="newsletter">
+
+                            {%- assign label = 'blog.comments.email' | t -%}
+                            {%- render 'input', type: 'email', name: 'contact[email]', label: label, value: customer.email, required: true, autocomplete: 'email' -%}
+                          </div>
+
+                          {%- render 'button', content: block.settings.button_text, icon: 'picto-envelope', type: 'submit', size: 'xl', secondary: true -%}
+                        {%- endform -%}
+
+                        {%- if block.settings.subtext != blank -%}
+                          <p class="text-sm text-subdued">{{- block.settings.subtext -}}</p>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endif -%}
+
+                {%- capture list_sizes -%}(max-width: 699px) 100vw, 220px{%- endcapture -%}
+                {%- render 'blog-post-list-item',
+                  article: article,
+                  show_excerpt: section.settings.show_excerpt,
+                  show_date: section.settings.show_date,
+                  show_author: section.settings.show_author,
+                  show_comments_count: section.settings.show_comments_count,
+                  show_category: section.settings.show_category,
+                  sizes: list_sizes,
+                  position: forloop.index
+                -%}
+              {%- endfor -%}
+            </div>
+
+            <div class="blog-page__pagination">
+              {%- render 'pagination', paginate: paginate -%}
+            </div>
+          {%- endpaginate -%}
         </div>
-        {%- render 'pagination', paginate: paginate -%}
-      {%- endpaginate -%}
+      </div>
     </div>
   {%- endif -%}
 </div>
+
+{%- if section.settings.show_tags and blog.all_tags.size > 0 and blog.articles_count > 0 -%}
+  <script>
+    (() => {
+      const root = document.querySelector('#shopify-section-{{ section.id }}');
+      if (!root || root.hasAttribute('data-blog-sidebar-drawer')) return;
+
+      const toggle = root.querySelector('.blog-sidebar__toggle');
+      const drawer = root.querySelector('#blog-sidebar-drawer-{{ section.id }}');
+      const overlay = root.querySelector('.blog-sidebar__overlay');
+      if (!toggle || !drawer || !overlay) return;
+
+      root.setAttribute('data-blog-sidebar-drawer', 'true');
+
+      let scrollLockY = 0;
+
+      const lockPageScroll = () => {
+        scrollLockY = window.scrollY;
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${scrollLockY}px`;
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        document.body.style.width = '100%';
+      };
+
+      const unlockPageScroll = () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollLockY);
+      };
+
+      const open = () => {
+        drawer.hidden = false;
+        overlay.hidden = false;
+        lockPageScroll();
+        requestAnimationFrame(() => {
+          drawer.classList.add('is-open');
+          overlay.classList.add('is-open');
+        });
+        toggle.setAttribute('aria-expanded', 'true');
+      };
+
+      let closeTimer = null;
+
+      const close = () => {
+        drawer.classList.remove('is-open');
+        overlay.classList.remove('is-open');
+        unlockPageScroll();
+        toggle.setAttribute('aria-expanded', 'false');
+
+        const finish = () => {
+          drawer.hidden = true;
+          overlay.hidden = true;
+          if (closeTimer) window.clearTimeout(closeTimer);
+          closeTimer = null;
+        };
+
+        drawer.addEventListener('transitionend', finish, { once: true });
+        closeTimer = window.setTimeout(finish, 400);
+      };
+
+      toggle.addEventListener('click', () => {
+        if (drawer.hidden) open();
+        else close();
+      });
+
+      root.querySelectorAll('[data-blog-sidebar-close]').forEach((el) => {
+        el.addEventListener('click', close);
+      });
+
+      drawer.addEventListener('click', (event) => {
+        if (event.target.closest('.blog-sidebar__nav a')) close();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !drawer.hidden) close();
+      });
+    })();
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -208,7 +718,7 @@
         {
           "type": "range",
           "id": "position",
-          "label": "Position in grid",
+          "label": "Position in list",
           "min": 1,
           "max": 24,
           "step": 1,
@@ -258,7 +768,7 @@
     {
       "type": "checkbox",
       "id": "show_tags",
-      "label": "Show tags",
+      "label": "Show category sidebar",
       "default": true,
       "info": "Categorize your blog posts by [adding tags](https://help.shopify.com/en/manual/online-store/blogs/writing-blogs#add-tags-to-a-blog-post)."
     },
@@ -296,24 +806,8 @@
       "default": 6
     },
     {
-      "type": "checkbox",
-      "id": "feature_first_article",
-      "label": "Feature first blog post",
-      "default": true
-    },
-    {
-      "type": "color",
-      "id": "feature_article_background",
-      "label": "Featured article background"
-    },
-    {
-      "type": "color",
-      "id": "feature_article_text_color",
-      "label": "Featured article text"
-    },
-    {
       "type": "header",
-      "content": "Blog post card"
+      "content": "Blog post list"
     },
     {
       "type": "checkbox",

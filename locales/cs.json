@@ -398,7 +398,8 @@
       "clear": "Vymazat",
       "view_all": "Zobrazit vše",
       "view_all_results": "Zobrazit všechny výsledky",
-      "no_results": "Nebyly nalezeny žádné výsledky."
+      "no_results": "Nebyly nalezeny žádné výsledky.",
+      "trending": "Trendy vyhledávání"
     },
     "results_count": {
       "zero": "0 výsledků pro „{{ terms }}“",

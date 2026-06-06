@@ -387,7 +387,8 @@
       "clear": "Tyhjennä",
       "view_all": "Näytä kaikki",
       "view_all_results": "Näytä kaikki tulokset",
-      "no_results": "Tuloksia ei löytynyt."
+      "no_results": "Tuloksia ei löytynyt.",
+      "trending": "Haku trendaavista aiheista"
     },
     "results_count": {
       "zero": "0 tulosta ehdolla \"{{ terms }}\"",

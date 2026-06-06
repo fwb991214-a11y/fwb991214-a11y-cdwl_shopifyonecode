@@ -399,7 +399,8 @@
       "clear": "Wyczyść",
       "view_all": "Zobacz wszystkie",
       "view_all_results": "Zobacz wszystkie",
-      "no_results": "Nie znaleziono wyników."
+      "no_results": "Nie znaleziono wyników.",
+      "trending": "Wyszukaj trendy"
     },
     "results_count": {
       "zero": "0 wyników dla \"{{ terms }}\"",
