@@ -1,6 +1,10 @@
 {%- assign root_id = 'pm-app-blocks-' | append: section.id -%}
 
 <style>
+  #shopify-section-{{ section.id }} {
+    scroll-margin-top: calc(var(--sticky-area-height, 0px) + 16px);
+  }
+
   #shopify-section-{{ section.id }} .pm-app-blocks {
     border-radius: 32px;
     background: #fff;
@@ -79,7 +83,7 @@
 
 {%- assign default_collapsed = section.settings.default_collapsed | default: false -%}
 
-<div {% render 'section-properties' %}>
+<div {% render 'section-properties' %} id="product-reviews">
   <div class="pm-app-blocks{% if default_collapsed %} is-collapsed{% endif %}" id="{{ root_id }}">
     <div class="pm-app-blocks__header">
       <div class="pm-app-blocks__title">{{ section.settings.title }}</div>

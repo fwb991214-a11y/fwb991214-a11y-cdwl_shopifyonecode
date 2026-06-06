@@ -1,26 +1,15 @@
 {%- comment -%}
-----------------------------------------------------------------------------------------------------------------------
-PRODUCT RATING
-----------------------------------------------------------------------------------------------------------------------
-
-This component generates a review badge from the product metafields information.
-
-********************************************
-Supported variables
-********************************************
-
-* product: the product from which reviews are extracted
-* show_empty: if set to true, the theme shows a 0.0 if there are no rating yet
-* show_placeholder: if set to true, show random value (useful for the product card placeholder)
-* display_mode: either "rating" (e.g.: 3.5) or "count" (e.g.: 4 reviews). Default to "rating" if none is passed
-* class: extra class to add
+  Product rating badge. Prefer Loox metafields when present so stars/count match the Loox widget below.
 {%- endcomment -%}
 
 {%- assign rating_max = 5 -%}
 
-{%- if product.metafields.reviews.rating.value != blank -%}
-  {%- assign rating_value = product.metafields.reviews.rating.value.rating | round: 1 -%}
-  {%- assign rating_count = product.metafields.reviews.rating_count.value -%}
+{%- if product.metafields.loox.num_reviews != blank and product.metafields.loox.num_reviews != '0' -%}
+  {%- assign rating_value = product.metafields.loox.avg_rating | plus: 0.0 -%}
+  {%- assign rating_count = product.metafields.loox.num_reviews | plus: 0 -%}
+{%- elsif product.metafields.reviews.rating.value != blank -%}
+  {%- assign rating_value = product.metafields.reviews.rating.value.rating | plus: 0.0 -%}
+  {%- assign rating_count = product.metafields.reviews.rating_count.value | plus: 0 -%}
   {%- assign rating_max = product.metafields.reviews.rating.value.scale_max -%}
 {%- elsif show_empty -%}
   {%- assign rating_value = 0.0 -%}
@@ -37,19 +26,43 @@ Supported variables
     {%- assign is_main_product = true -%}
   {%- endif -%}
 
-  <a href="{% unless is_main_product %}{{ product.url }}{% endunless %}#shopify-product-reviews" class="rating {{ class }}" title="{{ 'product.rating_count' | t: count: rating_count }}" {{ block.shopify_attributes }}>
-    <div class="rating__stars" role="img" aria-label="{{ 'general.rating.info' | t: rating_value: rating_value, rating_max: rating_max }}">
-      {%- liquid
-        assign normalized_rating = rating_value | default: 0
-        assign filled_stars = normalized_rating | round
-        if filled_stars < 0
-          assign filled_stars = 0
-        endif
-        if filled_stars > 5
-          assign filled_stars = 5
-        endif
-      -%}
+  {%- if is_main_product -%}
+    {%- assign reviews_href = '#product-reviews' -%}
+  {%- else -%}
+    {%- assign reviews_href = product.url | append: '#product-reviews' -%}
+  {%- endif -%}
 
+  <style>
+    .rating__star--half {
+      position: relative;
+      display: inline-flex;
+      width: var(--rating-star-size, 15px);
+      height: var(--rating-star-size, 15px);
+      flex: 0 0 auto;
+    }
+
+    .rating__star--half .rating__star-half-empty {
+      color: rgb(var(--text-color) / 0.25);
+    }
+
+    .rating__star--half .rating__star-half-fill {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 50%;
+      overflow: hidden;
+      color: rgb(var(--star-color));
+      display: flex;
+    }
+  </style>
+
+  <a
+    href="{{ reviews_href }}"
+    class="rating rating--scroll-reviews {{ class }}"
+    title="{{ 'product.rating_count' | t: count: rating_count }}"
+    data-scroll-reviews
+    {{ block.shopify_attributes }}
+  >
+    <div class="rating__stars" role="img" aria-label="{{ 'general.rating.info' | t: rating_value: rating_value, rating_max: rating_max }}">
       {%- liquid
         if request.page_type == 'product'
           assign rating_star_size = 19
@@ -57,13 +70,25 @@ Supported variables
           assign rating_star_size = 12
         endif
       -%}
-      {%- for i in (1..5) -%}
-        {%- assign star_class = 'rating__star' -%}
-        {%- if i > filled_stars -%}
-          {%- assign star_class = star_class | append: ' rating__star--empty' -%}
-        {%- endif -%}
 
-        {%- render 'icon' with 'rating-star', width: rating_star_size, height: rating_star_size, class: star_class -%}
+      {%- for i in (1..5) -%}
+        {%- assign star_floor = i | minus: 1 -%}
+        {%- assign star_half = i | minus: 0.5 -%}
+
+        {%- if rating_value >= i -%}
+          {%- assign star_class = 'rating__star' -%}
+          {%- render 'icon' with 'rating-star', width: rating_star_size, height: rating_star_size, class: star_class -%}
+        {%- elsif rating_value >= star_half -%}
+          <span class="rating__star rating__star--half" style="--rating-star-size: {{ rating_star_size }}px;">
+            {%- render 'icon' with 'rating-star', width: rating_star_size, height: rating_star_size, class: 'rating__star-half-empty' -%}
+            <span class="rating__star-half-fill" aria-hidden="true">
+              {%- render 'icon' with 'rating-star', width: rating_star_size, height: rating_star_size -%}
+            </span>
+          </span>
+        {%- else -%}
+          {%- assign star_class = 'rating__star rating__star--empty' -%}
+          {%- render 'icon' with 'rating-star', width: rating_star_size, height: rating_star_size, class: star_class -%}
+        {%- endif -%}
       {%- endfor -%}
     </div>
 
@@ -72,7 +97,48 @@ Supported variables
     {%- elsif display_mode == 'stars_count' -%}
       <span class="text-sm rating__count">({{ rating_count }})</span>
     {%- else -%}
-      <span class="text-sm rating__value">{{ rating_value }}</span>
+      <span class="text-sm rating__value">{{ rating_value | round: 1 }}</span>
     {%- endif -%}
   </a>
+
+  {%- if is_main_product -%}
+    <script>
+      (() => {
+        const links = document.querySelectorAll('.shopify-section--main-product a.rating[data-scroll-reviews]');
+        if (links.length === 0 || window.__productRatingScrollBound) return;
+        window.__productRatingScrollBound = true;
+
+        const resolveReviewsTarget = () => {
+          const section = document.getElementById('product-reviews');
+          if (section) return section;
+
+          return Array.from(document.querySelectorAll('.shopify-section--product-app-blocks .pm-app-blocks__title'))
+            .find((t) => (t.textContent || '').trim().toLowerCase() === 'reviews')
+            ?.closest('.shopify-section--product-app-blocks');
+        };
+
+        const expandReviews = (section) => {
+          const panel = section?.querySelector('.pm-app-blocks');
+          if (!panel || !panel.classList.contains('is-collapsed')) return;
+          panel.classList.remove('is-collapsed');
+          const toggle = panel.querySelector('.pm-app-blocks__toggle');
+          const wrap = panel.querySelector('.pm-app-blocks__content-wrap');
+          const content = panel.querySelector('.pm-app-blocks__content');
+          if (toggle) toggle.setAttribute('aria-expanded', 'true');
+          if (wrap && content) wrap.style.maxHeight = `${content.scrollHeight}px`;
+        };
+
+        links.forEach((link) => {
+          link.addEventListener('click', (event) => {
+            const target = resolveReviewsTarget();
+            if (!target) return;
+
+            event.preventDefault();
+            expandReviews(target);
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        });
+      })();
+    </script>
+  {%- endif -%}
 {%- endunless -%}

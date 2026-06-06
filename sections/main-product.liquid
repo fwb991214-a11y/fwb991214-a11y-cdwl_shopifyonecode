@@ -947,7 +947,11 @@ padding:10px;
                 <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-faq-anchor-{{ section.id }}" aria-current="{% if first_tab == 'faq' %}true{% else %}false{% endif %}">FAQ</button>
               {%- endif -%}
               {%- if has_reviews -%}
-                {%- assign reviews_count = product.metafields.reviews.rating_count.value | default: 0 | plus: 0 -%}
+                {%- if product.metafields.loox.num_reviews != blank and product.metafields.loox.num_reviews != '0' -%}
+                  {%- assign reviews_count = product.metafields.loox.num_reviews | plus: 0 -%}
+                {%- else -%}
+                  {%- assign reviews_count = product.metafields.reviews.rating_count.value | default: 0 | plus: 0 -%}
+                {%- endif -%}
                 <button class="pm-anchor-tabs__btn" type="button" data-anchor="#pm-reviews-anchor-{{ section.id }}" aria-current="{% if first_tab == 'reviews' %}true{% else %}false{% endif %}">
                   Reviews{%- if reviews_count > 0 -%} ({{ reviews_count }}){%- endif -%}
                 </button>
@@ -973,9 +977,10 @@ padding:10px;
             const resolveTarget = (sel) => {
               let el = sel ? document.querySelector(sel) : null;
               if (!el && sel === REVIEWS_SEL) {
-                el = Array.from(document.querySelectorAll('.shopify-section--product-app-blocks .pm-app-blocks__title'))
-                  .find((t) => (t.textContent || '').trim().toLowerCase() === 'reviews')
-                  ?.closest('.shopify-section--product-app-blocks');
+                el = document.getElementById('product-reviews')
+                  || Array.from(document.querySelectorAll('.shopify-section--product-app-blocks .pm-app-blocks__title'))
+                    .find((t) => (t.textContent || '').trim().toLowerCase() === 'reviews')
+                    ?.closest('.shopify-section--product-app-blocks');
               }
               return el;
             };
