@@ -1,5 +1,5 @@
 {%- comment -%}
-  Product rating badge. Prefer Loox metafields when present so stars/count match the Loox widget below.
+  Product rating badge. Prefer Loox metafields; star tiers match Loox (0.7 / 0.3 thresholds per star).
 {%- endcomment -%}
 
 {%- assign rating_max = 5 -%}
@@ -7,7 +7,7 @@
 {%- if product.metafields.loox.num_reviews != blank and product.metafields.loox.num_reviews != '0' -%}
   {%- assign rating_value = product.metafields.loox.avg_rating | plus: 0.0 -%}
   {%- assign rating_count = product.metafields.loox.num_reviews | plus: 0 -%}
-{%- elsif product.metafields.reviews.rating.value != blank -%}
+{%- elsif product.metafields.reviews.rating.value != blank and product.metafields.reviews.rating_count.value != blank and product.metafields.reviews.rating_count.value != 0 -%}
   {%- assign rating_value = product.metafields.reviews.rating.value.rating | plus: 0.0 -%}
   {%- assign rating_count = product.metafields.reviews.rating_count.value | plus: 0 -%}
   {%- assign rating_max = product.metafields.reviews.rating.value.scale_max -%}
@@ -22,6 +22,25 @@
 {%- endif -%}
 
 {%- unless hide_rating -%}
+  {%- comment -%}
+    Loox star tiers per whole-star band: decimal >= 0.7 → next full star,
+    >= 0.3 → half star, else → floor (e.g. 4.7→5, 4.5→4.5, 4.2→4; same for 3.x, 2.x, 1.x).
+  {%- endcomment -%}
+  {%- assign rating_floor = rating_value | floor -%}
+  {%- assign rating_decimal = rating_value | minus: rating_floor -%}
+
+  {%- if rating_decimal >= 0.7 -%}
+    {%- assign display_rating = rating_floor | plus: 1 -%}
+  {%- elsif rating_decimal >= 0.3 -%}
+    {%- assign display_rating = rating_floor | plus: 0.5 -%}
+  {%- else -%}
+    {%- assign display_rating = rating_floor -%}
+  {%- endif -%}
+
+  {%- if display_rating > rating_max -%}
+    {%- assign display_rating = rating_max -%}
+  {%- endif -%}
+
   {%- if request.page_type == 'product' and block != blank -%}
     {%- assign is_main_product = true -%}
   {%- endif -%}
@@ -32,37 +51,19 @@
     {%- assign reviews_href = product.url | append: '#product-reviews' -%}
   {%- endif -%}
 
-  <style>
-    .rating__star--half {
-      position: relative;
-      display: inline-flex;
-      width: var(--rating-star-size, 15px);
-      height: var(--rating-star-size, 15px);
-      flex: 0 0 auto;
-    }
-
-    .rating__star--half .rating__star-half-empty {
-      color: rgb(var(--text-color) / 0.25);
-    }
-
-    .rating__star--half .rating__star-half-fill {
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 50%;
-      overflow: hidden;
-      color: rgb(var(--star-color));
-      display: flex;
-    }
-  </style>
+  {%- assign is_card_rating = false -%}
+  {%- if class contains 'product-card__rating' -%}
+    {%- assign is_card_rating = true -%}
+  {%- endif -%}
 
   <a
     href="{{ reviews_href }}"
-    class="rating rating--scroll-reviews {{ class }}"
+    class="rating{% if is_card_rating %} rating--card{% endif %}{% unless is_main_product %} rating--scroll-reviews{% endunless %} {{ class }}"
     title="{{ 'product.rating_count' | t: count: rating_count }}"
-    data-scroll-reviews
+    {% unless is_main_product %}data-scroll-reviews{% endunless %}
     {{ block.shopify_attributes }}
   >
-    <div class="rating__stars" role="img" aria-label="{{ 'general.rating.info' | t: rating_value: rating_value, rating_max: rating_max }}">
+    <div class="rating__stars" role="img" aria-label="{{ 'general.rating.info' | t: rating_value: display_rating, rating_max: rating_max }}">
       {%- liquid
         if request.page_type == 'product'
           assign rating_star_size = 19
@@ -72,17 +73,18 @@
       -%}
 
       {%- for i in (1..5) -%}
-        {%- assign star_floor = i | minus: 1 -%}
         {%- assign star_half = i | minus: 0.5 -%}
 
-        {%- if rating_value >= i -%}
+        {%- if display_rating >= i -%}
           {%- assign star_class = 'rating__star' -%}
           {%- render 'icon' with 'rating-star', width: rating_star_size, height: rating_star_size, class: star_class -%}
-        {%- elsif rating_value >= star_half -%}
-          <span class="rating__star rating__star--half" style="--rating-star-size: {{ rating_star_size }}px;">
-            {%- render 'icon' with 'rating-star', width: rating_star_size, height: rating_star_size, class: 'rating__star-half-empty' -%}
-            <span class="rating__star-half-fill" aria-hidden="true">
+        {%- elsif display_rating >= star_half -%}
+          <span class="rating__star-wrap">
+            <span class="rating__star-empty" aria-hidden="true">
               {%- render 'icon' with 'rating-star', width: rating_star_size, height: rating_star_size -%}
+            </span>
+            <span class="rating__star-filled" aria-hidden="true">
+              {%- render 'icon' with 'rating-star', width: rating_star_size, height: rating_star_size, class: 'rating__star' -%}
             </span>
           </span>
         {%- else -%}
