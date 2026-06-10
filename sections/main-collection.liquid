@@ -15,6 +15,21 @@
       break
     endif
   endfor
+
+  unless has_custom_subcollections
+    for i in (1..10)
+      assign name_key = 'custom_collection_' | append: i | append: '_name'
+      assign item_key = 'custom_collection_' | append: i | append: '_item'
+
+      assign group_name = collection.metafields.custom[name_key].value
+      assign group_products = collection.metafields.custom[item_key].value
+
+      if group_name != blank and group_products != blank and group_products.size > 0
+        assign has_custom_subcollections = true
+        break
+      endif
+    endfor
+  endunless
 -%}
 
 <style>
@@ -165,6 +180,20 @@
 
                     <a class="collection-subcollections__nav-link" href="#sub-{{ i }}">{{ group_name | escape }}</a>
                   {%- endfor -%}
+
+                  {%- for i in (1..10) -%}
+                    {%- assign name_key = 'custom_collection_' | append: i | append: '_name' -%}
+                    {%- assign item_key = 'custom_collection_' | append: i | append: '_item' -%}
+
+                    {%- assign group_name = collection.metafields.custom[name_key].value -%}
+                    {%- assign group_products = collection.metafields.custom[item_key].value -%}
+
+                    {%- if group_name == blank or group_products == blank or group_products.size == 0 -%}
+                      {%- continue -%}
+                    {%- endif -%}
+
+                    <a class="collection-subcollections__nav-link" href="#custom-{{ i }}">{{ group_name | escape }}</a>
+                  {%- endfor -%}
                 </nav>
 
                 <div class="collection-subcollections__dots" aria-hidden="true">
@@ -180,6 +209,20 @@
                     {%- endif -%}
 
                     <span class="collection-subcollections__dot" data-subcollections-dot="#sub-{{ i }}"></span>
+                  {%- endfor -%}
+
+                  {%- for i in (1..10) -%}
+                    {%- assign name_key = 'custom_collection_' | append: i | append: '_name' -%}
+                    {%- assign item_key = 'custom_collection_' | append: i | append: '_item' -%}
+
+                    {%- assign group_name = collection.metafields.custom[name_key].value -%}
+                    {%- assign group_products = collection.metafields.custom[item_key].value -%}
+
+                    {%- if group_name == blank or group_products == blank or group_products.size == 0 -%}
+                      {%- continue -%}
+                    {%- endif -%}
+
+                    <span class="collection-subcollections__dot" data-subcollections-dot="#custom-{{ i }}"></span>
                   {%- endfor -%}
                 </div>
               </div>
@@ -229,6 +272,49 @@
                 </subcollection-load-more>
               </section>
             {%- endfor -%}
+
+            {%- for i in (1..10) -%}
+              {%- assign name_key = 'custom_collection_' | append: i | append: '_name' -%}
+              {%- assign item_key = 'custom_collection_' | append: i | append: '_item' -%}
+
+              {%- assign group_name = collection.metafields.custom[name_key].value -%}
+              {%- assign group_products = collection.metafields.custom[item_key].value -%}
+
+              {%- if group_name == blank or group_products == blank or group_products.size == 0 -%}
+                {%- continue -%}
+              {%- endif -%}
+
+              <section id="custom-{{ i }}" class="collection-subcollections__group">
+                <h2 class="collection-subcollections__title">{{ group_name | escape }}</h2>
+
+                <subcollection-load-more class="subcollection-load-more v-stack gap-6" data-step="6">
+                  <reveal-items selector=".product-list > *">
+                    <product-list class="product-list" role="region" aria-live="polite" data-items>
+                      {%- assign position = 0 -%}
+                      {%- assign render_index = 0 -%}
+
+                      {%- for product in group_products -%}
+                        {%- assign position = position | plus: 1 -%}
+                        {%- assign render_index = render_index | plus: 1 -%}
+                        <div {% if render_index > 6 %}hidden data-hidden-item{% endif %}>
+                          {%- render 'product-card', product: product, stacked: true, position: position, show_badges: true -%}
+                        </div>
+                      {%- endfor -%}
+                    </product-list>
+                  </reveal-items>
+
+                  <div class="subcollection-load-more__footer">
+                    <button type="button" class="button button--lg subcollection-load-more__button" data-load-more>
+                      <span data-show-more>{{ 'Show more' }}</span>
+                      <span class="subcollection-load-more__loading" data-loading hidden>
+                        <span class="subcollection-load-more__spinner" aria-hidden="true"></span>
+                        <span>{{ 'Loading...' }}</span>
+                      </span>
+                    </button>
+                  </div>
+                </subcollection-load-more>
+              </section>
+            {%- endfor -%}
           </div>
 
           <aside class="collection-subcollections__sidebar" aria-label="Collection navigation">
@@ -248,6 +334,20 @@
 
                     <a class="collection-subcollections__nav-link" href="#sub-{{ i }}">{{ group_name | escape }}</a>
                   {%- endfor -%}
+
+                  {%- for i in (1..10) -%}
+                    {%- assign name_key = 'custom_collection_' | append: i | append: '_name' -%}
+                    {%- assign item_key = 'custom_collection_' | append: i | append: '_item' -%}
+
+                    {%- assign group_name = collection.metafields.custom[name_key].value -%}
+                    {%- assign group_products = collection.metafields.custom[item_key].value -%}
+
+                    {%- if group_name == blank or group_products == blank or group_products.size == 0 -%}
+                      {%- continue -%}
+                    {%- endif -%}
+
+                    <a class="collection-subcollections__nav-link" href="#custom-{{ i }}">{{ group_name | escape }}</a>
+                  {%- endfor -%}
                 </nav>
 
                 <div class="collection-subcollections__dots collection-subcollections__dots--desktop" aria-hidden="true">
@@ -263,6 +363,20 @@
                     {%- endif -%}
 
                     <span class="collection-subcollections__dot" data-subcollections-dot="#sub-{{ i }}"></span>
+                  {%- endfor -%}
+
+                  {%- for i in (1..10) -%}
+                    {%- assign name_key = 'custom_collection_' | append: i | append: '_name' -%}
+                    {%- assign item_key = 'custom_collection_' | append: i | append: '_item' -%}
+
+                    {%- assign group_name = collection.metafields.custom[name_key].value -%}
+                    {%- assign group_products = collection.metafields.custom[item_key].value -%}
+
+                    {%- if group_name == blank or group_products == blank or group_products.size == 0 -%}
+                      {%- continue -%}
+                    {%- endif -%}
+
+                    <span class="collection-subcollections__dot" data-subcollections-dot="#custom-{{ i }}"></span>
                   {%- endfor -%}
                 </div>
               </div>
