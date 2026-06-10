@@ -3183,6 +3183,14 @@ model-media model-viewer, model-media .shopify-model-viewer-ui {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  min-height: 0;
+}
+
+.product-card--bottom-cta .product-card__info > .v-stack {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .product-card__figure {
@@ -3664,7 +3672,8 @@ padding: 0.5rem;
   }
 
   .product-card--bottom-cta .product-card__bottom-row {
-    margin-top: 10px;
+    margin-top: auto;
+    padding-top: 10px;
     gap: 12px;
   }
 
@@ -6570,6 +6579,22 @@ product-rerender {
 .footer__wrapper {
   gap: var(--footer-part-gap);
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.footer__wrapper > * {
+  min-width: 0;
+}
+
+.footer__block,
+.footer__block .v-stack,
+.footer__block .prose {
+  min-width: 0;
+}
+
+.footer .prose :is(p, div, span) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .footer__block-list {
@@ -6614,6 +6639,12 @@ product-rerender {
     /* Increase footer horizontal gutter on mobile */
   .footer {
     --container-gutter: var(--spacing-8);
+  }
+
+  .footer__block--text,
+  .footer__block--newsletter,
+  .footer__block--app {
+    grid-column: auto;
   }
 
   .footer__block--newsletter {
