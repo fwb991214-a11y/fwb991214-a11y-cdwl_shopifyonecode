@@ -1,0 +1,190 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --bundle-banner-title-size: {{ section.settings.title_size }}px;
+    --bundle-banner-desc-size: {{ section.settings.description_size }}px;
+    --bundle-banner-title-size-mobile: {{ section.settings.title_size_mobile }}px;
+    --bundle-banner-desc-size-mobile: {{ section.settings.description_size_mobile }}px;
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-banner__title {
+    margin: 0;
+    font-size: var(--bundle-banner-title-size);
+    line-height: 1.15;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-banner__description {
+    margin: 0;
+    font-size: var(--bundle-banner-desc-size);
+    line-height: 1.6;
+    max-width: 920px;
+    margin-inline: auto;
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-banner__text {
+    text-align: center;
+    display: grid;
+    gap: var(--spacing-4);
+    padding: var(--spacing-8) var(--container-gutter);
+  }
+
+  @media screen and (max-width: 699px) {
+    #shopify-section-{{ section.id }} .page-bundle-banner__title {
+      font-size: var(--bundle-banner-title-size-mobile);
+    }
+
+    #shopify-section-{{ section.id }} .page-bundle-banner__description {
+      font-size: var(--bundle-banner-desc-size-mobile);
+    }
+
+    #shopify-section-{{ section.id }} .page-bundle-banner__text {
+      padding-block: var(--spacing-6);
+    }
+  }
+</style>
+
+{%- liquid
+  assign banner_title = section.settings.title | default: page.title
+  assign banner_description = section.settings.description
+  if banner_description == blank and section.settings.show_page_content
+    assign banner_description = page.content
+  endif
+-%}
+
+<div {% render 'section-properties' %}>
+  {%- if section.settings.image != blank or section.settings.mobile_image != blank -%}
+    <div class="content-over-media content-over-media--{{ section.settings.image_size }} {% if section.settings.full_width %}full-bleed{% else %}shadow-block rounded-lg{% endif %}">
+      {%- capture sizes -%}{% if section.settings.full_width %}100vw{% else %}(max-width: 740px) calc(100vw - 40px), (max-width: 999px) calc(100vw - 64px), min({{ settings.page_width }}px, 100vw - 96px){% endif %}{%- endcapture -%}
+
+      <picture>
+        {%- if section.settings.mobile_image != blank -%}
+          <source
+            media="(max-width: 699px)"
+            srcset="{{ section.settings.mobile_image | image_url: width: 400 }} 400w, {{ section.settings.mobile_image | image_url: width: 600 }} 600w, {{ section.settings.mobile_image | image_url: width: 800 }} 800w, {{ section.settings.mobile_image | image_url: width: 1000 }} 1000w, {{ section.settings.mobile_image | image_url: width: 1200 }} 1200w"
+            width="{{ section.settings.mobile_image.width }}"
+            height="{{ section.settings.mobile_image.height }}"
+          >
+        {%- endif -%}
+
+        {%- assign desktop_image = section.settings.image | default: section.settings.mobile_image -%}
+        {{- desktop_image | image_url: width: desktop_image.width | image_tag: loading: 'eager', fetchpriority: 'high', sizes: sizes, widths: '400,600,800,1000,1200,1400,1600,1800,2000,2400,2800,3200' -}}
+      </picture>
+    </div>
+  {%- endif -%}
+
+  {%- if banner_title != blank or banner_description != blank -%}
+    <div class="container page-bundle-banner__text">
+      {%- if banner_title != blank -%}
+        <h1 class="page-bundle-banner__title">{{ banner_title | escape }}</h1>
+      {%- endif -%}
+
+      {%- if banner_description != blank -%}
+        <div class="page-bundle-banner__description prose text-subdued">
+          {{ banner_description }}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Bundle page banner",
+  "class": "shopify-section--page-bundle-banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Banner image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile banner image"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width image",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "image_size",
+      "label": "Image height",
+      "options": [
+        { "value": "auto", "label": "Adapt to image" },
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "info": "Leave blank to use page title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_page_content",
+      "label": "Use page content as description when description is empty",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size (desktop)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_size_mobile",
+      "label": "Title size (mobile)",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size (desktop)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "label": "Description size (mobile)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle page banner"
+    }
+  ]
+}
+{% endschema %}

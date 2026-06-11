@@ -1,0 +1,80 @@
+{
+  "sections": {
+    "banner": {
+      "type": "page-bundle-banner",
+      "settings": {
+        "full_width": true,
+        "image_size": "medium",
+        "title_size": 48,
+        "title_size_mobile": 28,
+        "description_size": 16,
+        "description_size_mobile": 14,
+        "show_page_content": false
+      }
+    },
+    "main": {
+      "type": "page-bundle-nav",
+      "settings": {
+        "show_shop_by_model": true,
+        "shop_by_model_heading": "Shop By Model",
+        "model_columns_desktop": 4,
+        "model_columns_mobile": "2",
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 3,
+        "load_more_step": 6,
+        "load_more_label": "Show more",
+        "loading_label": "Loading..."
+      },
+      "blocks": {
+        "model_mini": {
+          "type": "model_item",
+          "settings": {
+            "label": "Mini"
+          }
+        },
+        "model_gen3": {
+          "type": "model_item",
+          "settings": {
+            "label": "Gen 3"
+          }
+        },
+        "model_gen3p": {
+          "type": "model_item",
+          "settings": {
+            "label": "Gen 3P"
+          }
+        },
+        "model_gen2": {
+          "type": "model_item",
+          "settings": {
+            "label": "Gen 2"
+          }
+        },
+        "group_1": {
+          "type": "product_group",
+          "settings": {
+            "title": "Magnetic Roof Mounts"
+          }
+        },
+        "group_2": {
+          "type": "product_group",
+          "settings": {
+            "title": "Suction Cup Mounts"
+          }
+        }
+      },
+      "block_order": [
+        "model_mini",
+        "model_gen3",
+        "model_gen3p",
+        "model_gen2",
+        "group_1",
+        "group_2"
+      ]
+    }
+  },
+  "order": [
+    "banner",
+    "main"
+  ]
+}
