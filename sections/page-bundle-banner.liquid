@@ -46,7 +46,7 @@
 </style>
 
 {%- liquid
-  assign banner_title = section.settings.title | default: page.title
+  assign banner_title = section.settings.title
   assign banner_description = section.settings.description
   if banner_description == blank and section.settings.show_page_content
     assign banner_description = page.content
@@ -127,7 +127,7 @@
       "type": "text",
       "id": "title",
       "label": "Title",
-      "info": "Leave blank to use page title"
+      "info": "Leave blank to hide title"
     },
     {
       "type": "richtext",

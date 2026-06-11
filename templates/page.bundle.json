@@ -15,15 +15,38 @@
     "main": {
       "type": "page-bundle-nav",
       "settings": {
-        "show_shop_by_model": true,
-        "shop_by_model_heading": "Shop By Model",
-        "model_columns_desktop": 4,
-        "model_columns_mobile": "2",
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 3,
+        "filter_layout": "sidebar",
         "load_more_step": 6,
         "load_more_label": "Show more",
         "loading_label": "Loading..."
+      },
+      "blocks": {
+        "group_1": {
+          "type": "product_group",
+          "settings": {
+            "title": "Magnetic Roof Mounts"
+          }
+        },
+        "group_2": {
+          "type": "product_group",
+          "settings": {
+            "title": "Suction Cup Mounts"
+          }
+        }
+      },
+      "block_order": [
+        "group_1",
+        "group_2"
+      ]
+    },
+    "shop_by_model": {
+      "type": "page-bundle-shop-by-model",
+      "settings": {
+        "heading": "Shop By Model",
+        "columns_desktop": 4,
+        "columns_mobile": "2"
       },
       "blocks": {
         "model_mini": {
@@ -49,32 +72,19 @@
           "settings": {
             "label": "Gen 2"
           }
-        },
-        "group_1": {
-          "type": "product_group",
-          "settings": {
-            "title": "Magnetic Roof Mounts"
-          }
-        },
-        "group_2": {
-          "type": "product_group",
-          "settings": {
-            "title": "Suction Cup Mounts"
-          }
         }
       },
       "block_order": [
         "model_mini",
         "model_gen3",
         "model_gen3p",
-        "model_gen2",
-        "group_1",
-        "group_2"
+        "model_gen2"
       ]
     }
   },
   "order": [
     "banner",
-    "main"
+    "main",
+    "shop_by_model"
   ]
 }

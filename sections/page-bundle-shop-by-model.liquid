@@ -1,0 +1,424 @@
+{%- render 'section-spacing-collapsing' -%}
+
+{%- liquid
+  assign bg_image = section.settings.background_image
+  assign bg_image_mobile = section.settings.background_image_mobile | default: bg_image
+  assign has_background = false
+  if bg_image != blank or bg_image_mobile != blank
+    assign has_background = true
+  endif
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {%- if has_background -%}
+      --shop-by-model-overlay: {{ section.settings.overlay_color.rgb }} / {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+      --shop-by-model-text: {{ section.settings.text_color.rgb }};
+    {%- endif -%}
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-shop-by-model {
+    position: relative;
+    isolation: isolate;
+    margin-block: {{ section.settings.margin_top }}px {{ section.settings.margin_bottom }}px;
+    padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;
+    {%- if has_background -%}
+      color: rgb(var(--shop-by-model-text));
+    {%- endif -%}
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-shop-by-model__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-shop-by-model__bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: {{ section.settings.background_size }};
+    object-position: {{ section.settings.background_position }};
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-shop-by-model__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgb(var(--shop-by-model-overlay));
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-shop-by-model__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-shop-by-model__heading {
+    margin: 0 0 var(--spacing-6);
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-shop-by-model__grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns_desktop }}, minmax(0, 1fr));
+    gap: var(--spacing-6) var(--spacing-4);
+    max-width: 1100px;
+    margin-inline: auto;
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-shop-by-model__item {
+    display: grid;
+    gap: var(--spacing-3);
+    justify-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    min-width: 0;
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-shop-by-model__image-wrap {
+    width: 100%;
+    aspect-ratio: 1.35;
+    display: grid;
+    place-items: center;
+    min-width: 0;
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-shop-by-model__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-shop-by-model__label {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  @media screen and (max-width: 699px) {
+    #shopify-section-{{ section.id }} .page-bundle-shop-by-model {
+      margin-block: {{ section.settings.margin_top_mobile }}px {{ section.settings.margin_bottom_mobile }}px;
+      padding-block: {{ section.settings.padding_top_mobile }}px {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    #shopify-section-{{ section.id }} .page-bundle-shop-by-model__heading {
+      font-size: 1.5rem;
+      margin-bottom: var(--spacing-4);
+    }
+
+    #shopify-section-{{ section.id }} .page-bundle-shop-by-model__grid {
+      grid-template-columns: repeat({{ section.settings.columns_mobile }}, minmax(0, 1fr));
+      gap: var(--spacing-4) var(--spacing-2);
+    }
+
+    #shopify-section-{{ section.id }} .page-bundle-shop-by-model__label {
+      font-size: 0.875rem;
+    }
+  }
+</style>
+
+<div class="page-bundle-shop-by-model{% if section.settings.full_width_background %} full-bleed{% endif %}">
+  {%- if has_background -%}
+    <div class="page-bundle-shop-by-model__bg" aria-hidden="true">
+      <picture>
+        {%- if bg_image_mobile != blank -%}
+          <source
+            media="(max-width: 699px)"
+            srcset="{{ bg_image_mobile | image_url: width: 600 }} 600w, {{ bg_image_mobile | image_url: width: 900 }} 900w, {{ bg_image_mobile | image_url: width: 1200 }} 1200w"
+          >
+        {%- endif -%}
+
+        {%- assign desktop_bg = bg_image | default: bg_image_mobile -%}
+        {%- if desktop_bg != blank -%}
+          {{- desktop_bg | image_url: width: 2400 | image_tag: class: 'page-bundle-shop-by-model__bg-image', loading: 'lazy', widths: '800,1200,1600,2000,2400', sizes: '100vw' -}}
+        {%- endif -%}
+      </picture>
+      <div class="page-bundle-shop-by-model__overlay"></div>
+    </div>
+  {%- endif -%}
+
+  <div class="container page-bundle-shop-by-model__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="page-bundle-shop-by-model__heading">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="page-bundle-shop-by-model__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.label == blank -%}
+            {%- continue -%}
+          {%- endif -%}
+
+          {%- if block.settings.link != blank -%}
+            <a href="{{ block.settings.link }}" class="page-bundle-shop-by-model__item" {{ block.shopify_attributes }}>
+          {%- else -%}
+            <div class="page-bundle-shop-by-model__item" {{ block.shopify_attributes }}>
+          {%- endif -%}
+            <div class="page-bundle-shop-by-model__image-wrap">
+              {%- if block.settings.image != blank -%}
+                {{- block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'page-bundle-shop-by-model__image', widths: '200,300,400,500,600', sizes: '(max-width: 699px) 40vw, 220px' -}}
+              {%- else -%}
+                {{- 'product-1' | placeholder_svg_tag: 'page-bundle-shop-by-model__image' -}}
+              {%- endif -%}
+            </div>
+            <p class="page-bundle-shop-by-model__label">{{ block.settings.label | escape }}</p>
+          {%- if block.settings.link != blank -%}
+            </a>
+          {%- else -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="empty-state">
+        <div class="prose">
+          <p class="h5">Add Shop by Model items in the theme editor.</p>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shop by model",
+  "class": "shopify-section--page-bundle-shop-by-model",
+  "tag": "section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop By Model"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Mobile background image",
+      "info": "Optional. Uses desktop image if empty."
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width_background",
+      "label": "Full width background",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "background_size",
+      "label": "Background size",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "select",
+      "id": "background_position",
+      "label": "Background position",
+      "options": [
+        { "value": "center center", "label": "Center" },
+        { "value": "top center", "label": "Top" },
+        { "value": "bottom center", "label": "Bottom" }
+      ],
+      "default": "center center"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 35
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "label": "Margin top (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "label": "Margin bottom (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns (desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns (mobile)",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" }
+      ],
+      "default": "2"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "model_item",
+      "name": "Shop by model item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Link text",
+          "default": "Model name"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by model",
+      "blocks": [
+        {
+          "type": "model_item",
+          "settings": { "label": "Mini" }
+        },
+        {
+          "type": "model_item",
+          "settings": { "label": "Gen 3" }
+        },
+        {
+          "type": "model_item",
+          "settings": { "label": "Gen 3P" }
+        },
+        {
+          "type": "model_item",
+          "settings": { "label": "Gen 2" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
