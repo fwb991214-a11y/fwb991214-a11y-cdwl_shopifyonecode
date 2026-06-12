@@ -63,7 +63,7 @@
       "name": "Banner overlay text",
       "settings": {
         "full_width": true,
-        "image": "shopify://shop_images/EN.webp",
+        "image": "shopify://shop_images/A_3.jpg",
         "title": "",
         "desc_1": "",
         "desc_2": "",
@@ -86,10 +86,21 @@
     "promo_code_cards_wXMqKt": {
       "type": "promo-code-cards",
       "blocks": {
+        "card_j3KYyY": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/20.png",
+            "title": "",
+            "code": "",
+            "fineprint": "",
+            "button_text": "Shop now",
+            "button_link": ""
+          }
+        },
         "card_X4nxM7": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/1_57556468-ad62-4a7a-9109-83188c4c1887.png",
+            "image": "shopify://shop_images/30.png",
             "title": "",
             "code": "",
             "fineprint": "",
@@ -100,7 +111,7 @@
         "card_xYfaXx": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/2_1c37000d-f20c-48f8-83aa-d5d80c4603fc.png",
+            "image": "shopify://shop_images/50.png",
             "title": "",
             "code": "",
             "fineprint": "",
@@ -111,7 +122,7 @@
         "card_L9zkt3": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/3_a105464f-18b1-4749-be23-1eeb0e10dff5.png",
+            "image": "shopify://shop_images/120.png",
             "title": "",
             "code": "",
             "fineprint": "",
@@ -121,6 +132,7 @@
         }
       },
       "block_order": [
+        "card_j3KYyY",
         "card_X4nxM7",
         "card_xYfaXx",
         "card_L9zkt3"
@@ -132,7 +144,7 @@
         "heading": "#Discount Code",
         "content": "",
         "gap": "medium",
-        "columns_desktop": 3,
+        "columns_desktop": 4,
         "columns_tablet": 2,
         "columns_mobile": "1",
         "background": "",

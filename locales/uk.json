@@ -3351,7 +3351,9 @@
         "two_hours": "Зазвичай готовий через 2 години",
         "immediately": "Зараз готовий до вивезення",
         "two_to_four_days": "Зазвичай готовий через 2-4 дні",
-        "four_hours": "Зазвичай готовий через 4 години"
+        "four_hours": "Зазвичай готовий через 4 години",
+        "one_hour": "Зазвичай готовий через 1 годину",
+        "twenty_four_hours": "Зазвичай готовий через 24 години"
       }
     },
     "attributes": {
@@ -3398,7 +3400,8 @@
     },
     "sentence": {
       "two_words_connector": " і ",
-      "last_word_connector": ", і "
+      "last_word_connector": ", і ",
+      "words_connector": ", "
     },
     "links": {
       "learn_more": "Вивчайте більше",

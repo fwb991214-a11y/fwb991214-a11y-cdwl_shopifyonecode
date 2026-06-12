@@ -2721,7 +2721,8 @@
         "transaction_status": {
           "error": "Feil",
           "pending": "Avventer",
-          "success": "Suksess"
+          "success": "Suksess",
+          "failure": "Feil"
         },
         "financial_status": {
           "paid": "Betalt",
@@ -2729,7 +2730,10 @@
           "authorized": "Autorisert",
           "pending": "Avventer",
           "partially_paid": "Delvis betalt",
-          "refunded": "Refundert"
+          "refunded": "Refundert",
+          "expired": "Utløpt",
+          "partially_refunded": "Delvis refundert",
+          "voided": "Ugyldig"
         },
         "not_available": "Denne bestillingen er ikke tilgjengelig",
         "cash_on_delivery": "Postoppkrav (COD)"
@@ -2925,7 +2929,8 @@
       "addresses": "Adresser",
       "challenge": "Utfordring",
       "shopping_cart": "din handlevogn",
-      "blog_or_article_with_error": "Feil - %{title}"
+      "blog_or_article_with_error": "Feil - %{title}",
+      "not_found": "404 ikke funnet"
     },
     "store_availability": {
       "pick_up_time": {
@@ -2936,7 +2941,9 @@
         "two_hours": "Vanligvis klar på 2 timer",
         "immediately": "Klar for henting nå",
         "two_to_four_days": "Vanligvis klar på 2-4 dager",
-        "four_hours": "Vanligvis klar på 4 timer"
+        "four_hours": "Vanligvis klar på 4 timer",
+        "one_hour": "Vanligvis klar på 1 time",
+        "twenty_four_hours": "Vanligvis klar på 24 timer"
       }
     },
     "attributes": {
@@ -2980,7 +2987,8 @@
     },
     "sentence": {
       "two_words_connector": " og ",
-      "last_word_connector": ", og "
+      "last_word_connector": ", og ",
+      "words_connector": ", "
     },
     "links": {
       "learn_more": "Lære mer",
@@ -2990,7 +2998,8 @@
       "error": "Det oppsto et problem med å laste søkeresultatene dine. Oppdater siden eller prøv igjen senere.",
       "sorting": {
         "relevance": "Relevans",
-        "price_ascending": "Pris, lav til høy"
+        "price_ascending": "Pris, lav til høy",
+        "price_descending": "Pris, høy til lav"
       }
     }
   },

@@ -43,6 +43,7 @@
           "type": "product_group",
           "settings": {
             "title": "Magnetic Roof Mounts",
+            "description": "Save Up to <strong>USD 210</strong>",
             "collection": "mini-for-camping",
             "load_more_step": 6
           }
@@ -51,6 +52,7 @@
           "type": "product_group",
           "settings": {
             "title": "Suction Cup Mounts",
+            "description": "Save Up to <strong>USD 210</strong>",
             "collection": "starlink-gen-2-accessories",
             "load_more_step": 6
           }
@@ -61,13 +63,17 @@
         "group_1",
         "group_2"
       ],
+      "custom_css": [
+        ".collection-subcollections__layout{gap: 0}"
+      ],
       "settings": {
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 3,
         "filter_layout": "sidebar",
         "load_more_step": 6,
         "load_more_label": "Show more",
-        "loading_label": "Loading..."
+        "loading_label": "Loading...",
+        "description_accent_color": "#e86b5d"
       }
     },
     "shop_by_model": {
@@ -110,6 +116,7 @@
       ],
       "settings": {
         "heading": "Shop By Model",
+        "background_image": "shopify://shop_images/97128d96a1a4b8ba1f765bf30134f529.jpg",
         "full_width_background": true,
         "background_size": "cover",
         "background_position": "center center",
@@ -117,9 +124,9 @@
         "overlay_opacity": 35,
         "text_color": "#ffffff",
         "margin_top": 0,
-        "margin_bottom": 0,
+        "margin_bottom": 32,
         "margin_top_mobile": 0,
-        "margin_bottom_mobile": 0,
+        "margin_bottom_mobile": 32,
         "padding_top": 48,
         "padding_bottom": 48,
         "padding_top_mobile": 32,
