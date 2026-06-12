@@ -16,7 +16,10 @@
         "image_alt": "",
         "link": "",
         "open_in_new_tab": false,
-        "full_width": true
+        "full_width": false,
+        "enable_border_radius": true,
+        "border_radius": 12,
+        "margin_bottom": 20
       }
     },
     "banner": {

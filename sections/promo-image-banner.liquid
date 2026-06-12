@@ -4,9 +4,14 @@
   assign desktop_image = section.settings.image
   assign mobile_image = section.settings.mobile_image | default: desktop_image
   assign show_banner = false
+  assign promo_content_align = 'section'
 
   if desktop_image != blank or mobile_image != blank
     assign show_banner = true
+  endif
+
+  if template.name == 'collection'
+    assign promo_content_align = 'container'
   endif
 -%}
 
@@ -18,6 +23,46 @@
       --section-spacing-block-start: 0;
       --section-spacing-block-end: 0;
       padding-block: 0 !important;
+    }
+
+  {%- if section.settings.full_width -%}
+    #shopify-section-{{ section.id }} .section {
+      padding-inline: 0 !important;
+    }
+
+    #shopify-section-{{ section.id }} .promo-image-banner__wrapper {
+      width: 100%;
+      max-width: none;
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+  {%- elsif promo_content_align == 'section' -%}
+    #shopify-section-{{ section.id }} .promo-image-banner__wrapper {
+      width: 100%;
+      max-width: none;
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+  {%- else -%}
+    #shopify-section-{{ section.id }} .section {
+      padding-inline: 0 !important;
+    }
+
+    #shopify-section-{{ section.id }} .promo-image-banner__wrapper {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: var(--container-max-width);
+      margin-inline: auto;
+      padding-inline: var(--container-gutter);
+    }
+  {%- endif -%}
+
+    #shopify-section-{{ section.id }} .promo-image-banner__frame {
+      display: block;
+      overflow: hidden;
+      {%- if section.settings.enable_border_radius -%}
+        border-radius: {{ section.settings.border_radius }}px;
+      {%- endif -%}
     }
 
     #shopify-section-{{ section.id }} .promo-image-banner__link {
@@ -37,50 +82,50 @@
       display: block;
     }
 
-    {%- unless section.settings.full_width -%}
-      #shopify-section-{{ section.id }} .promo-image-banner--boxed {
-        border-radius: var(--rounded-lg);
-        overflow: hidden;
-        box-shadow: var(--shadow-block);
+    {%- if section.settings.margin_bottom > 0 -%}
+      #shopify-section-{{ section.id }} .promo-image-banner__wrapper {
+        margin-block-end: {{ section.settings.margin_bottom }}px;
       }
-    {%- endunless -%}
+    {%- endif -%}
   </style>
 
   <div {% render 'section-properties', tight: true %}>
-    <div class="promo-image-banner{% if section.settings.full_width %} full-bleed{% else %} container promo-image-banner--boxed{% endif %}">
-      {%- capture banner_image -%}
-        <picture class="promo-image-banner__picture">
-          {%- if section.settings.mobile_image != blank -%}
-            <source
-              media="(max-width: 699px)"
-              srcset="{{ section.settings.mobile_image | image_url: width: 400 }} 400w, {{ section.settings.mobile_image | image_url: width: 600 }} 600w, {{ section.settings.mobile_image | image_url: width: 800 }} 800w, {{ section.settings.mobile_image | image_url: width: 1000 }} 1000w, {{ section.settings.mobile_image | image_url: width: 1200 }} 1200w"
-              width="{{ section.settings.mobile_image.width }}"
-              height="{{ section.settings.mobile_image.height }}"
-            >
-          {%- endif -%}
+    <div class="promo-image-banner__wrapper promo-image-banner__wrapper--{{ promo_content_align }}{% if section.settings.full_width %} promo-image-banner__wrapper--full{% endif %}">
+      <div class="promo-image-banner__frame">
+        {%- capture banner_image -%}
+          <picture class="promo-image-banner__picture">
+            {%- if section.settings.mobile_image != blank -%}
+              <source
+                media="(max-width: 699px)"
+                srcset="{{ section.settings.mobile_image | image_url: width: 400 }} 400w, {{ section.settings.mobile_image | image_url: width: 600 }} 600w, {{ section.settings.mobile_image | image_url: width: 800 }} 800w, {{ section.settings.mobile_image | image_url: width: 1000 }} 1000w, {{ section.settings.mobile_image | image_url: width: 1200 }} 1200w"
+                width="{{ section.settings.mobile_image.width }}"
+                height="{{ section.settings.mobile_image.height }}"
+              >
+            {%- endif -%}
 
-          {%- assign render_image = desktop_image | default: mobile_image -%}
-          {%- capture sizes -%}{% if section.settings.full_width %}100vw{% else %}(max-width: 740px) calc(100vw - 40px), (max-width: 999px) calc(100vw - 64px), min({{ settings.page_width }}px, 100vw - 96px){% endif %}{%- endcapture -%}
-          {%- assign image_alt = section.settings.image_alt | default: render_image.alt | escape -%}
+            {%- assign render_image = desktop_image | default: mobile_image -%}
+            {%- capture sizes -%}{% if section.settings.full_width %}100vw{% else %}(max-width: 740px) calc(100vw - 40px), (max-width: 999px) calc(100vw - 64px), min({{ settings.page_width }}px, 100vw - 96px){% endif %}{%- endcapture -%}
+            {%- assign image_alt = section.settings.image_alt | default: render_image.alt | escape -%}
 
-          {{- render_image | image_url: width: render_image.width | image_tag: loading: 'eager', fetchpriority: 'high', class: 'promo-image-banner__image', sizes: sizes, widths: '400,600,800,1000,1200,1400,1600,1800,2000,2400,2800,3200', alt: image_alt -}}
-        </picture>
-      {%- endcapture -%}
+            {{- render_image | image_url: width: render_image.width | image_tag: loading: 'eager', fetchpriority: 'high', class: 'promo-image-banner__image', sizes: sizes, widths: '400,600,800,1000,1200,1400,1600,1800,2000,2400,2800,3200', alt: image_alt -}}
+          </picture>
+        {%- endcapture -%}
 
-      {%- if section.settings.link != blank -%}
-        <a
-          href="{{ section.settings.link }}"
-          class="promo-image-banner__link"
-          {% if section.settings.open_in_new_tab %}
-            target="_blank"
-            rel="noopener noreferrer"
-          {% endif %}
-        >
+        {%- if section.settings.link != blank -%}
+          <a
+            href="{{ section.settings.link }}"
+            class="promo-image-banner__link"
+            {% if section.settings.open_in_new_tab %}
+              target="_blank"
+              rel="noopener noreferrer"
+            {% endif %}
+          >
+            {{- banner_image -}}
+          </a>
+        {%- else -%}
           {{- banner_image -}}
-        </a>
-      {%- else -%}
-        {{- banner_image -}}
-      {%- endif -%}
+        {%- endif -%}
+      </div>
     </div>
   </div>
 {%- endif -%}
@@ -123,10 +168,42 @@
       "default": false
     },
     {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
       "type": "checkbox",
       "id": "full_width",
       "label": "Full width",
+      "info": "Disable to match product/collection content width.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_radius",
+      "label": "Enable rounded corners",
       "default": true
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ section.settings.enable_border_radius }}"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom spacing",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 20
     }
   ],
   "presets": [
