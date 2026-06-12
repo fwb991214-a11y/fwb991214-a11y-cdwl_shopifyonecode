@@ -19,6 +19,7 @@
   {%- endunless -%}
 
   #shopify-section-{{ section.id }} {
+    --bundle-group-description-accent: {{ section.settings.description_accent_color.rgb }};
     --product-list-gap: {% if section.settings.products_per_row_mobile == '2' %}{% if card_blends %}var(--product-list-row-gap){% endif %} var(--spacing-1){% else %}var(--product-list-row-gap) var(--product-list-column-gap){% endif %};
     --product-list-items-per-row: {{ section.settings.products_per_row_mobile | times: 1 }};
     --product-list-grid: auto-flow dense / repeat(var(--product-list-items-per-row), minmax(0, 1fr));
@@ -51,6 +52,29 @@
     #shopify-section-{{ section.id }} {
       --product-list-items-per-row: {{ section.settings.products_per_row_desktop }};
     }
+  }
+
+  #shopify-section-{{ section.id }} .collection-subcollections__group-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  #shopify-section-{{ section.id }} .collection-subcollections__group-header .collection-subcollections__title {
+    margin-bottom: var(--spacing-3);
+  }
+
+  #shopify-section-{{ section.id }} .collection-subcollections__group-description {
+    display: inline-block;
+    margin: 0;
+    padding: 5px 15px;
+    font-size: 1rem;
+    line-height: 1.35;
+    color: #191919;
+  }
+
+  #shopify-section-{{ section.id }} .collection-subcollections__group-description :is(strong, b) {
+    color: rgb(var(--bundle-group-description-accent));
+    font-weight: 700;
   }
 
   #shopify-section-{{ section.id }} .subcollection-load-more__footer {
@@ -90,6 +114,19 @@
   }
 
   @media screen and (max-width: 699px) {
+    #shopify-section-{{ section.id }} .collection-subcollections__group-header {
+      margin-bottom: 20px;
+    }
+
+    #shopify-section-{{ section.id }} .collection-subcollections__group-header .collection-subcollections__title {
+      margin-bottom: var(--spacing-2);
+    }
+
+    #shopify-section-{{ section.id }} .collection-subcollections__group-description {
+      font-size: 0.875rem;
+      padding: 4px 12px;
+    }
+
     #shopify-section-{{ section.id }} .subcollection-load-more__footer {
       margin-top: var(--spacing-3);
       margin-bottom: var(--spacing-8);
@@ -149,7 +186,15 @@
             {%- endif -%}
 
             <section id="sub-{{ block.id }}" class="collection-subcollections__group" {{ block.shopify_attributes }}>
-              <h2 class="collection-subcollections__title">{{ block.settings.title | escape }}</h2>
+              <div class="collection-subcollections__group-header">
+                <h2 class="collection-subcollections__title">{{ block.settings.title | escape }}</h2>
+
+                {%- if block.settings.description != blank -%}
+                  <div class="collection-subcollections__group-description">
+                    {{ block.settings.description }}
+                  </div>
+                {%- endif -%}
+              </div>
 
               <subcollection-load-more class="subcollection-load-more v-stack gap-6" data-step="{{ block.settings.load_more_step | default: section.settings.load_more_step }}">
                 <reveal-items selector=".product-list > *">
@@ -282,6 +327,16 @@
       "id": "loading_label",
       "label": "Loading label",
       "default": "Loading..."
+    },
+    {
+      "type": "header",
+      "content": "Group description style"
+    },
+    {
+      "type": "color",
+      "id": "description_accent_color",
+      "label": "Description border and highlight color",
+      "default": "#e86b5d"
     }
   ],
   "blocks": [
@@ -294,6 +349,13 @@
           "id": "title",
           "label": "Section title",
           "default": "Section name"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "Save Up to <strong>USD 210</strong>",
+          "info": "Use bold for the highlighted portion (e.g. price or discount)."
         },
         {
           "type": "collection",

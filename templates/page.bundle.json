@@ -1,19 +1,66 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "banner": {
       "type": "page-bundle-banner",
+      "custom_css": [
+        "{--section-outer-spacing-block: 0; --section-spacing-block: 0; --section-spacing-block-start: 0; --section-spacing-block-end: 0; padding-block-start: 0 !important; padding-block-end: 0 !important;}"
+      ],
       "settings": {
+        "image": "shopify://shop_images/B_1.jpg",
         "full_width": true,
         "image_size": "medium",
+        "title": "Bundle Title",
+        "description": "<p>Description<br/><br/></p>",
+        "show_page_content": false,
         "title_size": 48,
         "title_size_mobile": 28,
         "description_size": 16,
-        "description_size_mobile": 14,
-        "show_page_content": false
+        "description_size_mobile": 14
       }
     },
     "main": {
       "type": "page-bundle-nav",
+      "blocks": {
+        "product_group_xGdWJ6": {
+          "type": "product_group",
+          "settings": {
+            "title": "Section name",
+            "description": "Save Up to <strong>USD 210</strong>",
+            "collection": "starlink-gen-2-ethernet-cables",
+            "load_more_step": 6
+          }
+        },
+        "group_1": {
+          "type": "product_group",
+          "settings": {
+            "title": "Magnetic Roof Mounts",
+            "collection": "mini-for-camping",
+            "load_more_step": 6
+          }
+        },
+        "group_2": {
+          "type": "product_group",
+          "settings": {
+            "title": "Suction Cup Mounts",
+            "collection": "starlink-gen-2-accessories",
+            "load_more_step": 6
+          }
+        }
+      },
+      "block_order": [
+        "product_group_xGdWJ6",
+        "group_1",
+        "group_2"
+      ],
       "settings": {
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 3,
@@ -21,56 +68,37 @@
         "load_more_step": 6,
         "load_more_label": "Show more",
         "loading_label": "Loading..."
-      },
-      "blocks": {
-        "group_1": {
-          "type": "product_group",
-          "settings": {
-            "title": "Magnetic Roof Mounts"
-          }
-        },
-        "group_2": {
-          "type": "product_group",
-          "settings": {
-            "title": "Suction Cup Mounts"
-          }
-        }
-      },
-      "block_order": [
-        "group_1",
-        "group_2"
-      ]
+      }
     },
     "shop_by_model": {
       "type": "page-bundle-shop-by-model",
-      "settings": {
-        "heading": "Shop By Model",
-        "columns_desktop": 4,
-        "columns_mobile": "2"
-      },
       "blocks": {
         "model_mini": {
           "type": "model_item",
           "settings": {
-            "label": "Mini"
+            "label": "Mini",
+            "link": ""
           }
         },
         "model_gen3": {
           "type": "model_item",
           "settings": {
-            "label": "Gen 3"
+            "label": "Gen 3",
+            "link": ""
           }
         },
         "model_gen3p": {
           "type": "model_item",
           "settings": {
-            "label": "Gen 3P"
+            "label": "Gen 3P",
+            "link": ""
           }
         },
         "model_gen2": {
           "type": "model_item",
           "settings": {
-            "label": "Gen 2"
+            "label": "Gen 2",
+            "link": ""
           }
         }
       },
@@ -79,7 +107,26 @@
         "model_gen3",
         "model_gen3p",
         "model_gen2"
-      ]
+      ],
+      "settings": {
+        "heading": "Shop By Model",
+        "full_width_background": true,
+        "background_size": "cover",
+        "background_position": "center center",
+        "overlay_color": "#000000",
+        "overlay_opacity": 35,
+        "text_color": "#ffffff",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32,
+        "columns_desktop": 4,
+        "columns_mobile": "2"
+      }
     }
   },
   "order": [
