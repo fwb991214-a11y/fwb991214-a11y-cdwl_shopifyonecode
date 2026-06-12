@@ -47,6 +47,10 @@ CSS
       font-size: 14px;
     }
   }
+
+  #shopify-section-{{ section.id }} .slideshow__image-link {
+    display: contents;
+  }
 </style>
 
 {%- comment -%}
@@ -80,25 +84,42 @@ LIQUID
           {%- capture sizes -%}{% if section.settings.full_width %}100vw{% else %}min({{ settings.page_width }}px, 100vw){% endif %}{%- endcapture -%}
 
           {%- if block.type == 'image' -%}
-            {%- if block.settings.image != blank -%}
-              {%- capture loading_strategy -%}{% if forloop.first %}eager{% else %}lazy{% endif %}{%- endcapture -%}
-              {%- capture fetch_priority -%}{% if forloop.first %}high{% else %}low{% endif %}{%- endcapture -%}
+            {%- capture slide_image_markup -%}
+              {%- if block.settings.image != blank -%}
+                {%- capture loading_strategy -%}{% if forloop.first %}eager{% else %}lazy{% endif %}{%- endcapture -%}
+                {%- capture fetch_priority -%}{% if forloop.first %}high{% else %}low{% endif %}{%- endcapture -%}
 
-              <picture>
-                {%- if block.settings.mobile_image != blank -%}
-                  <source
-                    media="(max-width: 699px)"
-                    srcset="{{ block.settings.mobile_image | image_url: width: 400 }} 400w, {{ block.settings.mobile_image | image_url: width: 600 }} 600w, {{ block.settings.mobile_image | image_url: width: 800 }} 800w, {{ block.settings.mobile_image | image_url: width: 1000 }} 1000w, {{ block.settings.mobile_image | image_url: width: 1200 }} 1200w"
-                    width="{{ block.settings.mobile_image.width }}"
-                    height="{{ block.settings.mobile_image.height }}"
-                  >
-                {%- endif -%}
+                <picture>
+                  {%- if block.settings.mobile_image != blank -%}
+                    <source
+                      media="(max-width: 699px)"
+                      srcset="{{ block.settings.mobile_image | image_url: width: 400 }} 400w, {{ block.settings.mobile_image | image_url: width: 600 }} 600w, {{ block.settings.mobile_image | image_url: width: 800 }} 800w, {{ block.settings.mobile_image | image_url: width: 1000 }} 1000w, {{ block.settings.mobile_image | image_url: width: 1200 }} 1200w"
+                      width="{{ block.settings.mobile_image.width }}"
+                      height="{{ block.settings.mobile_image.height }}"
+                    >
+                  {%- endif -%}
 
-                {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: loading_strategy, fetchpriority: fetch_priority, sizes: sizes, widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200' -}}
-              </picture>
+                  {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: loading_strategy, fetchpriority: fetch_priority, sizes: sizes, widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200' -}}
+                </picture>
+              {%- else -%}
+                {%- capture placeholder_image -%}{% cycle 'placeholder': 'lifestyle-1', 'lifestyle-2' %}{%- endcapture -%}
+                {{- placeholder_image | placeholder_svg_tag: 'placeholder' | replace: '<svg', '<svg preserveAspectRatio="xMinYMin slice"' -}}
+              {%- endif -%}
+            {%- endcapture -%}
+
+            {%- if block.settings.image_link != blank and block.settings.button_text != blank -%}
+              <a
+                href="{{ block.settings.image_link }}"
+                class="slideshow__image-link"
+                {% if block.settings.image_link_open_new_tab %}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                {% endif %}
+              >
+                {{- slide_image_markup -}}
+              </a>
             {%- else -%}
-              {%- capture placeholder_image -%}{% cycle 'placeholder': 'lifestyle-1', 'lifestyle-2' %}{%- endcapture -%}
-              {{- placeholder_image | placeholder_svg_tag: 'placeholder' | replace: '<svg', '<svg preserveAspectRatio="xMinYMin slice"' -}}
+              {{- slide_image_markup -}}
             {%- endif -%}
           {%- elsif block.type == 'video' -%}
             {%- if section.settings.autoplay -%}
@@ -147,8 +168,31 @@ LIQUID
         </div>
       {%- endcapture -%}
 
-      {%- if block.settings.button_link != blank and block.settings.button_text == blank -%}
-        <a id="block-{{ block.id }}" href="{{ block.settings.button_link }}" class="slideshow__slide {% if forloop.first %}is-selected{% endif %}" data-slide-type="{{ block.type }}" role="group" {{ block.shopify_attributes }}>
+      {%- liquid
+        assign slide_link = blank
+        assign slide_link_open_new_tab = false
+
+        if block.type == 'image' and block.settings.image_link != blank and block.settings.button_text == blank
+          assign slide_link = block.settings.image_link
+          assign slide_link_open_new_tab = block.settings.image_link_open_new_tab
+        elsif block.settings.button_link != blank and block.settings.button_text == blank
+          assign slide_link = block.settings.button_link
+        endif
+      -%}
+
+      {%- if slide_link != blank -%}
+        <a
+          id="block-{{ block.id }}"
+          href="{{ slide_link }}"
+          class="slideshow__slide {% if forloop.first %}is-selected{% endif %}"
+          data-slide-type="{{ block.type }}"
+          role="group"
+          {% if slide_link_open_new_tab %}
+            target="_blank"
+            rel="noopener noreferrer"
+          {% endif %}
+          {{ block.shopify_attributes }}
+        >
           {{- slide -}}
         </a>
       {%- else -%}
@@ -357,6 +401,18 @@ LIQUID
           "info": "1200 x 1600px .jpg recommended"
         },
         {
+          "type": "url",
+          "id": "image_link",
+          "label": "Image link",
+          "info": "Optional. Leave empty to disable image click. When no button text is set, the whole slide becomes clickable."
+        },
+        {
+          "type": "checkbox",
+          "id": "image_link_open_new_tab",
+          "label": "Open image link in new tab",
+          "default": false
+        },
+        {
           "type": "header",
           "content": "Content"
         },
@@ -507,7 +563,7 @@ LIQUID
           "type": "url",
           "id": "button_link",
           "label": "Button link",
-          "info": "Leave the button text empty to make the slide fully clickable."
+          "info": "Used by the button. If image link is empty, you can also leave button text empty to make the whole slide clickable."
         },
         {
           "type": "header",

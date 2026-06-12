@@ -64,7 +64,7 @@
         "group_2"
       ],
       "custom_css": [
-        ".collection-subcollections__layout{gap: 0}"
+        ".collection-subcollections__layout {gap: 0;}"
       ],
       "settings": {
         "products_per_row_mobile": "2",
@@ -82,29 +82,33 @@
         "model_mini": {
           "type": "model_item",
           "settings": {
+            "image": "shopify://shop_images/Starlink_Mini_500x500_790ce83e-a4cb-45bc-9114-d6dd7d9e4a2f.png",
             "label": "Mini",
-            "link": ""
+            "link": "shopify://collections/starlink-mini-accessories"
           }
         },
         "model_gen3": {
           "type": "model_item",
           "settings": {
+            "image": "shopify://shop_images/Gen_3_500x500_01406650-1305-49cc-9306-da778c5b7b21.png",
             "label": "Gen 3",
-            "link": ""
+            "link": "shopify://collections/starlink-gen-3-accessories"
           }
         },
         "model_gen3p": {
           "type": "model_item",
           "settings": {
+            "image": "shopify://shop_images/Gen_3P_500x500_05e0ce57-56de-4d1f-b0ec-3764980386a7.png",
             "label": "Gen 3P",
-            "link": ""
+            "link": "shopify://collections/starlink-gen-3-performance-accessories"
           }
         },
         "model_gen2": {
           "type": "model_item",
           "settings": {
+            "image": "shopify://shop_images/Gen_2_500x500_812f1055-e25d-438c-b882-d573b6f12883.png",
             "label": "Gen 2",
-            "link": ""
+            "link": "shopify://collections/starlink-gen-2-accessories"
           }
         }
       },
