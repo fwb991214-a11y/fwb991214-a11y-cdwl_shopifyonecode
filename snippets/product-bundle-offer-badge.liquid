@@ -1,0 +1,20 @@
+{%- comment -%}
+Renders the bundle offer image badge from product metafield custom.bundle_offer_badge.
+
+* product: required
+* class_prefix: CSS prefix, e.g. product-card or product-gallery
+* image_width: optional, default 240
+{%- endcomment -%}
+
+{%- liquid
+  assign bundle_offer_badge = product.metafields.custom.bundle_offer_badge.value
+  assign image_width = image_width | default: 240
+-%}
+
+{%- if bundle_offer_badge != blank -%}
+  {%- capture bundle_badge_image_class -%}{{ class_prefix }}__bundle-badge-image{%- endcapture -%}
+  <span class="{{ class_prefix }}__bundle-badge">
+    {%- assign bundle_offer_badge_alt = bundle_offer_badge.alt | default: 'Bundle offer' | escape -%}
+    {{- bundle_offer_badge | image_url: width: image_width | image_tag: loading: 'lazy', class: bundle_badge_image_class, alt: bundle_offer_badge_alt, widths: '240,320,400,480', sizes: '280px' -}}
+  </span>
+{%- endif -%}

@@ -39,6 +39,12 @@ Supported variables
       break
     endif
   endfor
+
+  assign gallery_bundle_offer_badge = product.metafields.custom.bundle_offer_badge.value
+  assign gallery_has_bundle_offer_badge = false
+  if gallery_bundle_offer_badge != blank
+    assign gallery_has_bundle_offer_badge = true
+  endif
 -%}
 
 {%- comment -%}
@@ -85,8 +91,14 @@ only way to do it on Shopify right now.
 
   <div class="product-gallery__ar-wrapper">
     <div class="product-gallery__media-list-wrapper">
-      {%- if gallery_is_new_badge -%}
-        <span class="product-gallery__new-badge" aria-hidden="true">NEW</span>
+      {%- if gallery_is_new_badge or gallery_has_bundle_offer_badge -%}
+        <div class="product-gallery__badge-stack-left" aria-hidden="true">
+          {%- render 'product-bundle-offer-badge', product: product, class_prefix: 'product-gallery', image_width: 480 -%}
+
+          {%- if gallery_is_new_badge -%}
+            <span class="product-gallery__new-badge" aria-hidden="true">NEW</span>
+          {%- endif -%}
+        </div>
       {%- endif -%}
 
       {%- if gallery_tag_badge_text != blank -%}

@@ -54,6 +54,12 @@ Supported variables
       break
     endif
   endfor
+
+  assign bundle_offer_badge = product.metafields.custom.bundle_offer_badge.value
+  assign has_bundle_offer_badge = false
+  if bundle_offer_badge != blank
+    assign has_bundle_offer_badge = true
+  endif
 -%}
 
 {%- if stacked and section.settings.products_per_row_mobile == '2' -%}
@@ -93,13 +99,17 @@ Supported variables
 
   {%- if product.media.size > 0 -%}
     <div class="product-card__figure">
-      {%- if show_badges -%}
+      {%- if show_badges or has_bundle_offer_badge -%}
         <div class="product-card__badge-stack-left" aria-hidden="true">
-          {%- if is_new_badge -%}
-            <span class="product-card__new-badge">NEW</span>
-          {%- endif -%}
+          {%- render 'product-bundle-offer-badge', product: product, class_prefix: 'product-card', image_width: 480 -%}
 
-          {%- render 'product-badges', product: product, context: 'card', class: 'product-card__badge-list-inner' -%}
+          {%- if show_badges -%}
+            {%- if is_new_badge -%}
+              <span class="product-card__new-badge">NEW</span>
+            {%- endif -%}
+
+            {%- render 'product-badges', product: product, context: 'card', class: 'product-card__badge-list-inner' -%}
+          {%- endif -%}
         </div>
       {%- endif -%}
 
