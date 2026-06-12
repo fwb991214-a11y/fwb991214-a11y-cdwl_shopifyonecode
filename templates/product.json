@@ -9,6 +9,13 @@
  */
 {
   "sections": {
+    "promo_banner": {
+      "type": "promo-image-banner",
+      "settings": {
+        "full_width": true,
+        "open_in_new_tab": false
+      }
+    },
     "main": {
       "type": "main-product",
       "blocks": {
@@ -221,6 +228,7 @@
     }
   },
   "order": [
+    "promo_banner",
     "main",
     "related-products",
     "1776675983775d12c5",

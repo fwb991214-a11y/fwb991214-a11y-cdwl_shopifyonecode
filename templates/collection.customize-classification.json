@@ -9,6 +9,13 @@
  */
 {
   "sections": {
+    "promo_banner": {
+      "type": "promo-image-banner",
+      "settings": {
+        "full_width": true,
+        "open_in_new_tab": false
+      }
+    },
     "banner": {
       "type": "collection-banner",
       "settings": {}
@@ -19,6 +26,7 @@
     }
   },
   "order": [
+    "promo_banner",
     "banner",
     "main"
   ]
