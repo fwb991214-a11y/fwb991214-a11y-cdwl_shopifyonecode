@@ -11,8 +11,11 @@
   "sections": {
     "promo_banner": {
       "type": "promo-image-banner",
+      "custom_css": [
+        "{margin-top: 20px;}"
+      ],
       "settings": {
-        "image": "shopify://shop_images/589411643a6a12f31a5b3741dd9c4302.jpg",
+        "image": "shopify://shop_images/1_a89d0bf8-99b2-488f-9e46-f15cd1997291.jpg",
         "image_alt": "",
         "link": "",
         "open_in_new_tab": false,

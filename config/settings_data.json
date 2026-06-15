@@ -44,6 +44,8 @@
     "product_color_display": "hide",
     "product_info_alignment": "start",
     "cart_icon": "shopping_basket",
+    "cart_show_free_shipping_threshold": true,
+    "cart_free_shipping_threshold": "89",
     "social_facebook": "https://www.facebook.com/profile.php?id=61577295257914",
     "social_twitter": "https://x.com/Parts4Star",
     "social_pinterest": "https://www.pinterest.com/parts4star",
