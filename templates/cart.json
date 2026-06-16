@@ -9,6 +9,23 @@
  */
 {
   "sections": {
+    "promo_image_banner_wMTRH6": {
+      "type": "promo-image-banner",
+      "custom_css": [
+        "{margin-top: 20px}"
+      ],
+      "name": "Promo image banner",
+      "settings": {
+        "image": "shopify://shop_images/1_a89d0bf8-99b2-488f-9e46-f15cd1997291.jpg",
+        "image_alt": "",
+        "link": "",
+        "open_in_new_tab": false,
+        "full_width": false,
+        "enable_border_radius": true,
+        "border_radius": 12,
+        "margin_bottom": 20
+      }
+    },
     "main": {
       "type": "main-cart",
       "blocks": {
@@ -41,6 +58,7 @@
     }
   },
   "order": [
+    "promo_image_banner_wMTRH6",
     "main"
   ]
 }
