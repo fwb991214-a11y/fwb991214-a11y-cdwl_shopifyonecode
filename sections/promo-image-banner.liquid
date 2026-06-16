@@ -10,7 +10,7 @@
     assign show_banner = true
   endif
 
-  if template.name == 'collection'
+  if template.name == 'collection' or template.name == 'cart'
     assign promo_content_align = 'container'
   endif
 -%}
@@ -136,7 +136,7 @@
   "class": "shopify-section--promo-image-banner",
   "tag": "section",
   "enabled_on": {
-    "templates": ["collection", "product"]
+    "templates": ["collection", "product", "cart"]
   },
   "settings": [
     {
