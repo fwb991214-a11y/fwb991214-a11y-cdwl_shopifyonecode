@@ -13,10 +13,14 @@
 /* Bundle offer badge (product card) */
 .product-card--bottom-cta .product-card__bundle-badge{display:block;flex-shrink:0;width:fit-content;max-width:calc(100% - 16px);line-height:0;pointer-events:none}
 .product-card--bottom-cta .product-card__bundle-badge-image{display:block;height:80px;width:auto;max-width:280px;object-fit:contain}
-@media screen and (max-width:699px){.product-card--bottom-cta .product-card__bundle-badge-image{height:60px;max-width:220px}}
+@media screen and (max-width:699px){.product-card--bottom-cta .product-card__bundle-badge-image{height:36px;max-width:180px}}
 /* Bundle offer badge (product gallery) */
 .product-gallery__badge-stack-left{position:absolute;top:12px;left:12px;z-index:6;display:flex;flex-direction:column;gap:6px;pointer-events:none}
 .product-gallery__bundle-badge{display:block;flex-shrink:0;width:fit-content;max-width:calc(100% - 24px);line-height:0;pointer-events:none}
 .product-gallery__bundle-badge-image{display:block;height:80px;width:auto;max-width:280px;object-fit:contain}
 .product-gallery__new-badge{padding:var(--spacing-0-5) var(--spacing-2);border-radius:var(--rounded-button);background:#2f56ff;color:#fff;font-size:9px;font-weight:bold;display:inline-flex;align-items:center;justify-content:center;line-height:1;letter-spacing:.02em;text-transform:uppercase;pointer-events:none}
 @media screen and (max-width:699px){.product-gallery__badge-stack-left{top:10px;left:10px;gap:5px}.product-gallery__bundle-badge-image{height:60px;max-width:220px}.product-gallery__new-badge{padding:5px 9px;font-size:11px}}.product-gallery__badge-stack-left .product-gallery__new-badge{position:static;top:auto;left:auto}
+/* Product card on-sale bottom-left */
+.product-card--bottom-cta .product-card__sale-badge-bottom{position:absolute;left:8px;bottom:8px;z-index:6;pointer-events:none;display:inline-flex}
+.product-card__figure:has(.product-card__delivery-badge) .product-card__sale-badge-bottom{bottom:40px}
+.product-card__figure:has(.product-card__bundle-badge-bottom) .product-card__sale-badge-bottom{bottom:52px}

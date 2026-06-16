@@ -3392,6 +3392,24 @@ padding: 0.5rem;
   pointer-events: none;
 }
 
+.product-card--bottom-cta .product-card__sale-badge-bottom {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  z-index: 6;
+  pointer-events: none;
+  display: inline-flex;
+}
+
+/* Avoid overlapping other bottom-left badges */
+.product-card__figure:has(.product-card__delivery-badge) .product-card__sale-badge-bottom {
+  bottom: 40px;
+}
+
+.product-card__figure:has(.product-card__bundle-badge-bottom) .product-card__sale-badge-bottom {
+  bottom: 52px;
+}
+
 .product-card--bottom-cta .product-card__rating {
   gap: 6px;
 }
@@ -3487,8 +3505,8 @@ padding: 0.5rem;
   }
 
   .product-card--bottom-cta .product-card__bundle-badge-image {
-    height: 60px;
-    max-width: 220px;
+    height: 36px;
+    max-width: 180px;
   }
 }
 

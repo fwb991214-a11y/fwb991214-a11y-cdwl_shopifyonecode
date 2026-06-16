@@ -108,7 +108,7 @@ Supported variables
               <span class="product-card__new-badge">NEW</span>
             {%- endif -%}
 
-            {%- render 'product-badges', product: product, context: 'card', class: 'product-card__badge-list-inner' -%}
+            {%- render 'product-badges', product: product, context: 'card', types: 'custom, sold_out', class: 'product-card__badge-list-inner' -%}
           {%- endif -%}
         </div>
       {%- endif -%}
@@ -148,6 +148,14 @@ Supported variables
           {{- next_media | image_url: width: next_media.width | image_tag: class: 'product-card__image product-card__image--secondary object-fill', loading: 'lazy', fetchpriority: 'low', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800', aria-hidden: 'true' -}}
         {%- endif -%}
       </a>
+
+      {%- if show_badges -%}
+        {%- render 'product-badges', product: product, context: 'card', types: 'discount', class: 'product-card__sale-badge-bottom' -%}
+      {%- endif -%}
+
+      {%- if has_bundle_offer_badge -%}
+        {%- comment -%}Bundle badge stays top-left with other badges.{%- endcomment -%}
+      {%- endif -%}
 
       {%- if use_bottom_cta == false and show_quick_buy and product.available -%}
         <div class="product-card__quick-buy">
