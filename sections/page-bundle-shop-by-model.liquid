@@ -74,15 +74,53 @@
     display: grid;
     gap: var(--spacing-3);
     justify-items: center;
+    align-content: start;
+    width: 100%;
+    min-width: 0;
+    padding: var(--spacing-4) var(--spacing-3) var(--spacing-3);
+    border: 3px solid #6a777d;
+    border-radius: 10px;
     text-align: center;
     text-decoration: none;
     color: inherit;
-    min-width: 0;
+    box-shadow: 0 0 0 0 rgba(2, 128, 236, 0);
+    transition:
+      border-color 0.28s ease,
+      box-shadow 0.28s ease,
+      transform 0.28s ease;
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-shop-by-model__label {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    transition: color 0.28s ease;
+  }
+
+  @media (hover: hover) {
+    #shopify-section-{{ section.id }} .page-bundle-shop-by-model__item:hover {
+      border-color: #0280ec;
+      box-shadow: 0 10px 28px rgba(2, 128, 236, 0.28);
+      transform: translateY(-3px);
+    }
+
+    #shopify-section-{{ section.id }} .page-bundle-shop-by-model__item:hover .page-bundle-shop-by-model__label {
+      color: #0280ec;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .page-bundle-shop-by-model__item:focus-visible {
+    border-color: #0280ec;
+    box-shadow: 0 0 0 3px rgba(2, 128, 236, 0.35);
+    outline: none;
   }
 
   #shopify-section-{{ section.id }} .page-bundle-shop-by-model__image-wrap {
     width: 100%;
-    aspect-ratio: 1.35;
+    aspect-ratio: 1.15;
     display: grid;
     place-items: center;
     min-width: 0;
@@ -93,15 +131,13 @@
     height: 100%;
     object-fit: contain;
     display: block;
+    transition: transform 0.28s ease;
   }
 
-  #shopify-section-{{ section.id }} .page-bundle-shop-by-model__label {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.3;
-    overflow-wrap: anywhere;
-    word-break: break-word;
+  @media (hover: hover) {
+    #shopify-section-{{ section.id }} .page-bundle-shop-by-model__item:hover .page-bundle-shop-by-model__image {
+      transform: scale(1.03);
+    }
   }
 
   @media screen and (max-width: 699px) {
@@ -120,8 +156,13 @@
       gap: var(--spacing-4) var(--spacing-2);
     }
 
+    #shopify-section-{{ section.id }} .page-bundle-shop-by-model__item {
+      padding: var(--spacing-3) var(--spacing-2) var(--spacing-2);
+      border-radius: 8px;
+    }
+
     #shopify-section-{{ section.id }} .page-bundle-shop-by-model__label {
-      font-size: 0.875rem;
+      font-size: 0.9375rem;
     }
   }
 </style>
@@ -154,7 +195,7 @@
     {%- if section.blocks.size > 0 -%}
       <div class="page-bundle-shop-by-model__grid">
         {%- for block in section.blocks -%}
-          {%- if block.settings.label == blank -%}
+          {%- if block.settings.image == blank and block.settings.link == blank -%}
             {%- continue -%}
           {%- endif -%}
 
@@ -170,7 +211,9 @@
                 {{- 'product-1' | placeholder_svg_tag: 'page-bundle-shop-by-model__image' -}}
               {%- endif -%}
             </div>
-            <p class="page-bundle-shop-by-model__label">{{ block.settings.label | escape }}</p>
+            {%- if block.settings.label != blank -%}
+              <p class="page-bundle-shop-by-model__label">{{ block.settings.label | escape }}</p>
+            {%- endif -%}
           {%- if block.settings.link != blank -%}
             </a>
           {%- else -%}
@@ -386,7 +429,7 @@
         {
           "type": "text",
           "id": "label",
-          "label": "Link text",
+          "label": "Label",
           "default": "Model name"
         },
         {
@@ -401,22 +444,10 @@
     {
       "name": "Shop by model",
       "blocks": [
-        {
-          "type": "model_item",
-          "settings": { "label": "Mini" }
-        },
-        {
-          "type": "model_item",
-          "settings": { "label": "Gen 3" }
-        },
-        {
-          "type": "model_item",
-          "settings": { "label": "Gen 3P" }
-        },
-        {
-          "type": "model_item",
-          "settings": { "label": "Gen 2" }
-        }
+        { "type": "model_item", "settings": { "label": "Mini" } },
+        { "type": "model_item", "settings": { "label": "Gen 3" } },
+        { "type": "model_item", "settings": { "label": "Gen 3P" } },
+        { "type": "model_item", "settings": { "label": "Gen 2" } }
       ]
     }
   ]

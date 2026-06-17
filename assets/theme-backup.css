@@ -9896,7 +9896,17 @@ shopify-account::part(signed-out-avatar) {
   height: min(700px, 50vmax);
 }
 
+@media screen and (min-width: 700px) and (max-width: 989px) {
+  .slideshow .content-over-media--auto {
+    --content-over-media-height: clamp(280px, 46vw, 460px);
+  }
+}
+
 @media screen and (max-width: 699px) {
+  .slideshow__controls {
+    bottom: calc(var(--container-gutter) + 2rem);
+  }
+
   .slideshow__controls .circle-button {
     width: var(--spacing-10);
     height: var(--spacing-10);

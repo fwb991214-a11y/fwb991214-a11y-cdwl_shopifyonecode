@@ -96,7 +96,20 @@
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
- @media screen and (max-width: 989px) {
+ @media screen and (min-width: 690px) and (max-width: 989px) {
+  #{{ section_id }} {
+    --mpc-gap: 12px;
+    --mpc-card-height: 100px;
+    --mpc-card-padding-x: 20px;
+    --mpc-card-padding-y: 12px;
+  }
+
+  #{{ section_id }} .model-pill-cards__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+ @media screen and (max-width: 689px) {
   #{{ section_id }} {
     --mpc-gap: 12px;
     --mpc-card-height: 108px;

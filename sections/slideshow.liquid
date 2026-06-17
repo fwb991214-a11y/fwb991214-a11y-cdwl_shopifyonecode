@@ -41,10 +41,23 @@ CSS
     font-size: 24px;
   }
 
+  /* 平板 / 中等屏幕：auto 高度横幅容易撑满视口 */
+  {%- if section.settings.image_size == 'auto' -%}
+    @media screen and (min-width: 700px) and (max-width: 989px) {
+      #shopify-section-{{ section.id }} .content-over-media--auto {
+        --content-over-media-height: clamp(280px, 46vw, 460px);
+      }
+    }
+  {%- endif -%}
+
   /* 手机端 */
   @media screen and (max-width: 699px) {
     #shopify-section-{{ section.id }} .subheading {
       font-size: 14px;
+    }
+
+    #shopify-section-{{ section.id }} .slideshow__controls {
+      bottom: calc(var(--container-gutter) + 2rem);
     }
   }
 
@@ -92,7 +105,7 @@ LIQUID
                 <picture>
                   {%- if block.settings.mobile_image != blank -%}
                     <source
-                      media="(max-width: 699px)"
+                      media="(max-width: 989px)"
                       srcset="{{ block.settings.mobile_image | image_url: width: 400 }} 400w, {{ block.settings.mobile_image | image_url: width: 600 }} 600w, {{ block.settings.mobile_image | image_url: width: 800 }} 800w, {{ block.settings.mobile_image | image_url: width: 1000 }} 1000w, {{ block.settings.mobile_image | image_url: width: 1200 }} 1200w"
                       width="{{ block.settings.mobile_image.width }}"
                       height="{{ block.settings.mobile_image.height }}"

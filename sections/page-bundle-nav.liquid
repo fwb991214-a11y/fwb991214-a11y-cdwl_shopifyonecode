@@ -66,8 +66,9 @@
   #shopify-section-{{ section.id }} .collection-subcollections__group-description {
     display: inline-block;
     margin: 0;
-    padding: 5px 15px;
-    font-size: 1rem;
+    padding: 8px 18px;
+    font-size: 2.15rem;
+    font-weight: 700;
     line-height: 1.35;
     color: #191919;
   }
@@ -114,6 +115,10 @@
   }
 
   @media screen and (max-width: 699px) {
+    #shopify-section-{{ section.id }} .collection-subcollections__group:not(:first-of-type) {
+      margin-top: 48px;
+    }
+
     #shopify-section-{{ section.id }} .collection-subcollections__group-header {
       margin-bottom: 20px;
     }
@@ -123,8 +128,8 @@
     }
 
     #shopify-section-{{ section.id }} .collection-subcollections__group-description {
-      font-size: 0.875rem;
-      padding: 4px 12px;
+      font-size: 1.5rem;
+      padding: 6px 14px;
     }
 
     #shopify-section-{{ section.id }} .subcollection-load-more__footer {
@@ -155,16 +160,20 @@
             <div class="collection-subcollections__mobile-menu">
               <nav class="collection-subcollections__nav collection-subcollections__nav--mobile">
                 {%- for block in section.blocks -%}
-                  {%- if block.settings.title == blank or block.settings.collection == blank -%}
+                  {%- assign group_collection = block.settings.collection -%}
+                  {%- assign group_title = block.settings.title -%}
+                  {%- if group_title == blank or group_collection == blank or group_collection.products_count == 0 -%}
                     {%- continue -%}
                   {%- endif -%}
-                  <a class="collection-subcollections__nav-link" href="#sub-{{ block.id }}">{{ block.settings.title | escape }}</a>
+                  <a class="collection-subcollections__nav-link" href="#sub-{{ block.id }}">{{ group_title | escape }}</a>
                 {%- endfor -%}
               </nav>
 
               <div class="collection-subcollections__dots" aria-hidden="true">
                 {%- for block in section.blocks -%}
-                  {%- if block.settings.title == blank or block.settings.collection == blank -%}
+                  {%- assign group_collection = block.settings.collection -%}
+                  {%- assign group_title = block.settings.title -%}
+                  {%- if group_title == blank or group_collection == blank or group_collection.products_count == 0 -%}
                     {%- continue -%}
                   {%- endif -%}
                   <span class="collection-subcollections__dot" data-subcollections-dot="#sub-{{ block.id }}"></span>
@@ -176,18 +185,15 @@
 
         <div class="collection-subcollections__main">
           {%- for block in section.blocks -%}
-            {%- if block.settings.title == blank or block.settings.collection == blank -%}
-              {%- continue -%}
-            {%- endif -%}
-
             {%- assign group_collection = block.settings.collection -%}
-            {%- if group_collection.products_count == 0 -%}
+            {%- assign group_title = block.settings.title -%}
+            {%- if group_title == blank or group_collection == blank or group_collection.products_count == 0 -%}
               {%- continue -%}
             {%- endif -%}
 
             <section id="sub-{{ block.id }}" class="collection-subcollections__group" {{ block.shopify_attributes }}>
               <div class="collection-subcollections__group-header">
-                <h2 class="collection-subcollections__title">{{ block.settings.title | escape }}</h2>
+                <h2 class="collection-subcollections__title">{{ group_title | escape }}</h2>
 
                 {%- if block.settings.description != blank -%}
                   <div class="collection-subcollections__group-description">
@@ -234,16 +240,20 @@
             <div class="collection-subcollections__sidebar-menu">
               <nav class="collection-subcollections__nav">
                 {%- for block in section.blocks -%}
-                  {%- if block.settings.title == blank or block.settings.collection == blank -%}
+                  {%- assign group_collection = block.settings.collection -%}
+                  {%- assign group_title = block.settings.title -%}
+                  {%- if group_title == blank or group_collection == blank or group_collection.products_count == 0 -%}
                     {%- continue -%}
                   {%- endif -%}
-                  <a class="collection-subcollections__nav-link" href="#sub-{{ block.id }}">{{ block.settings.title | escape }}</a>
+                  <a class="collection-subcollections__nav-link" href="#sub-{{ block.id }}">{{ group_title | escape }}</a>
                 {%- endfor -%}
               </nav>
 
               <div class="collection-subcollections__dots collection-subcollections__dots--desktop" aria-hidden="true">
                 {%- for block in section.blocks -%}
-                  {%- if block.settings.title == blank or block.settings.collection == blank -%}
+                  {%- assign group_collection = block.settings.collection -%}
+                  {%- assign group_title = block.settings.title -%}
+                  {%- if group_title == blank or group_collection == blank or group_collection.products_count == 0 -%}
                     {%- continue -%}
                   {%- endif -%}
                   <span class="collection-subcollections__dot" data-subcollections-dot="#sub-{{ block.id }}"></span>

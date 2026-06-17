@@ -16,10 +16,11 @@
       ],
       "settings": {
         "image": "shopify://shop_images/B_1.jpg",
+        "mobile_image": "shopify://shop_images/M_730f151a-6173-40a2-8650-820109f8e58d.jpg",
         "full_width": true,
         "image_size": "medium",
-        "title": "Bundle Title",
-        "description": "<p>Description<br/><br/></p>",
+        "title": "Complete Starlink Mini & Gen 3 Kits for Every Setup",
+        "description": "<p>All-in-one installation solutions for home, vehicle, RV, and outdoor use—combining mounts, power systems, cables, and protection in ready-to-use kits.<br/><br/></p>",
         "show_page_content": false,
         "title_size": 48,
         "title_size_mobile": 28,
@@ -33,27 +34,45 @@
         "product_group_xGdWJ6": {
           "type": "product_group",
           "settings": {
-            "title": "Section name",
-            "description": "Save Up to <strong>USD 210</strong>",
-            "collection": "starlink-gen-2-ethernet-cables",
+            "title": "Starlink Mini Camping & Travel Kits",
+            "description": "Save Up to <strong>USD 105</strong>",
+            "collection": "starlink-mini-camping-and-travel-kits",
             "load_more_step": 6
           }
         },
         "group_1": {
           "type": "product_group",
           "settings": {
-            "title": "Magnetic Roof Mounts",
-            "description": "Save Up to <strong>USD 210</strong>",
-            "collection": "mini-for-camping",
+            "title": "Starlink Mini Vehicle & RV Kits",
+            "description": "Save Up to <strong>USD 50</strong>",
+            "collection": "starlink-mini-vehicle-and-rv-kits",
             "load_more_step": 6
           }
         },
         "group_2": {
           "type": "product_group",
           "settings": {
-            "title": "Suction Cup Mounts",
-            "description": "Save Up to <strong>USD 210</strong>",
-            "collection": "starlink-gen-2-accessories",
+            "title": "Starlink Mini Home Installation Kits",
+            "description": "Save Up to <strong>USD 40</strong>",
+            "collection": "starlink-mini-home-installation-kits",
+            "load_more_step": 6
+          }
+        },
+        "product_group_9r43R9": {
+          "type": "product_group",
+          "settings": {
+            "title": "Starlink Gen 3 Home Installation Kits",
+            "description": "Save Up to <strong>USD 50</strong>",
+            "collection": "starlink-gen-3-home-installation-kits",
+            "load_more_step": 5
+          }
+        },
+        "product_group_mmyArQ": {
+          "type": "product_group",
+          "settings": {
+            "title": "Starlink Gen 3 Vehicle & RV Kits",
+            "description": "Save Up to <strong>USD 50</strong>",
+            "collection": "starlink-gen-3-vehicle-and-rv-kits",
             "load_more_step": 6
           }
         }
@@ -61,7 +80,9 @@
       "block_order": [
         "product_group_xGdWJ6",
         "group_1",
-        "group_2"
+        "group_2",
+        "product_group_9r43R9",
+        "product_group_mmyArQ"
       ],
       "custom_css": [
         ".collection-subcollections__layout {gap: 0;}"
@@ -82,7 +103,7 @@
         "model_mini": {
           "type": "model_item",
           "settings": {
-            "image": "shopify://shop_images/Starlink_Mini_500x500_790ce83e-a4cb-45bc-9114-d6dd7d9e4a2f.png",
+            "image": "shopify://shop_images/Starlink_Mini_500x500_f09ce7cd-faad-462f-ac7f-7b56192c1d35.png",
             "label": "Mini",
             "link": "shopify://collections/starlink-mini-accessories"
           }
@@ -90,24 +111,24 @@
         "model_gen3": {
           "type": "model_item",
           "settings": {
-            "image": "shopify://shop_images/Gen_3_500x500_01406650-1305-49cc-9306-da778c5b7b21.png",
-            "label": "Gen 3",
+            "image": "shopify://shop_images/Gen_3_500x500_ff080365-778d-4e6d-be66-890cede39c86.png",
+            "label": "Gen 3",
             "link": "shopify://collections/starlink-gen-3-accessories"
           }
         },
         "model_gen3p": {
           "type": "model_item",
           "settings": {
-            "image": "shopify://shop_images/Gen_3P_500x500_05e0ce57-56de-4d1f-b0ec-3764980386a7.png",
-            "label": "Gen 3P",
+            "image": "shopify://shop_images/Gen_3P_500x500_7a8820ec-3c6a-4b30-8bb4-d1128b9bb199.png",
+            "label": "Gen 3P",
             "link": "shopify://collections/starlink-gen-3-performance-accessories"
           }
         },
         "model_gen2": {
           "type": "model_item",
           "settings": {
-            "image": "shopify://shop_images/Gen_2_500x500_812f1055-e25d-438c-b882-d573b6f12883.png",
-            "label": "Gen 2",
+            "image": "shopify://shop_images/Gen_2_500x500_53634ab4-bf40-4524-ac94-00df06b21991.png",
+            "label": "Gen 2",
             "link": "shopify://collections/starlink-gen-2-accessories"
           }
         }
