@@ -12,13 +12,12 @@
     "section-1": {
       "type": "slideshow",
       "blocks": {
-        "image_Y94pUX": {
+        "image_kk4Cxp": {
           "type": "image",
-          "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/B_1_359c88a4-0e30-465a-b12a-fbf533ea15bb.jpg",
-            "mobile_image": "shopify://shop_images/B_e054fc37-6da7-41f8-abd9-028d525c0c46.png",
-            "image_link": "shopify://pages/latest-deals",
+            "image": "shopify://shop_images/A888.png",
+            "mobile_image": "shopify://shop_images/M_144081dc-0d8e-4497-bfd3-67e241bf7ed9.jpg",
+            "image_link": "shopify://pages/prime-day-sale",
             "image_link_open_new_tab": false,
             "content_max_width": 780,
             "mobile_text_position": "place-self-center text-center",
@@ -37,12 +36,13 @@
             "background_gradient": ""
           }
         },
-        "image_kk4Cxp": {
+        "image_Y94pUX": {
           "type": "image",
+          "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/A888.png",
-            "mobile_image": "shopify://shop_images/M_144081dc-0d8e-4497-bfd3-67e241bf7ed9.jpg",
-            "image_link": "shopify://pages/prime-day-sale",
+            "image": "shopify://shop_images/B_1_359c88a4-0e30-465a-b12a-fbf533ea15bb.jpg",
+            "mobile_image": "shopify://shop_images/B_e054fc37-6da7-41f8-abd9-028d525c0c46.png",
+            "image_link": "",
             "image_link_open_new_tab": false,
             "content_max_width": 780,
             "mobile_text_position": "place-self-center text-center",
@@ -88,23 +88,21 @@
         }
       },
       "block_order": [
-        "image_Y94pUX",
         "image_kk4Cxp",
+        "image_Y94pUX",
         "block-1"
       ],
-      "custom_css": [
-        "{max-height: 90vh;}"
-      ],
+      "custom_css": [],
       "name": "Slideshow",
       "settings": {
         "full_width": true,
         "allow_transparent_header": false,
         "show_initial_transition": false,
         "image_size": "auto",
-        "controls_type": "none",
+        "controls_type": "numbers",
         "transition_type": "fade_with_text",
         "autoplay": true,
-        "cycle_speed": 8,
+        "cycle_speed": 6,
         "background": "rgba(0,0,0,0)",
         "background_gradient": ""
       }
